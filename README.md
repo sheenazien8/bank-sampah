@@ -15,8 +15,31 @@ Perkiraan Database
   
 * items
   * name
+  * unit id
+
+* unit
+  * name
   
 * transaction
   * date
-  * 1
+  * userby
   
+* transaction detail
+  * item id
+  * price now
+  * wieght
+  
+* Price
+  * Amount
+  * date
+  * item id
+
+* savings
+  * id nasabah
+  * current total
+  
+* savings histories
+  * type [out, in]
+  * total
+  * date
+  * savings id
