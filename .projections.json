@@ -1,0 +1,8 @@
+{
+    "app/Http/Controllers/*.php": {
+        "alternate": "tests/Feature/{}Test.php"
+    },
+    "tests/Feature/*.php": {
+        "alternate": "app/Http/Controllers/{}.php"
+    }
+}
