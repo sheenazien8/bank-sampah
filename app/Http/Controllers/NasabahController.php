@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class NasabahController extends Controller
 {
+    private $viewpath = 'app.nasabah';
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,9 @@ class NasabahController extends Controller
      */
     public function index()
     {
-        //
+        $nasabahs = Nasabah::get();
+
+        return view($this->viewpath . '.index', compact('nasabahs'));
     }
 
     /**
@@ -24,7 +27,7 @@ class NasabahController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->viewpath . '.create');
     }
 
     /**
@@ -35,7 +38,11 @@ class NasabahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nasabah = new Nasabah();
+        $nasabah->fill($request->all());
+        $nasabah->save();
+
+        return redirect()->route('nasabah.index');
     }
 
     /**
@@ -46,7 +53,7 @@ class NasabahController extends Controller
      */
     public function show(Nasabah $nasabah)
     {
-        //
+        return view($this->viewpath . '.show', compact('nasabah'));
     }
 
     /**
@@ -57,7 +64,7 @@ class NasabahController extends Controller
      */
     public function edit(Nasabah $nasabah)
     {
-        //
+        return view($this->viewpath . '.edit', compact('nasabah'));
     }
 
     /**
@@ -69,7 +76,10 @@ class NasabahController extends Controller
      */
     public function update(Request $request, Nasabah $nasabah)
     {
-        //
+        $nasabah->fill($request->all());
+        $nasabah->save();
+
+        return redirect()->route('nasabah.index');
     }
 
     /**
@@ -80,6 +90,8 @@ class NasabahController extends Controller
      */
     public function destroy(Nasabah $nasabah)
     {
-        //
+        $nasabah->delete();
+
+        return back();
     }
 }

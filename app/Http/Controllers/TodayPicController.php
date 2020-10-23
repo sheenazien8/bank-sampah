@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class TodayPicController extends Controller
 {
+    private $viewpath = 'app.today-pic';
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,9 @@ class TodayPicController extends Controller
      */
     public function index()
     {
-        //
+        $today_pics = TodayPic::get();
+
+        return view($this->viewpath . '.index', compact('today_pics'));
     }
 
     /**
@@ -24,7 +27,7 @@ class TodayPicController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->viewpath . '.create');
     }
 
     /**
@@ -35,51 +38,60 @@ class TodayPicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $today_pic = new TodayPic();
+        $today_pic->fill($request->all());
+        $today_pic->save();
+
+        return redirect()->route('today-pic.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TodayPic  $todayPic
+     * @param  \App\Models\TodayPic  $today_pic
      * @return \Illuminate\Http\Response
      */
-    public function show(TodayPic $todayPic)
+    public function show(TodayPic $today_pic)
     {
-        //
+        return view($this->viewpath . '.show', compact('today_pic'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TodayPic  $todayPic
+     * @param  \App\Models\TodayPic  $today_pic
      * @return \Illuminate\Http\Response
      */
-    public function edit(TodayPic $todayPic)
+    public function edit(TodayPic $today_pic)
     {
-        //
+        return view($this->viewpath . '.edit', compact('today_pic'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TodayPic  $todayPic
+     * @param  \App\Models\TodayPic  $today_pic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TodayPic $todayPic)
+    public function update(Request $request, TodayPic $today_pic)
     {
-        //
+        $today_pic->fill($request->all());
+        $today_pic->save();
+
+        return redirect()->route('today-pic.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TodayPic  $todayPic
+     * @param  \App\Models\TodayPic  $today_pic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TodayPic $todayPic)
+    public function destroy(TodayPic $today_pic)
     {
-        //
+        $today_pic->delete();
+
+        return back();
     }
 }

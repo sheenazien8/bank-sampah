@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class PicController extends Controller
 {
+    private $viewpath = 'app.pic';
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,9 @@ class PicController extends Controller
      */
     public function index()
     {
-        //
+        $pics = Pic::get();
+
+        return view($this->viewpath . '.index', compact('pics'));
     }
 
     /**
@@ -24,7 +27,7 @@ class PicController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->viewpath . '.create');
     }
 
     /**
@@ -35,7 +38,11 @@ class PicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pic = new Pic();
+        $pic->fill($request->all());
+        $pic->save();
+
+        return redirect()->route('pic.index');
     }
 
     /**
@@ -46,7 +53,7 @@ class PicController extends Controller
      */
     public function show(Pic $pic)
     {
-        //
+        return view($this->viewpath . '.show', compact('pic'));
     }
 
     /**
@@ -57,7 +64,7 @@ class PicController extends Controller
      */
     public function edit(Pic $pic)
     {
-        //
+        return view($this->viewpath . '.edit', compact('pic'));
     }
 
     /**
@@ -69,17 +76,22 @@ class PicController extends Controller
      */
     public function update(Request $request, Pic $pic)
     {
-        //
+        $pic->fill($request->all());
+        $pic->save();
+
+        return redirect()->route('pic.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pic  $pic
+     * @param  \App\Models\Nasabah  $pic
      * @return \Illuminate\Http\Response
      */
     public function destroy(Pic $pic)
     {
-        //
+        $pic->delete();
+
+        return back();
     }
 }

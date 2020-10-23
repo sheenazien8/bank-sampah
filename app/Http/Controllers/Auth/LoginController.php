@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -40,19 +41,38 @@ class LoginController extends Controller
     }
 
     /**
+     * Get the failed login response instance.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            'identity' => [trans('auth.failed')],
+        ]);
+    }
+
+    /**
      * Get the login username to be used by the controller.
      *
      * @return string
      */
     public function username()
     {
-        $request = request();
-        $field = $request->field;
-        if ($this->isPin($field)) {
-            return 'nomor_rekening';
+        $identity = request()->identity;
+        $field = '';
+
+        if (is_numeric($identity)) {
+            $field = 'nomor_rekening';
         } else {
-            return 'username';
+            $field = 'username';
         }
+        request()->merge([$field => $identity]);
+
+        return $field;
     }
 
     /**
@@ -65,20 +85,14 @@ class LoginController extends Controller
      */
     protected function validateLogin(Request $request)
     {
+        $messages = [
+            'identity.required' => 'Email or username cannot be empty',
+            'password.required' => 'Password cannot be empty',
+        ];
+
         $request->validate([
-            'field' => 'required|string',
+            'identity' => ['required', 'string'],
             'password' => 'required|string',
-        ]);
+        ], $messages);
     }
-
-    /**
-     * menegecek input field pin
-     *
-     * @return bool
-     */
-    private function isPin($field)
-    {
-        return is_numeric($field);
-    }
-
 }

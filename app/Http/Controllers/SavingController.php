@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class SavingController extends Controller
 {
+    private $viewpath = 'app.saving';
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,9 @@ class SavingController extends Controller
      */
     public function index()
     {
-        //
+        $savings = Saving::get();
+
+        return view($this->viewpath . '.index', compact('savings'));
     }
 
     /**
@@ -24,7 +27,7 @@ class SavingController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->viewpath . '.create');
     }
 
     /**
@@ -35,7 +38,11 @@ class SavingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $saving = new Saving();
+        $saving->fill($request->all());
+        $saving->save();
+
+        return redirect()->route('saving.index');
     }
 
     /**
@@ -46,7 +53,7 @@ class SavingController extends Controller
      */
     public function show(Saving $saving)
     {
-        //
+        return view($this->viewpath . '.show', compact('saving'));
     }
 
     /**
@@ -57,7 +64,7 @@ class SavingController extends Controller
      */
     public function edit(Saving $saving)
     {
-        //
+        return view($this->viewpath . '.edit', compact('saving'));
     }
 
     /**
@@ -69,7 +76,10 @@ class SavingController extends Controller
      */
     public function update(Request $request, Saving $saving)
     {
-        //
+        $saving->fill($request->all());
+        $saving->save();
+
+        return redirect()->route('saving.index');
     }
 
     /**
@@ -80,6 +90,8 @@ class SavingController extends Controller
      */
     public function destroy(Saving $saving)
     {
-        //
+        $saving->delete();
+
+        return back();
     }
 }

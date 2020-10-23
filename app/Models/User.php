@@ -57,4 +57,15 @@ class User extends Authenticatable
         return $this->hasOne(Nasabah::class, 'user_id');
     }
 
+    /**
+     * Who Am I accessor
+     *
+     * @return String
+     */
+    public function getWhoamiAttribute()
+    {
+        return $this->is_nasabah ? 'nasabah' : 'admin';
+    }
+
+
 }

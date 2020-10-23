@@ -40,7 +40,7 @@ class LoginControllerTest extends TestCase
     {
         $user = User::whereIsNasabah($isNasbah)->first();
         return [
-            'field' => $isNasbah ? $user->username : $user->nomor_rekening,
+            'idenity' => $isNasbah ? $user->username : $user->nomor_rekening,
             'password' => 'password'
         ];
     }

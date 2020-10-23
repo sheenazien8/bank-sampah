@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class UnitController extends Controller
 {
+    private $viewpath = 'app.unit';
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,9 @@ class UnitController extends Controller
      */
     public function index()
     {
-        //
+        $units = Unit::get();
+
+        return view($this->viewpath . '.index', compact('units'));
     }
 
     /**
@@ -24,7 +27,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->viewpath . '.create');
     }
 
     /**
@@ -35,7 +38,11 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $unit = new Unit();
+        $unit->fill($request->all());
+        $unit->save();
+
+        return redirect()->route('unit.index');
     }
 
     /**
@@ -46,7 +53,7 @@ class UnitController extends Controller
      */
     public function show(Unit $unit)
     {
-        //
+        return view($this->viewpath . '.show', compact('unit'));
     }
 
     /**
@@ -57,7 +64,7 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        //
+        return view($this->viewpath . '.edit', compact('unit'));
     }
 
     /**
@@ -69,7 +76,10 @@ class UnitController extends Controller
      */
     public function update(Request $request, Unit $unit)
     {
-        //
+        $unit->fill($request->all());
+        $unit->save();
+
+        return redirect()->route('unit.index');
     }
 
     /**
@@ -80,6 +90,8 @@ class UnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
-        //
+        $unit->delete();
+
+        return back();
     }
 }

@@ -6,10 +6,18 @@
     <a href="#">{{ strtoupper(substr(env('APP_NAME'), 0, 2)) }}</a>
   </div>
   <ul class="sidebar-menu">
-    <li class="menu-header">Dashboard</li>
-    <li class="{{ request()->is('/') ? 'active' : '' }}"><a class="nav-link" href="{{ url('/') }}"><i class="fas fa-columns"></i> <span>Dashboard</span></a></li>
-    <li class="{{ request()->is('table') ? 'active' : '' }}"><a href="{{ url('table') }}"><i class="fas fa-table"></i> <span>Tables</span></a></li>
-    <li class="menu-header">Users</li>
-    <li><a class="nav-link" href=""><i class="fas fa-users"></i> <span>Users</span></a></li>
+    @foreach (config('menu') as $menu)
+      @if (isset($menu['has_dropdown']))
+      @else
+        @if (isset($menu['menu-header']))
+          <li class="menu-header">{{ $menu['menu-header'] }}</li>
+        @endif
+        @if (in_array(auth()->user()->whoami, $menu['display_for']))
+          <li>
+            <a href="{{ route($menu['route']) }}"><i class="fas {{$menu['icon']}}"></i> <span>{{ $menu['menu_title'] }}</span></a>
+          </li>
+        @endif
+      @endif
+    @endforeach
   </ul>
 </aside>

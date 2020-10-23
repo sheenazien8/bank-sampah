@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
+    private $viewpath = 'app.item';
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::get();
+
+        return view($this->viewpath . '.index', compact('items'));
     }
 
     /**
@@ -24,7 +27,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->viewpath . '.create');
     }
 
     /**
@@ -35,7 +38,11 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = new Item();
+        $item->fill($request->all());
+        $item->save();
+
+        return redirect()->route('item.index');
     }
 
     /**
@@ -46,7 +53,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return view($this->viewpath . '.show', compact('item'));
     }
 
     /**
@@ -57,7 +64,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        return view($this->viewpath . '.edit', compact('item'));
     }
 
     /**
@@ -69,7 +76,10 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        $item->fill($request->all());
+        $item->save();
+
+        return redirect()->route('item.index');
     }
 
     /**
@@ -80,6 +90,8 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+
+        return back();
     }
 }
