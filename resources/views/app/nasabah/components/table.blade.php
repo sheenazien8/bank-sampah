@@ -1,10 +1,14 @@
 @if ($nasabahs->isNotEmpty())
-<div class="table-responsive-xl">
+<div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
         <th>#</th>
         <th>{{ trans('app.nasabah.column.name') }}</th>
+        <th>{{ trans('app.nasabah.column.id_number') }}</th>
+        <th>{{ trans('app.nasabah.column.address') }}</th>
+        <th>{{ trans('app.nasabah.column.curent_saldo') }}</th>
+        <th>{{ trans('app.nasabah.column.username') }}</th>
         <th></th>
       </tr>
     </thead>
@@ -13,6 +17,10 @@
         <tr>
           <td>{{ ++$key }}</td>
           <td>{{ $nasabah->nama_lengkap }}</td>
+          <td>{{ $nasabah->nomor_ktp }}</td>
+          <td>{{ $nasabah->alamat }}</td>
+          <td>{{ number_format($nasabah->saldo_akhir) }}</td>
+          <td>{{ optional($nasabah->user)->username }}</td>
           <td>
             <a href="{{route('nasabah.edit', $nasabah->id)}}">
               <span><i class="fas fa-pen"></i></span>

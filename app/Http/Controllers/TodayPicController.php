@@ -15,7 +15,7 @@ class TodayPicController extends Controller
      */
     public function index()
     {
-        $today_pics = TodayPic::get();
+        $today_pics = TodayPic::latest()->get();
 
         return view($this->viewpath . '.index', compact('today_pics'));
     }

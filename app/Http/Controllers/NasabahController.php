@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nasabah;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class NasabahController extends Controller
@@ -15,7 +16,7 @@ class NasabahController extends Controller
      */
     public function index()
     {
-        $nasabahs = Nasabah::get();
+        $nasabahs = Nasabah::latest()->get();
 
         return view($this->viewpath . '.index', compact('nasabahs'));
     }
@@ -38,8 +39,17 @@ class NasabahController extends Controller
      */
     public function store(Request $request)
     {
+        $user = new User();
+        $request->merge([
+            'is_nasabah' => 1,
+            'saldo_akhir' => 0,
+            'password' => bcrypt($request->password)
+        ]);
+        $user->fill($request->all());
+        $user->save();
         $nasabah = new Nasabah();
         $nasabah->fill($request->all());
+        $nasabah->user()->associate($user);
         $nasabah->save();
 
         return redirect()->route('nasabah.index');
@@ -76,7 +86,19 @@ class NasabahController extends Controller
      */
     public function update(Request $request, Nasabah $nasabah)
     {
+        $password = $nasabah->user->password;
+        if ($request->password) {
+           $passwod = bcrypt($request->password);
+        }
+        $request->merge([
+            'is_nasabah' => 1,
+            'saldo_akhir' => $nasabah->saldo_akhir,
+            'password' => $password
+        ]);
         $nasabah->fill($request->all());
+        $user = $nasabah->user;
+        $user->fill($request->all());
+        $user->save();
         $nasabah->save();
 
         return redirect()->route('nasabah.index');

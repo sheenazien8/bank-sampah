@@ -16,6 +16,7 @@ class CreateTodayPicsTable extends Migration
         Schema::create('today_pics', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('pic_id')->references('id')->on('pics')->onDelete('cascade');
             $table->date('tanggal_tugas');
             $table->timestamps();
         });

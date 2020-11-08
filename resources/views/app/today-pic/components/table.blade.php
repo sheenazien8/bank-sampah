@@ -6,6 +6,7 @@
         <th>#</th>
         <th>{{ trans('app.today_pic.column.user') }}</th>
         <th>{{ trans('app.today_pic.column.date') }}</th>
+        <th>{{ trans('app.today_pic.column.pic') }}</th>
         <th></th>
       </tr>
     </thead>
@@ -15,6 +16,7 @@
           <td>{{ ++$key }}</td>
           <td>{{ $today_pic->user->nasabahProfile->nama_lengkap }}</td>
           <td>{{ $today_pic->tanggal_tugas }}</td>
+          <td>{{ optional(optional($today_pic ?? '')->pic ?? '')->nama_jabatan }}</td>
           <td>
             <a href="{{route('today-pic.edit', $today_pic->id)}}">
               <span><i class="fas fa-pen"></i></span>

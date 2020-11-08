@@ -25,6 +25,16 @@
       </select>
     </div>
   </div>
+  <div class="form-group row">
+    <label for="pic_id" class="col-sm-2 col-form-label">{{ trans('app.item.column.pics') }}</label>
+    <div class="col-sm-10">
+      <select id="pic_id" name="pic_id" class="form-control">
+        @foreach (App\Models\Pic::select('nama_jabatan', 'id')->get() as $pic)
+          <option {{ optional($today_pic ?? '')->pic_id == $pic->id ? 'selected' : ''}} value="{{ $pic->id }}"> {{ $pic->nama_jabatan }} </option>
+        @endforeach
+      </select>
+    </div>
+  </div>
   <div class="form-group">
     <button class="btn btn-primary">{{ trans('app.global.save') }}</button>
   </div>

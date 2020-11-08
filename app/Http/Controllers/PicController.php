@@ -15,7 +15,7 @@ class PicController extends Controller
      */
     public function index()
     {
-        $pics = Pic::get();
+        $pics = Pic::latest()->get();
 
         return view($this->viewpath . '.index', compact('pics'));
     }

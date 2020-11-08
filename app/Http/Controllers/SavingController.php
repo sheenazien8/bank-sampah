@@ -15,7 +15,7 @@ class SavingController extends Controller
      */
     public function index()
     {
-        $savings = Saving::get();
+        $savings = Saving::latest()->get();
 
         return view($this->viewpath . '.index', compact('savings'));
     }

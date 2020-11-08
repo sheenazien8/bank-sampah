@@ -12,7 +12,7 @@ class TodayPic extends Model
      * @var array
      */
     protected $fillable = [
-        'tanggal_tugas', 'user_id'
+        'tanggal_tugas', 'user_id', 'pic_id'
     ];
 
     /**
@@ -23,5 +23,15 @@ class TodayPic extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * mengambil relasi ke table pic
+     *
+     * @return BelongsTo
+     */
+    public function pic()
+    {
+        return $this->belongsTo(Pic::class, 'pic_id');
     }
 }

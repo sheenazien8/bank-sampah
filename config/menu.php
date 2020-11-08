@@ -13,12 +13,12 @@ return [
         'route' => 'nasabah.index',
         'active' => ['nasabah.index'],
         'menu_title' => 'Nasabah',
-        'display_for' => ['nasabah', 'admin'],
+        'display_for' => ['admin'],
         'icon' => 'fas fa-th'
     ],
     [
         'route' => 'unit.index',
-        'display_for' => ['nasabah', 'admin'],
+        'display_for' => ['admin'],
         'active' => ['unit.index'],
         'menu_title' => 'Unit',
         'icon' => 'fas fa-th'
@@ -26,7 +26,7 @@ return [
     [
         'route' => 'item.index',
         'active' => ['item.index'],
-        'display_for' => ['nasabah', 'admin'],
+        'display_for' => ['admin'],
         'menu_title' => 'Item',
         'icon' => 'fas fa-th'
     ],
@@ -34,20 +34,20 @@ return [
         'route' => 'pic.index',
         'active' => ['pic.index'],
         'menu_title' => 'Pic',
-        'display_for' => ['nasabah', 'admin'],
+        'display_for' => ['admin'],
         'icon' => 'fas fa-th'
     ],
     [
         'route' => 'today-pic.index',
         'active' => ['today-pic.index'],
-        'display_for' => ['nasabah', 'admin'],
+        'display_for' => ['admin'],
         'menu_title' => 'Today Pic',
         'icon' => 'fas fa-th'
     ],
     [
         'route' => 'saving.index',
         'active' => ['saving.index'],
-        'display_for' => ['nasabah', 'admin'],
+        'display_for' => ['admin'],
         'menu_title' => 'Saving',
         'icon' => 'fas fa-th'
     ],
