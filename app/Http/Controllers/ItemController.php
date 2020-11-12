@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ItemDataTable;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,9 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ItemDataTable $dataTable)
     {
-        $items = Item::latest()->get();
-
-        return view($this->viewpath . '.index', compact('items'));
+        return $dataTable->render($this->viewpath . '.index');
     }
 
     /**

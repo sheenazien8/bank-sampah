@@ -67,5 +67,13 @@ class User extends Authenticatable
         return $this->is_nasabah ? 'nasabah' : 'admin';
     }
 
-
+    /**
+     * Return Telegram user_id of the user
+     *
+     * @return mixed
+     */
+    public function routeNotificationForTelegram()
+    {
+        return $this->telegram_account;
+    }
 }

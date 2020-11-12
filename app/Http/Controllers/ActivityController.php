@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\UnitDataTable;
-use App\Models\Unit;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 
-class UnitController extends Controller
+class ActivityController extends Controller
 {
-    private $viewpath = 'app.unit';
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UnitDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render($this->viewpath . '.index');
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view($this->viewpath . '.create');
+        //
     }
 
     /**
@@ -37,60 +35,51 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        $unit = new Unit();
-        $unit->fill($request->all());
-        $unit->save();
-
-        return redirect()->route('unit.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Unit  $unit
+     * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show(Unit $unit)
+    public function show(Activity $activity)
     {
-        return view($this->viewpath . '.show', compact('unit'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Unit  $unit
+     * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function edit(Unit $unit)
+    public function edit(Activity $activity)
     {
-        return view($this->viewpath . '.edit', compact('unit'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Unit  $unit
+     * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Unit $unit)
+    public function update(Request $request, Activity $activity)
     {
-        $unit->fill($request->all());
-        $unit->save();
-
-        return redirect()->route('unit.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Unit  $unit
+     * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Unit $unit)
+    public function destroy(Activity $activity)
     {
-        $unit->delete();
-
-        return back();
+        //
     }
 }

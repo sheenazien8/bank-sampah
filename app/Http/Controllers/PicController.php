@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PicDataTable;
 use App\Models\Pic;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,9 @@ class PicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PicDataTable $dataTable)
     {
-        $pics = Pic::latest()->get();
-
-        return view($this->viewpath . '.index', compact('pics'));
+        return $dataTable->render($this->viewpath . '.index');
     }
 
     /**

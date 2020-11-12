@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\NasabahDataTable;
 use App\Models\Nasabah;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,11 +15,9 @@ class NasabahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(NasabahDataTable $dataTable)
     {
-        $nasabahs = Nasabah::latest()->get();
-
-        return view($this->viewpath . '.index', compact('nasabahs'));
+        return $dataTable->render($this->viewpath . '.index');
     }
 
     /**

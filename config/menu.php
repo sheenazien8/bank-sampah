@@ -59,6 +59,21 @@ return [
         'icon' => 'fas fa-th'
     ],
     [
+        'route' => 'activity.index',
+        'display_for' => ['nasabah', 'admin'],
+        'active' => ['activity.index'],
+        'menu_title' => 'Activity',
+        'icon' => 'fas fa-th'
+    ],
+    [
+        'menu-header' => 'Setting',
+        'route' => 'setting.index',
+        'display_for' => ['nasabah', 'admin'],
+        'active' => ['setting.index'],
+        'menu_title' => 'Setting',
+        'icon' => 'fas fa-cogs'
+    ],
+    [
         'active' => ['setting.index'],
         'menu_title' => 'Setting',
         'icon' => 'fas fa-th',

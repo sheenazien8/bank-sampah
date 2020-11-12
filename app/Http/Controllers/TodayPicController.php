@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\TodayPicTable;
 use App\Models\TodayPic;
+use App\Models\User;
+use App\Notifications\SendTodayPicNotification;
 use Illuminate\Http\Request;
 
 class TodayPicController extends Controller
@@ -13,11 +16,9 @@ class TodayPicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TodayPicTable $dataTable)
     {
-        $today_pics = TodayPic::latest()->get();
-
-        return view($this->viewpath . '.index', compact('today_pics'));
+        return $dataTable->render($this->viewpath . '.index');
     }
 
     /**
@@ -38,6 +39,10 @@ class TodayPicController extends Controller
      */
     public function store(Request $request)
     {
+        $user = User::find($request->user_id);
+        $user->notify(new SendTodayPicNotification([
+            'text' => 'test'
+        ]));
         $today_pic = new TodayPic();
         $today_pic->fill($request->all());
         $today_pic->save();
