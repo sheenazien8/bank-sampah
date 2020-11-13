@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BotManController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\NasabahController;
@@ -12,10 +13,6 @@ use App\Http\Controllers\TodayPicController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
-use Telegram\Bot\Api;
-use BotMan\BotMan\BotMan;
-use BotMan\BotMan\BotManFactory;
-use BotMan\BotMan\Drivers\DriverManager;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,20 +73,6 @@ Route::get('/bot/sendmessage', function() {
     return response()->json($response->toArray());
 });
 
-Route::match(['get', 'post'], '/botman', function ()
-{
-    $config = [
-        // Your driver-specific configuration
-        "telegram" => [
-            "token" => config('telegram.bot_token')
-        ]
-    ];
-
-    // Load the driver(s) you want to use
-    DriverManager::loadDriver(\BotMan\Drivers\Telegram\TelegramDriver::class);
-
-    // Create an instance
-    $botman = BotManFactory::create($config);
-});
+Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
 
 

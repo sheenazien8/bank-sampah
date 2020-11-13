@@ -5,14 +5,16 @@
 </form>
 <ul class="navbar-nav navbar-right">
   <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-    <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->username }}</div></a>
-    <div class="dropdown-menu dropdown-menu-right">
-      <div class="dropdown-title">Welcome, {{ auth()->user()->username }}</div>
-      <div class="dropdown-divider"></div>
-      <a href="#" class="dropdown-item has-icon text-danger logout">
-        <i class="fas fa-sign-out-alt"></i> Logout
-      </a>
-    </div>
+      @if (auth()->user())
+        <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->username }}</div></a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <div class="dropdown-title">Welcome, {{ auth()->user()->username }}</div>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item has-icon text-danger logout">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </div>
+      @endif
   </li>
 </ul>
 <form method="POST" class="d-inline logout-form" action="{{ route('logout') }}">
