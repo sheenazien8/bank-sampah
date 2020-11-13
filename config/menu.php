@@ -59,6 +59,13 @@ return [
         'icon' => 'fas fa-th'
     ],
     [
+        'route' => 'content.index',
+        'display_for' => ['nasabah', 'admin'],
+        'active' => ['content.index'],
+        'menu_title' => 'Content',
+        'icon' => 'fas fa-th'
+    ],
+    [
         'route' => 'activity.index',
         'display_for' => ['nasabah', 'admin'],
         'active' => ['activity.index'],
