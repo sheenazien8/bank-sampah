@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('/unit', UnitController::class);
     Route::resource('/setting', SettingController::class);
     Route::resource('/activity', ActivityController::class);
+    Route::get('/content', [ContentController::class, 'index'])->name('content.index');
 });
 
 Route::get('/bot/telegram', function() {
