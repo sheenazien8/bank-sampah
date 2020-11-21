@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BotManController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\NasabahController;
@@ -44,7 +45,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('/unit', UnitController::class);
     Route::resource('/setting', SettingController::class);
     Route::resource('/activity', ActivityController::class);
-    Route::get('/content', [ContentController::class, 'index'])->name('content.index');
+    Route::resource('/content', ContentController::class);
 });
 
 Route::get('/bot/telegram', function() {

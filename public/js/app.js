@@ -1243,8 +1243,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/sheenazien/code/myproject/banksampah/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/sheenazien/code/myproject/banksampah/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/sheenazien/code/myproject/banksampah-project/banksampah/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/sheenazien/code/myproject/banksampah-project/banksampah/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
