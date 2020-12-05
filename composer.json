@@ -13,7 +13,10 @@
         "botman/botman": "^2.6",
         "botman/driver-telegram": "^1.6",
         "botman/driver-web": "^1.5",
+<<<<<<< Updated upstream
         "doctrine/dbal": "^3.0",
+=======
+>>>>>>> Stashed changes
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
