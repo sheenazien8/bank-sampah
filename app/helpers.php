@@ -1,16 +1,7 @@
 <?php
 
-use App\Models\AlatLab;
-use App\Models\AlatLabStatus;
-use App\Models\Media;
-use App\Models\Param;
-use App\Models\Produk;
-use App\Models\ReportStatus;
 use App\Models\Setting;
-use App\Models\Site;
-use App\Models\UjiLab;
 use App\Models\User;
-use App\Models\UserType;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -132,131 +123,6 @@ if (! function_exists('setting')) {
     }
 }
 
-if (! function_exists('getProfileImage')) {
-    function getProfileImage()
-    {
-        return (new User)->adminlte_image();
-    }
-}
-
-if (! function_exists('getAlatLabStatus')) {
-    function getAlatLabStatus()
-    {
-        return AlatLabStatus::get()->map(function($data) {
-            return $data->nama;
-        })->toArray();
-    }
-
-}
-
-if (! function_exists('getAlatLab')) {
-    function getUjiLab($filter = null)
-    {
-        $option = [];
-        UjiLab::when($filter, function ($query) use ($filter)
-        {
-            return $query->whereHas('produk', function ($produk) use ($filter)
-            {
-                return $produk->where('id_produk', $filter);
-            });
-        })->get()->each(function($data) use (&$option) {
-            $option[$data->getKey()] = $data->nama_uji;
-        });
-
-        return $option;
-    }
-
-}
-
-if (! function_exists('getAlatLab')) {
-    function getAlatLab($filter = null)
-    {
-        $option = [];
-        AlatLab::get()->each(function($data) use (&$option) {
-            $option[$data->getKey()] = $data->nama;
-        });
-
-        return $option;
-    }
-
-}
-
-if (! function_exists('getSiteLok')) {
-    function getSiteLok()
-    {
-        $option = [];
-        Site::get()->each(function($data) use (&$option) {
-            $option[$data->getKey()] = $data->nama;
-        });
-        return $option;
-    }
-
-}
-
-if (! function_exists('getProduk')) {
-    function getProduk()
-    {
-        $option = [];
-        Produk::get()->each(function($data) use (&$option) {
-            $option[$data->getKey()] = $data->nama_prod;
-        });
-        return $option;
-    }
-
-}
-if (! function_exists('getParam')) {
-    function getParam(): array
-    {
-        $option = [];
-        Param::get()->each(function($data) use (&$option) {
-            $option[$data->getKey()] = $data->nm_param;
-        });
-
-        return $option;
-    }
-
-}
-
-if (! function_exists('getStatusReport')) {
-    function getStatusReport()
-    {
-        $filter = false;
-        if (auth()->user()->siteLok->id_site != 504) {
-            $filter = true;
-        }
-        $option = [];
-        ReportStatus::when($filter, function ($query)
-            {
-                return $query->whereIn('id_stat', [601, 602]);
-            })
-            ->when(auth()->user()->user_type == 102, function ($query)
-            {
-                return $query->whereIn('id_stat', [603, 604]);
-            })
-            ->when(auth()->user()->user_type == 104 && !$filter, function ($query)
-            {
-                return $query->whereIn('id_stat', [605]);
-            })
-            ->get()->each(function($data) use (&$option) {
-                $option[$data->getKey()] = ucfirst($data->nama);
-            });
-
-        return $option;
-    }
-
-}
-
-if (! function_exists('getUserType')) {
-    function getUserType()
-    {
-        $option = [];
-        UserType::get()->each(function($data) use (&$option) {
-            $option[$data->getKey()] = $data->nama;
-        });
-        return $option;
-    }
-
-}
 
 if (! function_exists('penyebut')) {
     function penyebut($nilai) {
@@ -297,3 +163,4 @@ if (! function_exists('terbilang')) {
         return $hasil;
     }
 }
+

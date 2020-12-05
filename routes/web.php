@@ -13,6 +13,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TodayPicController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('/nasabah', NasabahController::class);
+    Route::resource('/user', UserController::class);
     Route::resource('/item', ItemController::class);
     Route::resource('/pic', PicController::class);
     Route::resource('/saving', SavingController::class);

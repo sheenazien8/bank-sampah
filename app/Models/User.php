@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -42,7 +43,7 @@ class User extends Authenticatable
      *
      * @return BelongsTo
      */
-    public function store()
+    public function tabungan()
     {
         return $this->hasOne(Saving::class, 'user_id');
     }
@@ -76,4 +77,15 @@ class User extends Authenticatable
     {
         return $this->telegram_account;
     }
+
+    /**
+     * get user Nasabah
+     *
+     * @return void
+     */
+    public function scopeIsNasabah(Builder $query): Builder
+    {
+        return $query->where('is_nasabah', true);
+    }
+
 }

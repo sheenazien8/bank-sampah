@@ -12,7 +12,7 @@ class SavingHistory extends Model
      * @var array
      */
     protected $fillable = [
-        'type', 'tanggal_menabung'
+        'type', 'tanggal_menabung', 'jumlah_uang'
     ];
 
     /**
@@ -20,9 +20,8 @@ class SavingHistory extends Model
      *
      * @return BelongsTo
      */
-    public function saving()
+    public function tabungan()
     {
         return $this->belongsTo(Saving::class, 'saving_id');
     }
-
 }

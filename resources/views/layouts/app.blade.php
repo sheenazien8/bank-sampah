@@ -12,6 +12,14 @@
 
     <!-- Main Content -->
     <div class="main-content">
+      @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">{{ trans('app.global.ohno422') }}</h4>
+           @foreach ($errors->all() as $error)
+             <p><b>{{ $error }}</b></p>
+            @endforeach
+        </div>
+      @endif
       @yield('content')
     </div>
     <footer class="main-footer">

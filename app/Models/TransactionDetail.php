@@ -12,7 +12,7 @@ class TransactionDetail extends Model
      * @var array
      */
     protected $fillable = [
-        'berat', 'harga_sekarang'
+        'jumlah', 'harga_sekarang', 'profit_bank_sampah'
     ];
 
     /**

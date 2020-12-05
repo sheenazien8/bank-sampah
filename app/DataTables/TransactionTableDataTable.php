@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -25,6 +26,10 @@ class TransactionTableDataTable extends DataTable
                 $date = (new Carbon($model->created_at))->diffForHumans();
 
                 return $date;
+            })
+            ->addColumn('nasabah', function ($model)
+            {
+                return optional($model->nasabah)->nama_lengkap;
             })
             ->addColumn('action', function ($model)
             {
@@ -67,6 +72,8 @@ class TransactionTableDataTable extends DataTable
     {
         return [
             Column::make('created_at'),
+            Column::make('tanggal_transaksi')->title(trans('app.transaction.column.tanggal_transaksi')),
+            Column::make('nasabah')->title(trans('app.transaction.column.nasabah')),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

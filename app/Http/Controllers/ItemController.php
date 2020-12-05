@@ -3,19 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ItemDataTable;
+use App\Helpers\Response;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
     private $viewpath = 'app.item';
+
+    /**
+     * @var Response
+     */
+    private $response;
+
+    /**
+     * @param
+     */
+    public function __construct()
+    {
+        $this->response = new Response;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ItemDataTable $dataTable)
+    public function index(ItemDataTable $dataTable, Request $request)
     {
+        if (request()->type == 'select2') {
+            return $this->response->success(Item::where('nama', 'LIKE', "%{$request->term}%")->get()->map(function($data) {
+                return ['value' => $data->nama, 'label' => $data->nama, 'id' => $data->id, 'unit' => $data->unit];
+            })->toArray());
+        }
+
         return $dataTable->render($this->viewpath . '.index');
     }
 
@@ -92,5 +113,11 @@ class ItemController extends Controller
         $item->delete();
 
         return back();
+    }
+
+    public function getItemByName(Request $request)
+    {
+        $item = Item::where('nama', $request->nama)->first();
+        return view($this->viewpath . '.show', compact('item'));
     }
 }

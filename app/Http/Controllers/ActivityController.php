@@ -9,11 +9,7 @@ use App\DataTables\ActivityDataTable;
 class ActivityController extends Controller
 {
     private $viewpath = 'app.activity';
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(ActivityDataTable $dataTable)
     {
         return $dataTable->render($this->viewpath . '.index');
@@ -83,7 +79,7 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $activity)
     {
-        $activity = Activity::find($activity);      
+        $activity = Activity::find($activity);
         $activity->fill($request->all());
         $activity->save();
 

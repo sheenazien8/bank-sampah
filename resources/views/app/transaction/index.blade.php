@@ -12,11 +12,16 @@
 
     <div class="section-body">
       <div class="card">
+        <div class="card-header">
+          <h3 class="mr-auto">{{ trans('app.transaction.title.create') }}</h3>
+        </div>
+        <div class="card-body">
+          @include('app.transaction.components.form')
+        </div>
+      </div>
+      <div class="card">
         <div class="card-header d-flex justify-content-end">
           <h3 class="mr-auto">{{ trans('app.transaction.title.index') }}</h3>
-          <div class="card-title">
-            <a href="{{route('transaction.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> <span>{{ trans('app.global.add', ['name' => 'Item']) }}</span></a>
-          </div>
         </div>
         <div class="card-body">
           @include('app.transaction.components.table')
@@ -25,3 +30,39 @@
     </div>
   </section>
 @endsection
+
+@push('javascript')
+  <script>
+    $(document).on('keyup', '.row-item', function(e) {
+      $('.tbody-transaction .row-table-transaction .row-item').autocomplete({
+        source: function(req, res) {
+          axios.get(`/item?type=select2&term=${req.term}`)
+            .then((data) => {
+              res(data.data.payload)
+            })
+            .catch((err) => {
+
+            })
+        },
+        select: function (event, ui) {
+          // Set selection
+          $(event.target.closest('.row-table-transaction').children[3]).find('input.row-satuan')[0].value = ui.item.unit
+          return false;
+        }
+      })
+    })
+    $(document).ready(() => {
+      $('select[name=nasabah]').select2({
+        width: 'resolve',
+        theme: "bootstrap"
+      })
+
+      $('.add-item').on('click', function($event) {
+        let rowTable = $('.row-table-transaction')
+        let trow = $('<tr class="row-table-transaction"></tr>')
+        $('.tbody-transaction').append(trow.append(rowTable.html()))
+      })
+    })
+
+  </script>
+@endpush

@@ -12,17 +12,6 @@ class Item extends Model
      * @var array
      */
     protected $fillable = [
-        'nama', 'unit_id'
+        'nama', 'unit'
     ];
-
-    /**
-     * mengambil relasi ke table unit
-     *
-     * @return belongsTo
-     */
-    public function unit()
-    {
-        return $this->belongsTo(Unit::class, 'unit_id');
-    }
-
 }

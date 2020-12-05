@@ -1,13 +1,14 @@
 <?php
 
 return [
-    /* [ */
-    /*     'route' => 'dashboard.index', */
-    /*     'active' => ['dashboard.index'], */
-    /*     'menu_title' => 'Dashboard', */
-    /*     'display_for' => ['nasabah', 'admin'], */
-    /*     'icon' => 'fas fa-th' */
-    /* ], */
+    [
+        'menu-header' => 'Dashboard',
+        'route' => 'dashboard.index',
+        'active' => ['dashboard.index'],
+        'menu_title' => 'Dashboard',
+        'display_for' => ['nasabah', 'admin'],
+        'icon' => 'fas fa-th'
+    ],
     [
         'menu-header' => 'Menu',
         'route' => 'nasabah.index',
@@ -17,10 +18,10 @@ return [
         'icon' => 'fas fa-th'
     ],
     [
-        'route' => 'unit.index',
+        'route' => 'user.index',
+        'active' => ['user.index'],
+        'menu_title' => 'User',
         'display_for' => ['admin'],
-        'active' => ['unit.index'],
-        'menu_title' => 'Unit',
         'icon' => 'fas fa-th'
     ],
     [

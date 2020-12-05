@@ -27,10 +27,6 @@ class ItemDataTable extends DataTable
 
                 return $date;
             })
-            ->addColumn('unit', function ($model)
-            {
-                return $model->unit->nama;
-            })
             ->addColumn('action', function ($model)
             {
                 $resources = 'item';

@@ -18,7 +18,7 @@
     <label for="unit" class="col-sm-2 col-form-label">{{ trans('app.content.column.body') }}</label>
     <div class="col-sm-10">
       <textarea placeholder="{{ trans('app.content.placeholder.body') }}"
-                class="form-control"
+                class="form-control summernote"
                 id="body"
                 name="body"
                 >{{ optional($content ?? '')->body }}</textarea>

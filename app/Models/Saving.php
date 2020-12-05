@@ -12,7 +12,7 @@ class Saving extends Model
      * @var array
      */
     protected $fillable = [
-        'saldo_akhir'
+        'saldo_akhir', 'user_id'
     ];
 
     /**

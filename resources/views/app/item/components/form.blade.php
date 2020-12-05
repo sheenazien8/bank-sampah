@@ -17,11 +17,12 @@
   <div class="form-group row">
     <label for="unit" class="col-sm-2 col-form-label">{{ trans('app.item.column.unit') }}</label>
     <div class="col-sm-10">
-      <select id="inputState" name="unit_id" class="form-control">
-        @foreach (App\Models\Unit::select('nama', 'id')->get() as $unit)
-          <option {{ optional(optional($item ?? '')->unit ?? '')->id == $unit->id ? 'selected' : ''}} value="{{ $unit->id }}">{{ $unit->nama }}</option>
-        @endforeach
-      </select>
+      <input type="text"
+             placeholder="{{ trans('app.item.placeholder.unit') }}"
+             class="form-control"
+             id="unit"
+             name="unit"
+             value="{{ optional($item ?? '')->unit }}">
     </div>
   </div>
   <div class="form-group">
