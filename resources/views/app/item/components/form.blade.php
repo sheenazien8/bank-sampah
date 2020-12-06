@@ -8,7 +8,7 @@
     <div class="col-sm-10">
       <input type="text"
              placeholder="{{ trans('app.item.placeholder.name') }}"
-             class="form-control"
+             class="form-control {{ $errors->first('nama') ? 'is-invalid' : '' }}"
              id="nama"
              name="nama"
              value="{{ optional($item ?? '')->nama }}">
@@ -19,7 +19,7 @@
     <div class="col-sm-10">
       <input type="text"
              placeholder="{{ trans('app.item.placeholder.unit') }}"
-             class="form-control"
+             class="form-control {{ $errors->first('unit') ? 'is-invalid' : '' }}"
              id="unit"
              name="unit"
              value="{{ optional($item ?? '')->unit }}">

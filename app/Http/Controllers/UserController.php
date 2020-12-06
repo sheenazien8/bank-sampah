@@ -37,9 +37,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'username' => ['unique:users', 'alpha_dash', 'required'],
+            'phone' => ['unique:users', 'required'],
+            'telegram_account' => ['unique:users', 'required'],
+            'password' => ['required']
+        ]);
         $user = new User();
         $request->merge([
             'is_user' => 1,
+            'is_nasabah' => 0,
             'password' => bcrypt($request->password)
         ]);
         $user->fill($request->all());
@@ -79,12 +86,19 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->validate($request, [
+            'username' => ['unique:users,username,'.$user->id, 'alpha_dash', 'required'],
+            'phone' => ['unique:users,phone,'.$user->id, 'required'],
+            'telegram_account' => ['unique:users,telegram_account,'.$user->id, 'required'],
+        ]);
+
         $password = $user->password;
         if ($request->password) {
            $passwod = bcrypt($request->password);
         }
         $request->merge([
             'is_user' => 1,
+            'is_nasabah' => 0,
             'password' => $password
         ]);
         $user->fill($request->all());

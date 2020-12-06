@@ -37,6 +37,11 @@ class PicController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_jabatan' => ['required', 'unique:pics'],
+            'keterangan' => ['required'],
+            'nilai_setiap_tugas' => ['required'],
+        ]);
         $pic = new Pic();
         $pic->fill($request->all());
         $pic->save();
@@ -75,6 +80,11 @@ class PicController extends Controller
      */
     public function update(Request $request, Pic $pic)
     {
+        $this->validate($request, [
+            'nama_jabatan' => ['required', 'unique:pics,nama_jabatan,'.$pic->id],
+            'keterangan' => ['required'],
+            'nilai_setiap_tugas' => ['required'],
+        ]);
         $pic->fill($request->all());
         $pic->save();
 

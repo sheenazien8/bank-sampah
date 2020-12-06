@@ -39,6 +39,9 @@ class TodayPicController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'tanggal_tugas' => ['required', 'after:now'],
+        ]);
         $user = User::find($request->user_id);
         $user->notify(new SendTodayPicNotification([
             'text' => 'test'
@@ -81,6 +84,9 @@ class TodayPicController extends Controller
      */
     public function update(Request $request, TodayPic $today_pic)
     {
+        $this->validate($request, [
+            'tanggal_tugas' => ['required', 'after:now'],
+        ]);
         $today_pic->fill($request->all());
         $today_pic->save();
 

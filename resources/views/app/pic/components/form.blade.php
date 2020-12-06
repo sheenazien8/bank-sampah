@@ -8,7 +8,7 @@
     <div class="col-sm-10">
       <input type="text"
              placeholder="{{ trans('app.pic.placeholder.name') }}"
-             class="form-control"
+             class="form-control {{ $errors->first('nama_jabatan') ? 'is-invalid' : '' }}"
              id="nama_jabatan"
              name="nama_jabatan"
              value="{{ optional($pic ?? '')->nama_jabatan }}">
@@ -19,7 +19,7 @@
     <div class="col-sm-10">
       <input type="text"
              placeholder="{{ trans('app.pic.placeholder.description') }}"
-             class="form-control"
+             class="form-control {{ $errors->first('keterangan') ? 'is-invalid' : '' }}"
              id="keterangan"
              name="keterangan"
              value="{{ optional($pic ?? '')->keterangan }}">
@@ -30,7 +30,7 @@
     <div class="col-sm-10">
       <input type="text"
              placeholder="{{ trans('app.pic.placeholder.value') }}"
-             class="form-control"
+             class="form-control {{ $errors->first('nilai_setiap_tugas') ? 'is-invalid' : '' }}"
              id="nilai_setiap_tugas"
              name="nilai_setiap_tugas"
              value="{{ optional($pic ?? '')->nilai_setiap_tugas }}">

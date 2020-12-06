@@ -33,6 +33,11 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => ['required'],
+            'tanggal' => ['required', 'after:now'],
+            'agenda' => ['required']
+        ]);
         $activity = new Activity();
         $activity->fill([
             'agenda'=>$request->agenda,
@@ -79,6 +84,11 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $activity)
     {
+        $this->validate($request, [
+            'title' => ['required'],
+            'tanggal' => ['required', 'after:now'],
+            'agenda' => ['required']
+        ]);
         $activity = Activity::find($activity);
         $activity->fill($request->all());
         $activity->save();

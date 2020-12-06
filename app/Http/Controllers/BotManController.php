@@ -12,8 +12,6 @@ use BotMan\BotMan\Drivers\DriverManager;
 class BotManController extends Controller
 {
     /**
-     * undocumented function
-     *
      * @return void
      */
     public function handle()

@@ -27,9 +27,27 @@ return [
             'password' => 'Input Password'
         ]
     ],
+    'user' => [
+        'title' => [
+            'index' => 'List User',
+            'create' => 'Create User',
+        ],
+        'column' => [
+            'username' => 'Username',
+            'phone' => 'Phone',
+            'telegram_account' => 'Telegram Account',
+            'password' => 'Password'
+        ],
+        'placeholder' => [
+            'username' => 'Input Username',
+            'phone' => 'Input Phone',
+            'telegram_account' => 'Input Telegram Account',
+            'password' => 'Input Password'
+        ]
+    ],
     'transaction' => [
         'title' => [
-            'index' => 'List Transaction',
+            'index' => 'Transaction Histories',
             'create' => 'Create Transaction'
         ],
         'add_item' => 'Add Item',

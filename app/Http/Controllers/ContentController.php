@@ -37,6 +37,10 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => ['required'],
+            'body' => ['required']
+        ]);
         $user = auth()->user();
         $content = new Content();
         $content->fill($request->all());
@@ -81,6 +85,10 @@ class ContentController extends Controller
      */
     public function update(Request $request, $content)
     {
+        $this->validate($request, [
+            'title' => ['required'],
+            'body' => ['required']
+        ]);
         $user = auth()->user();
         $content = Content::find($content);
         $content->fill($request->all());

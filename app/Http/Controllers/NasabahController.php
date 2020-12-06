@@ -38,6 +38,16 @@ class NasabahController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_lengkap' => ['required'],
+            'nomor_ktp' => ['required', 'unique:nasabahs'],
+            'alamat' => ['required'],
+            'nomor_rekening' => ['required', 'unique:users'],
+            'username' => ['unique:users', 'alpha_dash', 'required'],
+            'phone' => ['unique:users', 'required'],
+            'telegram_account' => ['unique:users', 'required'],
+            'password' => ['required']
+        ]);
         $user = new User();
         $request->merge([
             'is_nasabah' => 1,
@@ -85,6 +95,15 @@ class NasabahController extends Controller
      */
     public function update(Request $request, Nasabah $nasabah)
     {
+        $this->validate($request, [
+            'nama_lengkap' => ['required'],
+            'nomor_ktp' => ['required', 'unique:nasabahs,nomor_ktp,'.$nasabah->id],
+            'alamat' => ['required'],
+            'nomor_rekening' => ['required', 'unique:users,nomor_rekening,'.$nasabah->user->id],
+            'username' => ['unique:users,username,'.$nasabah->user->id, 'alpha_dash', 'required'],
+            'phone' => ['unique:users,phone,'.$nasabah->user->id, 'required'],
+            'telegram_account' => ['unique:users,telegram_account,'.$nasabah->user->id, 'required'],
+        ]);
         $password = $nasabah->user->password;
         if ($request->password) {
            $passwod = bcrypt($request->password);

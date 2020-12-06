@@ -8,7 +8,7 @@
     <div class="col-sm-10">
       <input type="text"
              placeholder="{{ trans('app.content.placeholder.title') }}"
-             class="form-control"
+             class="form-control {{ $errors->first('title') ? 'is-invalid' : '' }}"
              id="title"
              name="title"
              value="{{ optional($content ?? '')->title }}">
@@ -18,8 +18,8 @@
     <label for="unit" class="col-sm-2 col-form-label">{{ trans('app.content.column.body') }}</label>
     <div class="col-sm-10">
       <textarea placeholder="{{ trans('app.content.placeholder.body') }}"
-                class="form-control summernote"
                 id="body"
+                class="form-control summernote-simple {{ $errors->first('body') ? 'is-invalid' : '' }}"
                 name="body"
                 >{{ optional($content ?? '')->body }}</textarea>
     </div>

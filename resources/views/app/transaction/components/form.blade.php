@@ -18,8 +18,8 @@
     <thead>
       <tr>
         <th>{{ trans('app.transaction.column.item') }}</th>
-        <th>{{ trans('app.transaction.column.price') }}</th>
         <th>{{ trans('app.transaction.column.quantity') }}</th>
+        <th>{{ trans('app.transaction.column.price') }}</th>
         <th>{{ trans('app.transaction.column.satuan') }}</th>
       </tr>
     </thead>
@@ -37,18 +37,18 @@
         <td>
           <input
             type="text"
-            placeholder="{{ trans('app.transaction.placeholder.price') }}"
-            class="form-control row row-price"
-            name="price[]"
+            placeholder="{{ trans('app.transaction.placeholder.quantity') }}"
+            class="form-control row row-satuan"
+            name="quantity[]"
             value=""
           >
         </td>
         <td>
           <input
             type="text"
-            placeholder="{{ trans('app.transaction.placeholder.quantity') }}"
-            class="form-control row row-satuan"
-            name="quantity[]"
+            placeholder="{{ trans('app.transaction.placeholder.price') }}"
+            class="form-control row row-price"
+            name="price[]"
             value=""
           >
         </td>

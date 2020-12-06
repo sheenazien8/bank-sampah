@@ -8,7 +8,7 @@
     <div class="col-sm-10">
       <input type="date"
              placeholder="{{ trans('app.today_pic.placeholder.date') }}"
-             class="form-control"
+             class="form-control {{ $errors->first('tanggal_tugas') ? 'is-invalid' : '' }}"
              id="tanggal_tugas"
              name="tanggal_tugas"
              value="{{ optional($today_pic ?? '')->tanggal_tugas }}"

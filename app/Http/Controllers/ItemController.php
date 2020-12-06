@@ -58,6 +58,10 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama' => ['required', 'unique:items'],
+            'unit' => ['required']
+        ]);
         $item = new Item();
         $item->fill($request->all());
         $item->save();
@@ -96,6 +100,10 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
+        $this->validate($request, [
+            'nama' => ['required', 'unique:items,nama,'.$item->id],
+            'unit' => ['required']
+        ]);
         $item->fill($request->all());
         $item->save();
 
