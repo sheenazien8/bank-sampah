@@ -67,9 +67,9 @@ class PicDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('nama_jabatan')->title(trans('app.pic.column.nama_jabatan')),
-            Column::make('nilai_setiap_tugas')->title(trans('app.pic.column.nilai_setiap_tugas')),
-            Column::make('keterangan')->title(trans('app.pic.column.keterangan')),
+            Column::make('nama_jabatan')->title(trans('app.pic.column.name')),
+            Column::make('nilai_setiap_tugas')->title(trans('app.pic.column.value')),
+            Column::make('keterangan')->title(trans('app.pic.column.description')),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)

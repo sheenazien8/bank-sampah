@@ -2,7 +2,9 @@
 return [
     'nasabah' => [
         'title' => [
-            'index' => 'List Nasabah'
+            'index' => 'List Nasabah',
+            'create' => 'Create Nasabah',
+            'edit' => 'Edit Nasabah',
         ],
         'column' => [
             'name' => 'Name',
@@ -31,6 +33,7 @@ return [
         'title' => [
             'index' => 'List User',
             'create' => 'Create User',
+            'edit' => 'Edit User'
         ],
         'column' => [
             'username' => 'Username',
@@ -48,7 +51,8 @@ return [
     'transaction' => [
         'title' => [
             'index' => 'Transaction Histories',
-            'create' => 'Create Transaction'
+            'create' => 'Create Transaction',
+            'edit' => 'Edit Transaction'
         ],
         'add_item' => 'Add Item',
         'column' => [
@@ -69,8 +73,92 @@ return [
         ]
 
     ],
+    'item' => [
+        'title' => [
+            'index' => 'List Item',
+            'create' => 'Create Item',
+            'edit' => 'Edit Item'
+        ],
+        'column' => [
+            'name' => 'Item Name',
+            'unit' => 'Unit'
+        ],
+        'placeholder' => [
+            'name' => 'Input Item Name',
+            'unit' => 'Input Unit'
+        ]
+
+    ],
+    'pic' => [
+        'title' => [
+            'index' => 'List Pic (Person In Charge)',
+            'create' => 'Create Pic',
+            'edit' => 'Edit Pic'
+        ],
+        'column' => [
+            'name' => 'Job Name',
+            'value' => 'Value Per Job',
+            'description' => 'Description'
+        ],
+        'placeholder' => [
+            'name' => 'Input Job Name',
+            'value' => 'Input Value Per Job',
+            'description' => 'Input Description'
+        ]
+
+    ],
+    'today_pic' => [
+        'title' => [
+            'index' => 'List Today Pic',
+            'create' => 'Create Today Pic',
+            'edit' => 'Edit Today Pic'
+        ],
+        'column' => [
+            'date' => 'Job Date',
+            'user' => 'PIC (Person In Charge)',
+            'pics' => 'Job'
+        ],
+        'placeholder' => [
+            'date' => 'Input Job Date',
+            'user' => 'Input PIC (Person In Charge)',
+            'pics' => 'Input Job'
+        ]
+    ],
+    'content' => [
+        'title' => [
+            'index' => 'List Content',
+            'create' => 'Create Content',
+            'edit' => 'Edit Content'
+        ],
+        'column' => [
+            'title' => 'Title',
+            'body' => 'Body',
+        ],
+        'placeholder' => [
+            'title' => 'Input Title',
+            'body' => 'Input Body',
+        ]
+    ],
+    'activity' => [
+        'title' => [
+            'index' => 'List Activity',
+            'create' => 'Create Activity',
+            'edit' => 'Edit Activity'
+        ],
+        'column' => [
+            'title' => 'Title',
+            'agenda' => 'Agenda',
+            'tanggal' => 'Tanggal',
+        ],
+        'placeholder' => [
+            'title' => 'Title',
+            'agenda' => 'Agenda',
+            'tanggal' => 'Tanggal',
+        ]
+    ],
     'global' => [
         'add' => 'Add',
+        'save' => 'Save',
         'edit' => 'Edit',
         'delete' => 'Delete',
         'ohno422' => 'You Must Complete the field'

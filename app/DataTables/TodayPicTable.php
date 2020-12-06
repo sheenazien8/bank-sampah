@@ -75,9 +75,9 @@ class TodayPicTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('tanggal_tugas')->title(trans('app.today_pic.column.tanggal_tugas')),
+            Column::make('tanggal_tugas')->title(trans('app.today_pic.column.date')),
             Column::make('user')->title(trans('app.today_pic.column.user')),
-            Column::make('tugas')->title(trans('app.today_pic.column.tugas')),
+            Column::make('tugas')->title(trans('app.today_pic.column.pics')),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)

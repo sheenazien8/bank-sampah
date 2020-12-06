@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="user" class="col-sm-2 col-form-label">{{ trans('app.item.column.user') }}</label>
+    <label for="user" class="col-sm-2 col-form-label">{{ trans('app.today_pic.column.user') }}</label>
     <div class="col-sm-10">
       <select id="user" name="user_id" class="form-control">
         @foreach (App\Models\User::select('username', 'id')->where('is_nasabah', true)->get() as $user)
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="pic_id" class="col-sm-2 col-form-label">{{ trans('app.item.column.pics') }}</label>
+    <label for="pic_id" class="col-sm-2 col-form-label">{{ trans('app.today_pic.column.pics') }}</label>
     <div class="col-sm-10">
       <select id="pic_id" name="pic_id" class="form-control">
         @foreach (App\Models\Pic::select('nama_jabatan', 'id')->get() as $pic)
