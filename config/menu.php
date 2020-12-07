@@ -12,42 +12,42 @@ return [
     [
         'menu-header' => 'Menu',
         'route' => 'nasabah.index',
-        'active' => ['nasabah.index'],
+        'active' => ['nasabah.index', 'nasabah.create', 'nasabah.edit', 'nasabah.show'],
         'menu_title' => 'Nasabah',
         'display_for' => ['admin'],
         'icon' => 'fas fa-th'
     ],
     [
         'route' => 'user.index',
-        'active' => ['user.index'],
+        'active' => ['user.index', 'user.create', 'user.edit', 'user.show'],
         'menu_title' => 'User',
         'display_for' => ['admin'],
         'icon' => 'fas fa-th'
     ],
     [
         'route' => 'item.index',
-        'active' => ['item.index'],
+        'active' => ['item.index', 'item.create', 'item.edit', 'item.show'],
         'display_for' => ['admin'],
         'menu_title' => 'Item',
         'icon' => 'fas fa-th'
     ],
     [
         'route' => 'pic.index',
-        'active' => ['pic.index'],
+        'active' => ['pic.index', 'pic.edit', 'pic.create', 'pic.show'],
         'menu_title' => 'Pic',
         'display_for' => ['admin'],
         'icon' => 'fas fa-th'
     ],
     [
         'route' => 'today-pic.index',
-        'active' => ['today-pic.index'],
+        'active' => ['today-pic.index', 'today-pic.edit', 'today-pic.create', 'today-pic.show'],
         'display_for' => ['admin'],
         'menu_title' => 'Today Pic',
         'icon' => 'fas fa-th'
     ],
     [
         'route' => 'saving.index',
-        'active' => ['saving.index'],
+        'active' => ['saving.index', 'saving.show'],
         'display_for' => ['admin'],
         'menu_title' => 'Saving',
         'icon' => 'fas fa-th'
@@ -55,21 +55,21 @@ return [
     [
         'route' => 'transaction.index',
         'display_for' => ['nasabah', 'admin'],
-        'active' => ['transaction.index'],
+        'active' => ['transaction.index', 'transaction.edit', 'transaction.show'],
         'menu_title' => 'Transaction',
         'icon' => 'fas fa-th'
     ],
     [
         'route' => 'content.index',
         'display_for' => ['nasabah', 'admin'],
-        'active' => ['content.index'],
+        'active' => ['content.index', 'content.show', 'content.create', 'content.edit'],
         'menu_title' => 'Content',
         'icon' => 'fas fa-th'
     ],
     [
         'route' => 'activity.index',
         'display_for' => ['nasabah', 'admin'],
-        'active' => ['activity.index'],
+        'active' => ['activity.index', 'activity.show', 'activity.create', 'activity.edit'],
         'menu_title' => 'Activity',
         'icon' => 'fas fa-th'
     ],
@@ -81,14 +81,4 @@ return [
         'menu_title' => 'Setting',
         'icon' => 'fas fa-cogs'
     ],
-    [
-        'active' => ['setting.index'],
-        'menu_title' => 'Setting',
-        'icon' => 'fas fa-th',
-        'has_dropdown' => [
-            'route' => 'setting.index',
-            'active' => ['setting.index'],
-            'menu_title' => 'System',
-        ]
-    ]
 ];

@@ -13,7 +13,7 @@
           <li class="menu-header">{{ $menu['menu-header'] }}</li>
         @endif
         @if (in_array(auth()->user()->whoami, $menu['display_for']))
-          <li class="">
+          <li class="{{ getActiveClass($menu['active']) }}">
             <a href="{{ route($menu['route']) }}"><i class="fas {{$menu['icon']}}"></i> <span>{{ $menu['menu_title'] }}</span></a>
           </li>
         @endif

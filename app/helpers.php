@@ -3,6 +3,7 @@
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 if (! function_exists('action')) {
@@ -161,6 +162,16 @@ if (! function_exists('terbilang')) {
             $hasil = trim(penyebut($nilai));
         }
         return $hasil;
+    }
+}
+if (! function_exists('getActiveClass')) {
+    function getActiveClass($activefor) {
+        foreach ($activefor as $value) {
+            if ($value == Route::current()->action['as']) {
+                return 'active';
+            }
+        }
+        return '';
     }
 }
 

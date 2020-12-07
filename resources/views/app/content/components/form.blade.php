@@ -19,7 +19,7 @@
     <div class="col-sm-10">
       <textarea placeholder="{{ trans('app.content.placeholder.body') }}"
                 id="body"
-                class="form-control summernote-simple {{ $errors->first('body') ? 'is-invalid' : '' }}"
+                class="form-control summernote {{ $errors->first('body') ? 'is-invalid' : '' }}"
                 name="body"
                 >{{ optional($content ?? '')->body }}</textarea>
     </div>
