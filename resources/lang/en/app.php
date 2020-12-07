@@ -156,9 +156,22 @@ return [
             'tanggal' => 'Tanggal',
         ]
     ],
+    'saving' => [
+        'title' => [
+            'index' => 'List Saving',
+            'show' => 'Saving Histories',
+        ],
+        'column' => [
+            'nasabah' => 'Nasabah',
+            'nomor_rekening' => 'Account Number',
+            'transaksi_terakhir' => 'Last Transaction',
+            'saldo_akhir' => 'Current Saldo',
+        ],
+    ],
     'global' => [
         'add' => 'Add',
         'save' => 'Save',
+        'show' => 'Detail',
         'edit' => 'Edit',
         'delete' => 'Delete',
         'ohno422' => 'You Must Complete the field'

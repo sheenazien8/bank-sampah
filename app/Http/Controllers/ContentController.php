@@ -9,32 +9,17 @@ use Illuminate\Http\Request;
 class ContentController extends Controller
 {
     private $viewpath = 'app.content';
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(ContentDataTable $dataTable)
     {
         return $dataTable->render($this->viewpath . '.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view($this->viewpath . '.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -47,26 +32,14 @@ class ContentController extends Controller
         $content->user()->associate($user);
         $content->save();
 
-        return redirect()->route('content.index');
+        return redirect()->route('content.index')->with('success',trans('message.create', ['data' => $content->title]));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\content  $content
-     * @return \Illuminate\Http\Response
-     */
     public function show(Content $content)
     {
         return view($this->viewpath . '.show', compact('content'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\content  $content
-     * @return \Illuminate\Http\Response
-     */
     public function edit($content)
     {
         $content = Content::find($content);
@@ -76,13 +49,6 @@ class ContentController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\act$ivity  $content
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $content)
     {
         $this->validate($request, [
@@ -95,19 +61,14 @@ class ContentController extends Controller
         $content->user()->associate($user);
         $content->save();
 
-        return redirect()->route('content.index');
+        return redirect()->route('content.index')->with('success',trans('message.update', ['data' => $content->title]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\content  $content
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Content $content)
     {
+        $message = $content->title;
         $content->delete();
 
-        return back();
+        return back()->with('success',trans('message.delete', ['data' => $content->title]));
     }
 }

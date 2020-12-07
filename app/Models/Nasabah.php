@@ -25,5 +25,16 @@ class Nasabah extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * mengambil transaksi
+     *
+     * @return HasMany
+     */
+    public function transaksi()
+    {
+        return $this->hasMany(Transaction::class, 'nasabah_id');
+    }
+
+
 
 }

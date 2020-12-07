@@ -20,7 +20,7 @@ class Saving extends Model
      *
      * @return BelongsTo
      */
-    public function nasabah()
+    public function nasabahUser()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

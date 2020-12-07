@@ -11,14 +11,8 @@ class ItemController extends Controller
 {
     private $viewpath = 'app.item';
 
-    /**
-     * @var Response
-     */
     private $response;
 
-    /**
-     * @param
-     */
     public function __construct()
     {
         $this->response = new Response;
@@ -40,22 +34,11 @@ class ItemController extends Controller
         return $dataTable->render($this->viewpath . '.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view($this->viewpath . '.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -66,38 +49,19 @@ class ItemController extends Controller
         $item->fill($request->all());
         $item->save();
 
-        return redirect()->route('item.index');
+        return redirect()->route('item.index')->with('success',trans('message.create', ['data' => $item->nama]));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function show(Item $item)
     {
         return view($this->viewpath . '.show', compact('item'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Item $item)
     {
         return view($this->viewpath . '.edit', compact('item'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Item $item)
     {
         $this->validate($request, [
@@ -107,20 +71,15 @@ class ItemController extends Controller
         $item->fill($request->all());
         $item->save();
 
-        return redirect()->route('item.index');
+        return redirect()->route('item.index')->with('success',trans('message.update', ['data' => $item->nama]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Item $item)
     {
+        $message = $item->nama;
         $item->delete();
 
-        return back();
+        return back()->with('success',trans('message.delete', ['data' => $item->nama]));
     }
 
     public function getItemByName(Request $request)

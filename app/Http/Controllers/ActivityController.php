@@ -15,22 +15,11 @@ class ActivityController extends Controller
         return $dataTable->render($this->viewpath . '.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view($this->viewpath . '.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -46,26 +35,14 @@ class ActivityController extends Controller
         ]);
         $activity->save();
 
-        return redirect()->route('activity.index');
+        return redirect()->route('activity.index')->with('success',trans('message.create', ['data' => $activity->title]));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\activity  $activity
-     * @return \Illuminate\Http\Response
-     */
     public function show(Activity $activity)
     {
         return view($this->viewpath . '.show', compact('activity'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\activity  $activity
-     * @return \Illuminate\Http\Response
-     */
     public function edit($activity)
     {
         $activity = Activity::find($activity);
@@ -75,13 +52,6 @@ class ActivityController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\act$ivity  $activity
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $activity)
     {
         $this->validate($request, [
@@ -93,19 +63,14 @@ class ActivityController extends Controller
         $activity->fill($request->all());
         $activity->save();
 
-        return redirect()->route('activity.index');
+        return redirect()->route('activity.index')->with('success',trans('message.update', ['data' => $activity->title]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\activity  $activity
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Activity $activity)
     {
+        $message = $activity->title;
         $activity->delete();
 
-        return back();
+        return back()->with('success',trans('message.delete', ['data' => $message]));
     }
 }

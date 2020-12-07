@@ -57,12 +57,19 @@
         theme: "bootstrap"
       })
 
+
       $('.add-item').on('click', function($event) {
         let rowTable = $('.row-table-transaction')
         let trow = $('<tr class="row-table-transaction"></tr>')
         $('.tbody-transaction').append(trow.append(rowTable.html()))
       })
     })
+    $(document).on('click', '.close-row', (e) => {
+      e.preventDefault()
+      if($('.row-table-transaction').length > 1) {
+        $(e.target).parents()[2].remove()
+      }
+    });
 
   </script>
 @endpush

@@ -9,32 +9,17 @@ use Illuminate\Http\Request;
 class PicController extends Controller
 {
     private $viewpath = 'app.pic';
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(PicDataTable $dataTable)
     {
         return $dataTable->render($this->viewpath . '.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view($this->viewpath . '.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -46,38 +31,19 @@ class PicController extends Controller
         $pic->fill($request->all());
         $pic->save();
 
-        return redirect()->route('pic.index');
+        return redirect()->route('pic.index')->with('success',trans('message.create', ['data' => $pic->nama_jabatan]));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pic  $pic
-     * @return \Illuminate\Http\Response
-     */
     public function show(Pic $pic)
     {
         return view($this->viewpath . '.show', compact('pic'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pic  $pic
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Pic $pic)
     {
         return view($this->viewpath . '.edit', compact('pic'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pic  $pic
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Pic $pic)
     {
         $this->validate($request, [
@@ -88,19 +54,14 @@ class PicController extends Controller
         $pic->fill($request->all());
         $pic->save();
 
-        return redirect()->route('pic.index');
+        return redirect()->route('pic.index')->with('success',trans('message.update', ['data' => $pic->nama_jabatan]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Nasabah  $pic
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Pic $pic)
     {
+        $message = $pic->nama_jabatan;
         $pic->delete();
 
-        return back();
+        return back()->with('success',trans('message.delete', ['data' => $message]));
     }
 }

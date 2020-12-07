@@ -10,32 +10,17 @@ use Illuminate\Http\Request;
 class NasabahController extends Controller
 {
     private $viewpath = 'app.nasabah';
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(NasabahDataTable $dataTable)
     {
         return $dataTable->render($this->viewpath . '.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view($this->viewpath . '.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -61,38 +46,19 @@ class NasabahController extends Controller
         $nasabah->user()->associate($user);
         $nasabah->save();
 
-        return redirect()->route('nasabah.index');
+        return redirect()->route('nasabah.index')->with('success',trans('message.create', ['data' => $nasabah->nama_lengkap]));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Nasabah  $nasabah
-     * @return \Illuminate\Http\Response
-     */
     public function show(Nasabah $nasabah)
     {
         return view($this->viewpath . '.show', compact('nasabah'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Nasabah  $nasabah
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Nasabah $nasabah)
     {
         return view($this->viewpath . '.edit', compact('nasabah'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Nasabah  $nasabah
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Nasabah $nasabah)
     {
         $this->validate($request, [
@@ -119,19 +85,14 @@ class NasabahController extends Controller
         $user->save();
         $nasabah->save();
 
-        return redirect()->route('nasabah.index');
+        return redirect()->route('nasabah.index')->with('success',trans('message.update', ['data' => $nasabah->nama_lengkap]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Nasabah  $nasabah
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Nasabah $nasabah)
     {
+        $message = $nasabah->nama_lengkap;
         $nasabah->delete();
 
-        return back();
+        return back()->with('success',trans('message.delete', ['data' => $message]));
     }
 }

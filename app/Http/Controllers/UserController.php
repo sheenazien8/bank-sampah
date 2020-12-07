@@ -9,32 +9,17 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     private $viewpath = 'app.user';
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(UserDataTable $dataTable)
     {
         return $dataTable->render($this->viewpath . '.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view($this->viewpath . '.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -52,38 +37,19 @@ class UserController extends Controller
         $user->fill($request->all());
         $user->save();
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('success',trans('message.create', ['data' => "User {$user->username}"]));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $user)
     {
         return view($this->viewpath . '.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
         return view($this->viewpath . '.edit', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
@@ -104,19 +70,14 @@ class UserController extends Controller
         $user->fill($request->all());
         $user->save();
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('success',trans('message.update', ['data' => "User {$user->username}"]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
+        $message = $user->username;
         $user->delete();
 
-        return back();
+        return back()->with('success',trans('message.delete', ['data' => "User {$message}"]));
     }
 }

@@ -53,13 +53,16 @@
           >
         </td>
         <td>
-          <input
-            type="text"
-            placeholder="{{ trans('app.transaction.placeholder.satuan') }}"
-            class="form-control row row-satuan"
-            name="satuan[]"
-            value=""
-          >
+          <div class="row">
+            <input
+                 type="text"
+                 placeholder="{{ trans('app.transaction.placeholder.satuan') }}"
+                 class="form-control row-satuan col"
+                 name="satuan[]"
+                 value=""
+                 >
+                 <button class="btn btn-danger col close-row">X</button>
+          </div>
         </td>
       </tr>
     </tbody>

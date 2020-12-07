@@ -20,6 +20,7 @@
             @endforeach
         </div>
       @endif
+      @include('partials.flash-message')
       @yield('content')
     </div>
     <footer class="main-footer">

@@ -36,16 +36,6 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
-        /* TODO: Create Transaction <05-12-20, ulil>
-         * cari item, jika item belum ada maka akan tersimpan dengan item baru, dan Satuan baru
-         * jika sudah ada maka bind idnya untuk di simpen dengan transaksi detail
-         * cari nasabah
-         * cari kasir
-         * simpan total price untuk di mausukkan tabungan nasabah
-         * simpan history tabungan dahulu
-         * simpan transaksinya
-         */
-
         $this->validate($request, [
             'nasabah' => ['required'],
             'item' => ['required', 'array', 'min:1'],
@@ -70,18 +60,23 @@ class TransactionController extends Controller
                     'nama' => $item,
                     'unit' => $request->satuan[$k]
                 ]);
+                $profit = setting('profit_bank_sampah') ?? 5;
                 $data = [
                     'jumlah' => $request->quantity[$k],
                     'harga_sekarang' => $request->price[$k],
-                    'profit_bank_sampah' => setting('profit_bank_sampah') ?? 5
+                    'profit_bank_sampah' => $profit
                 ];
-                $money += $data['harga_sekarang'] * $data['jumlah'];
+                $price = $data['harga_sekarang'] * $data['jumlah'];
+                $money += ($price) - ($price) * $profit / 100;
                 $transaction->detailTransaksi()->save((new TransactionDetail($data))->item()->associate($itemData->id));
             }
-            $saving = Saving::where('user_id', $request->nasabah)->firstOrCreate([
-                'user_id' => $request->nasabah,
-                'saldo_akhir' => 0,
-            ]);
+            $saving = Saving::where('user_id', $nasabah->user->id)->first();
+            if (!$saving) {
+                $saving = Saving::create([
+                    'user_id' => $nasabah->user->id,
+                    'saldo_akhir' => 0,
+                ]);
+            }
             $savingHistory = new SavingHistory();
             $savingHistory->fill([
                 'type' => 'in',
@@ -95,7 +90,7 @@ class TransactionController extends Controller
             $savingHistory->save();
             DB::commit();
 
-            return redirect()->route('transaction.index');
+            return redirect()->route('transaction.index')->with('success',trans('message.create', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -118,13 +113,13 @@ class TransactionController extends Controller
         $transaction->fill($request->all());
         $transaction->save();
 
-        return redirect()->route('transaction.index');
+        return redirect()->route('transaction.index')->with('success',trans('message.update', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));
     }
 
     public function destroy(Transaction $transaction)
     {
         $transaction->delete();
 
-        return back();
+        return back()->with('success',trans('message.delete', ['data' => 'Transaction']));
     }
 }
