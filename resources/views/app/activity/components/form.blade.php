@@ -1,4 +1,4 @@
-<form method="POST" action="{{route('activity.store')}}" class="needs-validation" novalidate="">
+<form method="POST" action="{{ isset($activity) ? route('activity.update', $activity) : route('activity.store') }}" class="needs-validation" novalidate="">
   @csrf
   @isset($activity)
   @method('PUT')

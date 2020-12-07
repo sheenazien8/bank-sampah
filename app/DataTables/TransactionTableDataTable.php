@@ -33,7 +33,7 @@ class TransactionTableDataTable extends DataTable
             })
             ->addColumn('action', function ($model)
             {
-                $resources = 'today-pic';
+                $resources = 'transaction';
                 return view('partials.table.action', compact('resources', 'model'));
             });
     }

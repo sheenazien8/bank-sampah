@@ -79,7 +79,7 @@ class NasabahDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('username')->title(trans('app.nasabah.column.username')),
+            Column::make('username')->title(trans('app.nasabah.column.username'))->searchable(),
             Column::make('nama_lengkap')->title(trans('app.nasabah.column.full_name')),
             Column::make('nomor_ktp')->title(trans('app.nasabah.column.id_number')),
             Column::make('alamat')->title(trans('app.nasabah.column.address')),

@@ -1,44 +1,65 @@
 @extends('layouts.app')
 
-@section('title', trans('app.today_pic.title.show', ['name' => $today_pic->user->nasabahProfile->nama_lengkap ]))
+@section('title', trans('app.saving.title.show', ['name' => $saving->saldo_akhir ]))
 
 @section('content')
   <section class="section">
     @if (app()->environment() == 'production')
       <div class="section-header">
-        <h1>{{ trans('app.today_pic.title.show', ['name' =>  $today_pic->user->nasabahProfile->nama_lengkap ]) }}</h1>
+        <h1>{{ trans('app.saving.title.show', ['name' =>  $saving->saldo_akhir ]) }}</h1>
       </div>
     @endif
 
     <div class="section-body">
       <div class="card">
         <div class="card-header d-flex justify-content-end">
-          <h3 class="mr-auto">{{ $today_pic->user->nasabahProfile->nama_lengkap }}</h3>
+          <h3 class="mr-auto">{{ $saving->nasabahUser->nasabahProfile->nama_lengkap }}</h3>
           <div class="card-title">
-            <a href="{{route('today-pic.edit', $today_pic->id)}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-pen"></i> @lang('app.saving.tarik_tunai')</a>
           </div>
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col-md-4">
-              <p>{{ trans('app.today_pic.column.name') }}</p>
+              <h5>{{ trans('app.saving.column.saldo_akhir') }}</h5>
             </div>
             <div class="col-md-8">
-              <p>{{ $today_pic->user->nasabahProfile->nama_lengkap }}</p>
+              <h5>{{price_format($saving->saldo_akhir)}}</h5>
             </div>
           </div>
-          <hr>
+          <br>
           <div class="row">
-            <div class="col-md-4">
-              <p>{{ trans('app.today_pic.column.date') }}</p>
-            </div>
-            <div class="col-md-8">
-              <p>{{ $today_pic->tanggal_tugas }}</p>
-            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>@lang('app.saving.tanggal_transaksi')</th>
+                  <th>@lang('app.saving.type')</th>
+                  <th>@lang('app.saving.jumlah_uang')</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($saving->savingHistories as $savingHistory)
+                  <tr>
+                    <td>{{ $savingHistory->tanggal }}</td>
+                    <td>{{ $savingHistory->type }}</td>
+                    <td>{{ price_format( $savingHistory->jumlah_uang ) }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
           </div>
-          <hr>
         </div>
       </div>
     </div>
   </section>
+  @include('app.saving.components.tarik-tunai')
 @endsection
+@push('javascript')
+  <script charset="utf-8">
+    $(document).ready(() => {
+      $('.save').click(() => {
+        $('form.tarik-tunai').submit()
+      })
+    })
+  </script>
+@endpush

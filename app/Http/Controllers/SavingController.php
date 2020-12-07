@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\SavingDataTable;
+use App\Models\User;
 use App\Models\Saving;
+use App\Models\SavingHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SavingController extends Controller
 {
@@ -15,42 +18,52 @@ class SavingController extends Controller
         return $dataTable->render($this->viewpath . '.index');
     }
 
-    public function create()
-    {
-        return view($this->viewpath . '.create');
-    }
-
-    public function store(Request $request)
-    {
-        $saving = new Saving();
-        $saving->fill($request->all());
-        $saving->save();
-
-        return redirect()->route('saving.index');
-    }
-
     public function show(Saving $saving)
     {
         return view($this->viewpath . '.show', compact('saving'));
     }
 
-    public function edit(Saving $saving)
+    public function tarikTunai(Request $request)
     {
-        return view($this->viewpath . '.edit', compact('saving'));
+        $user = User::whereNomorRekening($request->nasabah)->firstOrFail();
+        $nasabah = $user->nasabahProfile;
+        $this->validate($request, [
+            'nasabah' => ['required', function ($attr, $value, $fail) use ($user)
+            {
+                if (!$user->getSaving) {
+                    $fail(trans('app.saving.saving_not_founf'));
+                }
+            }],
+            'jumlah_uang' => ['required', function ($attr, $value, $fail) use ($user)
+            {
+                if ($value > $user->getSaving->saldo_akhir) {
+                    $fail(trans('app.saving.uang_melebihi_saldo', ['jumlah_saldo' => $user->getSaving->saldo_akhir]));
+                }
+            }]
+        ]);
+        try {
+            DB::beginTransaction();
+            $request->merge([
+                'tanggal' => date('Y-m-d'),
+            ]);
+            $saldo_akhir = $nasabah->saldo_akhir - $request->jumlah_uang;
+            $savingHistory = new SavingHistory();
+            $request->merge([ 'type' => 'out' ]);
+            $savingHistory->fill($request->all());
+            $savingHistory->tabungan()->associate($nasabah->user->getSaving);
+            $savingHistory->save();
+            $nasabah->user->getSaving->fill(['saldo_akhir' => $saldo_akhir]);
+            $nasabah->user->getSaving->save();
+            $nasabah->fill(['saldo_akhir' => $saldo_akhir]);
+            $nasabah->save();
+            DB::commit();
+
+            return back()->with('success',trans('app.saving.message.tarik_tunai', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return $e->getMessage();
+        }
     }
 
-    public function update(Request $request, Saving $saving)
-    {
-        $saving->fill($request->all());
-        $saving->save();
-
-        return redirect()->route('saving.index');
-    }
-
-    public function destroy(Saving $saving)
-    {
-        $saving->delete();
-
-        return back();
-    }
 }

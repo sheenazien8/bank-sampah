@@ -71,8 +71,8 @@ class ContentDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('user')->title(trans('app.content.column.writer')),
             Column::make('title')->title(trans('app.content.column.title')),
-            Column::make('body')->title(trans('app.content.column.body')),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)

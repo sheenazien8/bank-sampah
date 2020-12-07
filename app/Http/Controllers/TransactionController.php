@@ -80,12 +80,15 @@ class TransactionController extends Controller
             $savingHistory = new SavingHistory();
             $savingHistory->fill([
                 'type' => 'in',
-                'tanggal_menabung' => date('Y-m-d'),
+                'tanggal' => date('Y-m-d'),
                 'jumlah_uang' => $money
             ]);
+            $saldo_akhir = $saving->saldo_akhir + $money;
             $saving->update([
-                'saldo_akhir' => $saving->saldo_akhir + $money
+                'saldo_akhir' => $saldo_akhir
             ]);
+            $nasabah->saldo_akhir = $saldo_akhir;
+            $nasabah->save();
             $savingHistory->tabungan()->associate($saving);
             $savingHistory->save();
             DB::commit();

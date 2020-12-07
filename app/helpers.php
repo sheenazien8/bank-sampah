@@ -175,3 +175,14 @@ if (! function_exists('getActiveClass')) {
     }
 }
 
+if (! function_exists('getConditionDetail')) {
+    function getConditionDetail($key, ...$bypass)
+    {
+        foreach ($bypass as $v) {
+            if ($key == $v) {
+                return false;
+            }
+        }
+        return $key != 'id' && $key !='updated_at' && $key != 'created_at';
+    }
+}

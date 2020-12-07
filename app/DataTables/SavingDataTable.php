@@ -46,11 +46,9 @@ class SavingDataTable extends DataTable
             ->addColumn('action', function ($model)
             {
                 $resources = 'saving';
-                return view('partials.table.action', [
+                return view('app.saving.components.action', [
                     'resources' => $resources,
-                    'model' => $model,
-                    'tanpadelete' => true,
-                    'tanpaedit' => true
+                    'model' => $model
                 ]);
             });
 

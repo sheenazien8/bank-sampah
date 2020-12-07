@@ -69,7 +69,6 @@ class ActivityDataTable extends DataTable
         return [
             Column::make('tanggal')->title(trans('app.activity.column.tanggal')),
             Column::make('title')->title(trans('app.activity.column.title')),
-            Column::make('agenda')->title(trans('app.activity.column.agenda')),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)

@@ -34,7 +34,4 @@ class Nasabah extends Model
     {
         return $this->hasMany(Transaction::class, 'nasabah_id');
     }
-
-
-
 }

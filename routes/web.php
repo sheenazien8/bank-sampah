@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('/item', ItemController::class);
     Route::resource('/pic', PicController::class);
     Route::resource('/saving', SavingController::class);
+    Route::post('/tarik_tunai/saving/', [SavingController::class, 'tarikTunai'])->name('saving.tarik_tunai');
     Route::resource('/today-pic', TodayPicController::class);
     Route::resource('/transaction', TransactionController::class);
     Route::resource('/unit', UnitController::class);

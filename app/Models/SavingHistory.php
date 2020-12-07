@@ -12,7 +12,7 @@ class SavingHistory extends Model
      * @var array
      */
     protected $fillable = [
-        'type', 'tanggal_menabung', 'jumlah_uang'
+        'type', 'jumlah_uang', 'tanggal'
     ];
 
     /**

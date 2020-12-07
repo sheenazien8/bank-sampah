@@ -81,6 +81,7 @@ return [
         ],
         'column' => [
             'name' => 'Item Name',
+            'nama' => 'Item Name',
             'unit' => 'Unit'
         ],
         'placeholder' => [
@@ -97,6 +98,9 @@ return [
         ],
         'column' => [
             'name' => 'Job Name',
+            'nama_jabatan' => 'Job Name',
+            'keterangan' => 'Description',
+            'nilai_setiap_tugas' => 'Value Per Job',
             'value' => 'Value Per Job',
             'description' => 'Description'
         ],
@@ -133,6 +137,7 @@ return [
         'column' => [
             'title' => 'Title',
             'body' => 'Body',
+            'writer' => 'Writer',
         ],
         'placeholder' => [
             'title' => 'Input Title',

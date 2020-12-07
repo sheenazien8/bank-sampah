@@ -16,19 +16,37 @@
           <h3 class="mr-auto">{{ $nasabah->nama_lengkap }}</h3>
           <div class="card-title">
             <a href="{{route('nasabah.edit', $nasabah->id)}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-            {{-- <a href="{{route('nasabah.destroy', $nasabah->id)}}" class="btn btn-danger"><i class="fas fa-trash"></i></a> --}}
           </div>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-4">
-              <p>{{ trans('app.nasabah.column.name') }}</p>
-            </div>
-            <div class="col-md-8">
-              <p>{{ $nasabah->nama_lengkap }}</p>
-            </div>
-          </div>
-          <hr>
+          @foreach ($nasabah->user->getAttributes() as $key => $value)
+            @if (getConditionDetail($key, 'password', 'email_verified_at', 'remember_token', 'is_nasabah'))
+              <div class="row">
+                <div class="col-md-4">
+                  <p>{{ trans("app.nasabah.column.{$key}") }}</p>
+                </div>
+                <div class="col-md-8">
+                  <p>{{ $value }}</p>
+                </div>
+              </div>
+            @endif
+          @endforeach
+          @foreach ($nasabah->getAttributes() as $key => $value)
+            @if (getConditionDetail($key))
+              <div class="row">
+                <div class="col-md-4">
+                  <p>{{ trans("app.nasabah.column.{$key}") }}</p>
+                </div>
+                <div class="col-md-8">
+                  @if ($key == 'saldo_akhir')
+                    <p>{{ price_format($value) }}</p>
+                  @else
+                    <p>{{ $value }}</p>
+                  @endif
+                </div>
+              </div>
+            @endif
+          @endforeach
         </div>
       </div>
     </div>

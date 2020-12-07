@@ -88,4 +88,15 @@ class User extends Authenticatable
         return $query->where('is_nasabah', true);
     }
 
+    /**
+     * mengambil saving
+     *
+     * @return HasOne
+     */
+    public function getSaving()
+    {
+        return $this->hasOne(Saving::class, 'user_id');
+    }
+
+
 }

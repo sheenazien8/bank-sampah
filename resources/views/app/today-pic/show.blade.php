@@ -27,7 +27,6 @@
               <p>{{ $today_pic->user->nasabahProfile->nama_lengkap }}</p>
             </div>
           </div>
-          <hr>
           <div class="row">
             <div class="col-md-4">
               <p>{{ trans('app.today_pic.column.date') }}</p>
@@ -36,7 +35,6 @@
               <p>{{ $today_pic->tanggal_tugas }}</p>
             </div>
           </div>
-          <hr>
         </div>
       </div>
     </div>

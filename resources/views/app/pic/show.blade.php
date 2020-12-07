@@ -19,33 +19,18 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-4">
-              <p>{{ trans('app.pic.column.name') }}</p>
-            </div>
-            <div class="col-md-8">
-              <p>{{ $pic->nama_jabatan }}</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-md-4">
-              <p>{{ trans('app.pic.column.description') }}</p>
-            </div>
-            <div class="col-md-8">
-              <p>{{ $pic->keterangan }}</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-md-4">
-              <p>{{ trans('app.pic.column.value') }}</p>
-            </div>
-            <div class="col-md-8">
-              <p>{{ $pic->nilai_setiap_tugas }}</p>
-            </div>
-          </div>
-          <hr>
+          @foreach ($pic->getAttributes() as $key => $value)
+            @if (getConditionDetail($key))
+              <div class="row">
+                <div class="col-md-4">
+                  <p>{{ trans("app.pic.column.{$key}") }}</p>
+                </div>
+                <div class="col-md-8">
+                  <p>{{ $value }}</p>
+                </div>
+              </div>
+            @endif
+          @endforeach
         </div>
       </div>
     </div>
