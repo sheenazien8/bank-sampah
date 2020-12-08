@@ -78,6 +78,7 @@ class TodayPicTable extends DataTable
             Column::make('tanggal_tugas')->title(trans('app.today_pic.column.date')),
             Column::make('user')->title(trans('app.today_pic.column.user')),
             Column::make('tugas')->title(trans('app.today_pic.column.pics')),
+            Column::make('pin')->title(trans('app.today_pic.column.pin')),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)

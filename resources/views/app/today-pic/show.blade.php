@@ -21,7 +21,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-4">
-              <p>{{ trans('app.today_pic.column.name') }}</p>
+              <p><b>{{ trans('app.today_pic.column.name') }}</b></p>
             </div>
             <div class="col-md-8">
               <p>{{ $today_pic->user->nasabahProfile->nama_lengkap }}</p>
@@ -29,10 +29,18 @@
           </div>
           <div class="row">
             <div class="col-md-4">
-              <p>{{ trans('app.today_pic.column.date') }}</p>
+              <p><b>{{ trans('app.today_pic.column.pin') }}</b></p>
             </div>
             <div class="col-md-8">
-              <p><b>{{ $today_pic->tanggal_tugas }}</b></p>
+              <p>{{ $today_pic->pin }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <p><b>{{ trans('app.today_pic.column.date') }}</b></p>
+            </div>
+            <div class="col-md-8">
+              <p>{{ $today_pic->tanggal_tugas }}</p>
             </div>
           </div>
         </div>

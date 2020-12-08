@@ -11,7 +11,7 @@
              class="form-control {{ $errors->first('nama_lengkap') ? 'is-invalid' : '' }}"
              id="nama_lengkap"
              name="nama_lengkap"
-             value="{{ optional($nasabah ?? '')->nama_lengkap }}">
+             value="{{ old('nama_lengkap', optional($nasabah ?? '')->nama_lengkap) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -22,7 +22,7 @@
              class="form-control {{ $errors->first('nomor_ktp') ? 'is-invalid' : '' }}"
              id="nomor_ktp"
              name="nomor_ktp"
-             value="{{ optional($nasabah ?? '')->nomor_ktp }}">
+             value="{{ old('nomor_ktp', optional($nasabah ?? '')->nomor_ktp) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -33,7 +33,7 @@
              class="form-control {{ $errors->first('alamat') ? 'is-invalid' : '' }}"
              id="alamat"
              name="alamat"
-             value="{{ optional($nasabah ?? '')->alamat }}">
+             value="{{ old('alamat', optional($nasabah ?? '')->alamat) }}">
     </div>
   </div>
   <hr>
@@ -45,7 +45,7 @@
              class="form-control {{ $errors->first('username') ? 'is-invalid' : '' }}"
              id="username"
              name="username"
-             value="{{ optional(optional($nasabah ?? '')->user ?? '')->username }}">
+             value="{{ old('username', optional(optional($nasabah ?? '')->user ?? '')->username) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -56,7 +56,7 @@
              class="form-control {{ $errors->first('nomor_rekening') ? 'is-invalid' : '' }}"
              id="nomor_rekening"
              name="nomor_rekening"
-             value="{{ optional(optional($nasabah ?? '')->user ?? '')->nomor_rekening }}">
+             value="{{ old('nomor_rekening',  optional(optional($nasabah ?? '')->user ?? '')->nomor_rekening ) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -67,7 +67,7 @@
              class="form-control {{ $errors->first('phone') ? 'is-invalid' : '' }}"
              id="phone"
              name="phone"
-             value="{{ optional(optional($nasabah ?? '')->user ?? '')->phone }}">
+             value="{{ old('phone',  optional(optional($nasabah ?? '')->user ?? '')->phone ) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -78,7 +78,7 @@
              class="form-control {{ $errors->first('telegram_account') ? 'is-invalid' : '' }}"
              id="telegram_account"
              name="telegram_account"
-             value="{{ optional(optional($nasabah ?? '')->user ?? '')->telegram_account }}">
+             value="{{ old('telegram_account',  optional(optional($nasabah ?? '')->user ?? '')->telegram_account ) }}">
     </div>
   </div>
   <div class="form-group row">

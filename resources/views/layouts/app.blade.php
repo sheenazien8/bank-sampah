@@ -13,8 +13,11 @@
     <!-- Main Content -->
     <div class="main-content">
       @if ($errors->any())
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <h4 class="alert-heading">{{ trans('app.global.ohno422') }}</h4>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
            @foreach ($errors->all() as $error)
              <p><b>{{ $error }}</b></p>
             @endforeach

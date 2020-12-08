@@ -8,7 +8,7 @@ return [
         ],
         'column' => [
             'name' => 'Name',
-            'id_number' => 'Id Number',
+            'id_number' => 'KTP Id Number',
             'full_name' => 'Full Name',
             'address' => 'Address',
             'username' => 'Username',
@@ -20,7 +20,7 @@ return [
         ],
         'placeholder' => [
             'name' => 'Input Name',
-            'id_number' => 'Input Id Number',
+            'id_number' => 'Input KTP Id Number',
             'full_name' => 'Input Full Name',
             'address' => 'Input Address',
             'username' => 'Input Username',
@@ -137,7 +137,7 @@ return [
         ],
         'column' => [
             'title' => 'Title',
-            'body' => 'Body',
+            'body' => 'Body image(*.png)',
             'writer' => 'Writer',
         ],
         'placeholder' => [

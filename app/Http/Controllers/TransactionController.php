@@ -80,9 +80,12 @@ class TransactionController extends Controller
             // kali upah untuk petugas untuk di masukkan ke tabungan petugas
             $todayPic = session()->get('today-pic');
             if ($todayPic) {
+                // mengambil tabungan milik petugas
                 $saving = $todayPic->tabungan;
+                // mengambil nilai_setiap_tugas
                 $nilai_setiap_tugas = TodayPic::where('user_id', $todayPic->id)->where('tanggal_tugas', date('Y-m-d'))->first()->pic->nilai_setiap_tugas;
                 $upahPetugas = $money * $nilai_setiap_tugas / 100;
+                $money = $money - $money * (setting('profit_total_petugas') ?? 5) / 100;
                 $savingHistory = new SavingHistory();
                 $savingHistory->fill([
                     'type' => 'upah-petugas',
@@ -95,7 +98,6 @@ class TransactionController extends Controller
                 ]);
                 $savingHistory->tabungan()->associate($saving);
                 $savingHistory->save();
-                $money = $money - ($money * setting('profit_total_petugas') ?? 5 / 100);
             }
             $saving = Saving::where('user_id', $nasabah->user->id)->first();
             if (!$saving) {
