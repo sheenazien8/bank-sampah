@@ -18,6 +18,7 @@
           </div>
         </div>
         <div class="card-body">
+          @include('app.setting.components.form')
         </div>
       </div>
     </div>

@@ -14,9 +14,11 @@
       <div class="card">
         <div class="card-header d-flex justify-content-end">
           <h3 class="mr-auto">{{ $saving->nasabahUser->nasabahProfile->nama_lengkap }}</h3>
-          <div class="card-title">
-            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-pen"></i> @lang('app.saving.tarik_tunai')</a>
-          </div>
+          @if (!auth()->user()->is_nasabah)
+            <div class="card-title">
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-pen"></i> @lang('app.saving.tarik_tunai')</a>
+            </div>
+          @endif
         </div>
         <div class="card-body">
           <div class="row">

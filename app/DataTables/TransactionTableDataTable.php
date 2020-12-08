@@ -46,7 +46,10 @@ class TransactionTableDataTable extends DataTable
      */
     public function query(Transaction $model)
     {
-        return $model->newQuery();
+        return $model->when(auth()->user()->whoami == 'pic', function ($query)
+        {
+            return $query->where('user_id', auth()->id());
+        })->newQuery();
     }
 
     /**

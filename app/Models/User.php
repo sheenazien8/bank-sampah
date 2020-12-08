@@ -65,6 +65,7 @@ class User extends Authenticatable
      */
     public function getWhoamiAttribute()
     {
+        if (session()->get('today-pic')) return 'pic';
         return $this->is_nasabah ? 'nasabah' : 'admin';
     }
 
@@ -98,5 +99,8 @@ class User extends Authenticatable
         return $this->hasOne(Saving::class, 'user_id');
     }
 
-
+    public function getProfileNameAttribute()
+    {
+        return $this->is_nasabah ? $this->nasabahProfile->nama_lengkap : $this->username;
+    }
 }

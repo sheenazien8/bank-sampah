@@ -13,6 +13,7 @@ return [
             'address' => 'Address',
             'username' => 'Username',
             'account_number' => 'Account Number',
+            'saldo_akhir' => 'Current Saldo',
             'phone' => 'Phone',
             'telegram_account' => 'Telegram Account',
             'password' => 'Password'
@@ -173,12 +174,18 @@ return [
             'saldo_akhir' => 'Current Saldo',
         ],
     ],
+    'auth' => [
+        'username_or_pin' => 'Username, Account Number Or Pin',
+        'password' => 'Password'
+    ],
     'global' => [
         'add' => 'Add',
         'save' => 'Save',
         'show' => 'Detail',
         'edit' => 'Edit',
         'delete' => 'Delete',
-        'ohno422' => 'You Must Complete the field'
+        'ohno422' => 'You Must Complete the field',
+        'wellcome' => 'Wellcome, :user',
+        'profile' => 'Profile'
     ]
 ];

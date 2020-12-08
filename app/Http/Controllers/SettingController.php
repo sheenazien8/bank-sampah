@@ -15,7 +15,19 @@ class SettingController extends Controller
 
     public function store(Request $request)
     {
-        return redirect()->route('setting.index');
+        foreach ($request->only('bahasa', 'profit_bank_sampah') as $key => $value) {
+            $setting = Setting::where('key', $key)->first();
+            if (!$setting) {
+                $setting = new Setting();
+            }
+            $setting->fill([
+                'key' => $key,
+                'value' => $value
+            ]);
+            $setting->save();
+        }
+
+        return redirect()->route('setting.index')->with('success', trans('app.setting.succes'));
     }
 
 }

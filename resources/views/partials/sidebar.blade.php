@@ -10,6 +10,9 @@
       @if (isset($menu['has_dropdown']))
       @else
         @if (isset($menu['menu-header']))
+          @if (in_array(auth()->user()->whoami, $menu['display_for']))
+
+          @endif
           <li class="menu-header">{{ $menu['menu-header'] }}</li>
         @endif
         @if (in_array(auth()->user()->whoami, $menu['display_for']))

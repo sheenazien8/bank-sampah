@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('/today-pic', TodayPicController::class);
     Route::resource('/transaction', TransactionController::class);
     Route::resource('/unit', UnitController::class);
-    Route::resource('/setting', SettingController::class);
+    Route::resource('/setting', SettingController::class)->only(['index', 'store']);
     Route::resource('/activity', ActivityController::class);
     Route::resource('/content', ContentController::class);
 });

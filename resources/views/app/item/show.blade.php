@@ -26,7 +26,7 @@
                   <p>{{ trans("app.item.column.{$key}") }}</p>
                 </div>
                 <div class="col-md-8">
-                  <p>{{ $value }}</p>
+                  <p><b>{{ $value }}</b></p>
                 </div>
               </div>
             @endif

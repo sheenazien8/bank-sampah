@@ -12,7 +12,7 @@ class TodayPic extends Model
      * @var array
      */
     protected $fillable = [
-        'tanggal_tugas', 'user_id', 'pic_id'
+        'tanggal_tugas', 'user_id', 'pic_id', 'pin'
     ];
 
     /**

@@ -27,6 +27,7 @@ class TodayPicController extends Controller
         $this->validate($request, [
             'tanggal_tugas' => ['required', 'after:now'],
         ]);
+        $request->merge(['pin' => random_int(1111, 9999)]);
         $user = User::find($request->user_id);
         $user->notify(new SendTodayPicNotification([
             'text' => 'test'

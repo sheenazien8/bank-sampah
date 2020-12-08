@@ -62,7 +62,10 @@ class SavingDataTable extends DataTable
      */
     public function query(Saving $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->when(auth()->user()->whoami == 'nasabah', function ($query)
+        {
+            return $query->where('user_id', auth()->user()->id);
+        });
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\TodayPic;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Validation\ValidationException;
@@ -10,44 +11,17 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    protected $userPic = null;
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
 
-    /**
-     * Get the failed login response instance.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
     protected function sendFailedLoginResponse(Request $request)
     {
         throw ValidationException::withMessages([
@@ -55,34 +29,24 @@ class LoginController extends Controller
         ]);
     }
 
-    /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
-     */
     public function username()
     {
         $identity = request()->identity;
         $field = '';
 
-        if (is_numeric($identity)) {
+        if (is_numeric($identity) && strlen($identity) == 4) {
+            $field = 'pin';
+        } else if (is_numeric($identity)) {
             $field = 'nomor_rekening';
         } else {
             $field = 'username';
         }
+
         request()->merge([$field => $identity]);
 
         return $field;
     }
 
-    /**
-     * Validate the user login request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
     protected function validateLogin(Request $request)
     {
         $messages = [
@@ -91,8 +55,28 @@ class LoginController extends Controller
         ];
 
         $request->validate([
-            'identity' => ['required', 'string'],
+            'identity' => ['required', 'string', function ($attr, $value, $fail)
+            {
+                if ($this->username() == 'pin') {
+                    $todayPic = TodayPic::where('pin', $value)->where('tanggal_tugas', date('Y-m-d'))->first();
+                    $this->userPic = $todayPic->user;
+                    if (!$todayPic) {
+                        $fail('app.auth.today_pic.you_cannot_login_now');
+                    }
+                }
+            }],
             'password' => 'required|string',
         ], $messages);
+    }
+
+    protected function attemptLogin(Request $request)
+    {
+        if ($this->username() == 'pin') {
+            session()->put('today-pic', $this->userPic);
+            return $this->guard()->loginUsingId($this->userPic->id);
+        }
+        return $this->guard()->attempt(
+            $this->credentials($request), $request->filled('remember')
+        );
     }
 }

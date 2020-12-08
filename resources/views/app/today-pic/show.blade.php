@@ -32,7 +32,7 @@
               <p>{{ trans('app.today_pic.column.date') }}</p>
             </div>
             <div class="col-md-8">
-              <p>{{ $today_pic->tanggal_tugas }}</p>
+              <p><b>{{ $today_pic->tanggal_tugas }}</b></p>
             </div>
           </div>
         </div>

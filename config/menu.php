@@ -6,7 +6,7 @@ return [
         'route' => 'dashboard.index',
         'active' => ['dashboard.index'],
         'menu_title' => 'Dashboard',
-        'display_for' => ['nasabah', 'admin'],
+        'display_for' => ['nasabah', 'admin', 'pic'],
         'icon' => 'fas fa-th'
     ],
     [
@@ -48,7 +48,7 @@ return [
     [
         'route' => 'saving.index',
         'active' => ['saving.index', 'saving.show'],
-        'display_for' => ['admin'],
+        'display_for' => ['admin', 'nasabah'],
         'menu_title' => 'Saving',
         'icon' => 'fas fa-piggy-bank'
     ],
@@ -56,6 +56,7 @@ return [
         'route' => 'transaction.index',
         'display_for' => ['nasabah', 'admin'],
         'active' => ['transaction.index', 'transaction.edit', 'transaction.show'],
+        'display_for' => ['admin', 'pic'],
         'menu_title' => 'Transaction',
         'icon' => 'fas fa-money-check-alt'
     ],
@@ -74,9 +75,8 @@ return [
         'icon' => 'fas fa-th-list'
     ],
     [
-        'menu-header' => 'Setting',
         'route' => 'setting.index',
-        'display_for' => ['nasabah', 'admin'],
+        'display_for' => ['admin'],
         'active' => ['setting.index'],
         'menu_title' => 'Setting',
         'icon' => 'fas fa-cogs'

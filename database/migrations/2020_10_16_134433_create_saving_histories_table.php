@@ -15,7 +15,7 @@ class CreateSavingHistoriesTable extends Migration
     {
         Schema::create('saving_histories', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['in', 'out'])->default('in');
+            $table->enum('type', ['in', 'out', 'upah-petugas'])->default('in');
             $table->date('tanggal_menabung');
             $table->foreignId('saving_id')->references('id')->on('savings')->onDelete('cascade');
             $table->timestamps();

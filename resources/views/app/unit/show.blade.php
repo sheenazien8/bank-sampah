@@ -24,7 +24,7 @@
               <p>{{ trans('app.unit.column.name') }}</p>
             </div>
             <div class="col-md-8">
-              <p>{{ $unit->nama }}</p>
+              <p><b>{{ $unit->nama }}</b></p>
             </div>
           </div>
           <hr>

@@ -30,7 +30,7 @@
                   @if ($key == 'agenda')
                     {!! $value !!}
                   @else
-                    <p>{{ $value }}</p>
+                    <p><b>{{ $value }}</b></p>
                   @endif
                 </div>
               </div>

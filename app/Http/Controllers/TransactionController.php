@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Nasabah;
 use App\Models\Saving;
 use App\Models\SavingHistory;
+use App\Models\TodayPic;
 use App\Models\TransactionDetail;
 use App\Models\Transaction;
 use App\Models\User;
@@ -21,10 +22,14 @@ class TransactionController extends Controller
     {
         $nasabah = User::isNasabah()->get()->map(function($data) {
             if ($data->nasabahProfile) {
-                return ['value' => $data->nasabahProfile->id, 'text' => $data->nomor_rekening . ' --- ' . $data->nasabahProfile->nama_lengkap];
+                return ['value' => $data->nasabahProfile->id, 'text' => $data->nomor_rekening . ' --- ' . $data->nasabahProfile->nama_lengkap, 'id_user' => $data->id];
             }
         });
-        $nasabah = $nasabah->filter(fn($data) => $data);
+        $nasabah = $nasabah->filter(function($data) {
+            if (isset($data['id_user']) && session()->get('today-pic')->id != $data['id_user']) {
+                return $data;
+            }
+        });
 
         return $dataTable->render($this->viewpath . '.index', compact('nasabah'));
     }
@@ -69,6 +74,26 @@ class TransactionController extends Controller
                 $price = $data['harga_sekarang'] * $data['jumlah'];
                 $money += ($price) - ($price) * $profit / 100;
                 $transaction->detailTransaksi()->save((new TransactionDetail($data))->item()->associate($itemData->id));
+            }
+            // kali upah untuk petugas untuk di masukkan ke tabungan petugas
+            $todayPic = session()->get('today-pic');
+            if ($todayPic) {
+                $saving = $todayPic->tabungan;
+                $nilai_setiap_tugas = TodayPic::where('user_id', $todayPic->id)->where('tanggal_tugas', date('Y-m-d'))->first()->pic->nilai_setiap_tugas;
+                $upahPetugas = $money * $nilai_setiap_tugas / 100;
+                $money = $money - $upahPetugas;
+                $savingHistory = new SavingHistory();
+                $savingHistory->fill([
+                    'type' => 'upah-petugas',
+                    'tanggal' => date('Y-m-d'),
+                    'jumlah_uang' => $upahPetugas
+                ]);
+                $saldo_akhir = $saving->saldo_akhir + $upahPetugas;
+                $saving->update([
+                    'saldo_akhir' => $saldo_akhir
+                ]);
+                $savingHistory->tabungan()->associate($saving);
+                $savingHistory->save();
             }
             $saving = Saving::where('user_id', $nasabah->user->id)->first();
             if (!$saving) {

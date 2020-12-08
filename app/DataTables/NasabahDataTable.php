@@ -31,6 +31,10 @@ class NasabahDataTable extends DataTable
 
                 return $date;
             })
+            ->addColumn('saldo_akhir', function ($model)
+            {
+                return price_format($model->saldo_akhir);
+            })
             ->addColumn('action', function ($model)
             {
                 $resources = 'nasabah';
@@ -82,6 +86,7 @@ class NasabahDataTable extends DataTable
             Column::make('username')->title(trans('app.nasabah.column.username'))->searchable(),
             Column::make('nama_lengkap')->title(trans('app.nasabah.column.full_name')),
             Column::make('nomor_ktp')->title(trans('app.nasabah.column.id_number')),
+            Column::make('saldo_akhir')->title(trans('app.nasabah.column.saldo_akhir')),
             Column::make('alamat')->title(trans('app.nasabah.column.address')),
             Column::make('created_at'),
             Column::computed('action')
