@@ -191,7 +191,8 @@ return [
         'total_admin' => 'Total Admin',
         'total_nasabah' => 'Total Nasabah',
         'total_jenis_sampah' => 'Total Item Type',
-        'profit_bank_sampah' => 'Profit Bank Sampah'
+        'profit_bank_sampah' => 'Profit Bank Sampah',
+        'tabungan' => 'Current Saldo'
     ],
     'global' => [
         'add' => 'Add',

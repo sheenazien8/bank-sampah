@@ -18,11 +18,11 @@ return [
         'icon' => 'fas fa-user-friends'
     ],
     [
-        'route' => 'user.index',
-        'active' => ['user.index', 'user.create', 'user.edit', 'user.show'],
-        'menu_title' => 'User',
-        'display_for' => ['admin'],
-        'icon' => 'fas fa-users'
+        'route' => 'transaction.index',
+        'active' => ['transaction.index', 'transaction.edit', 'transaction.show'],
+        'display_for' => ['admin', 'pic'],
+        'menu_title' => 'Transaction',
+        'icon' => 'fas fa-money-check-alt'
     ],
     [
         'route' => 'item.index',
@@ -46,6 +46,13 @@ return [
         'icon' => 'fas fa-user-cog'
     ],
     [
+        'route' => 'user.index',
+        'active' => ['user.index', 'user.create', 'user.edit', 'user.show'],
+        'menu_title' => 'User',
+        'display_for' => ['admin'],
+        'icon' => 'fas fa-users'
+    ],
+    [
         'route' => 'saving.index',
         'active' => ['saving.index', 'saving.show'],
         'display_for' => ['admin', 'nasabah'],
@@ -53,18 +60,11 @@ return [
         'icon' => 'fas fa-piggy-bank'
     ],
     [
-        'route' => 'transaction.index',
-        'active' => ['transaction.index', 'transaction.edit', 'transaction.show'],
-        'display_for' => ['admin', 'pic'],
-        'menu_title' => 'Transaction',
-        'icon' => 'fas fa-money-check-alt'
-    ],
-    [
-        'route' => 'report.index',
-        'active' => ['report.index', 'report.edit', 'report.show'],
-        'display_for' => ['admin'],
-        'menu_title' => 'Report',
-        'icon' => 'fas fa-list-alt'
+        'route' => 'activity.index',
+        'display_for' => ['nasabah', 'admin'],
+        'active' => ['activity.index', 'activity.show', 'activity.create', 'activity.edit'],
+        'menu_title' => 'Activity',
+        'icon' => 'fas fa-th-list'
     ],
     [
         'route' => 'content.index',
@@ -74,11 +74,11 @@ return [
         'icon' => 'fas fa-cubes'
     ],
     [
-        'route' => 'activity.index',
-        'display_for' => ['nasabah', 'admin'],
-        'active' => ['activity.index', 'activity.show', 'activity.create', 'activity.edit'],
-        'menu_title' => 'Activity',
-        'icon' => 'fas fa-th-list'
+        'route' => 'report.index',
+        'active' => ['report.index', 'report.edit', 'report.show'],
+        'display_for' => ['admin'],
+        'menu_title' => 'Report',
+        'icon' => 'fas fa-list-alt'
     ],
     [
         'route' => 'setting.index',
