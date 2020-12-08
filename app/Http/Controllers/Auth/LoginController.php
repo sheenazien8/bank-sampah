@@ -60,12 +60,13 @@ class LoginController extends Controller
             {
                 if ($this->username() == 'pin') {
                     $todayPic = TodayPic::where('pin', $value)->where('tanggal_tugas', date('Y-m-d'))->first();
-                    $this->userPic = $todayPic->user;
                     if (!$todayPic) {
                         $fail('app.auth.today_pic.you_cannot_login_now');
-                    }
-                    if (!Hash::check(request()->password, $this->userPic->password)) {
-                        $this->sendFailedLoginResponse($request);
+                    } else {
+                        $this->userPic = $todayPic->user;
+                        if (!Hash::check(request()->password, $this->userPic->password)) {
+                            $this->sendFailedLoginResponse($request);
+                        }
                     }
                 }
             }],

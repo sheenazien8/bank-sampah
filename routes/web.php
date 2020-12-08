@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\PicController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TodayPicController;
@@ -43,7 +44,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('/pic', PicController::class);
     Route::resource('/saving', SavingController::class);
     Route::post('/tarik_tunai/saving/', [SavingController::class, 'tarikTunai'])->name('saving.tarik_tunai');
-    Route::get('/report', [SavingController::class, 'tarikTunai'])->name('report.index');
+    Route::get('/report', [ReportController::class, 'tarikTunai'])->name('report.index');
     Route::resource('/today-pic', TodayPicController::class);
     Route::resource('/transaction', TransactionController::class);
     Route::resource('/unit', UnitController::class);

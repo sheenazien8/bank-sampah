@@ -59,13 +59,13 @@ return [
         'menu_title' => 'Transaction',
         'icon' => 'fas fa-money-check-alt'
     ],
-    /* [ */
-    /*     'route' => 'report.index', */
-    /*     'active' => ['report.index', 'report.edit', 'report.show'], */
-    /*     'display_for' => ['admin'], */
-    /*     'menu_title' => 'Report', */
-    /*     'icon' => 'fas fa-list-alt' */
-    /* ], */
+    [
+        'route' => 'report.index',
+        'active' => ['report.index', 'report.edit', 'report.show'],
+        'display_for' => ['admin'],
+        'menu_title' => 'Report',
+        'icon' => 'fas fa-list-alt'
+    ],
     [
         'route' => 'content.index',
         'display_for' => ['nasabah', 'admin'],

@@ -7,7 +7,11 @@
     <div class="section-header">
       <h1>Dashboard</h1>
     </div>
-    @include('app.dashboard.components.card')
+    @if (auth()->user()->whoami == 'admin')
+      @include('app.dashboard.components.card')
+    @else
+      @include('app.dashboard.components.tabungan')
+    @endif
 
     <div class="section-body">
     </div>

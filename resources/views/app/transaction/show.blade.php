@@ -37,6 +37,7 @@
                 <th>@lang('app.transaction.column.item')</th>
                 <th>@lang('app.transaction.column.quantity')</th>
                 <th>@lang('app.transaction.column.price')</th>
+                <th>@lang('app.transaction.column.satuan')</th>
               </tr>
             </thead>
             @foreach ($transaction->detailTransaksi as $detailTransaksi)
@@ -44,6 +45,7 @@
                 <td>{{ $detailTransaksi->item->nama }}</td>
                 <td>{{ $detailTransaksi->jumlah }}</td>
                 <td>{{ price_format($detailTransaksi->harga_sekarang) }}</td>
+                <td>{{ $detailTransaksi->item->unit }}</td>
               </tr>
             @endforeach
           </table>
