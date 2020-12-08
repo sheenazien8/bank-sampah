@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TodayPic;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 
@@ -55,7 +56,7 @@ class LoginController extends Controller
         ];
 
         $request->validate([
-            'identity' => ['required', 'string', function ($attr, $value, $fail)
+            'identity' => ['required', 'string', function ($attr, $value, $fail) use ($request)
             {
                 if ($this->username() == 'pin') {
                     $todayPic = TodayPic::where('pin', $value)->where('tanggal_tugas', date('Y-m-d'))->first();
@@ -63,9 +64,12 @@ class LoginController extends Controller
                     if (!$todayPic) {
                         $fail('app.auth.today_pic.you_cannot_login_now');
                     }
+                    if (!Hash::check(request()->password, $this->userPic->password)) {
+                        $this->sendFailedLoginResponse($request);
+                    }
                 }
             }],
-            'password' => 'required|string',
+            'password' => ['required', 'string'],
         ], $messages);
     }
 
@@ -73,6 +77,7 @@ class LoginController extends Controller
     {
         if ($this->username() == 'pin') {
             session()->put('today-pic', $this->userPic);
+
             return $this->guard()->loginUsingId($this->userPic->id);
         }
         return $this->guard()->attempt(

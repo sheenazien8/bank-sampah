@@ -20,8 +20,7 @@ class NasabahDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables()
-            ->eloquent($query)
+        return datatables($query)
             ->addColumn('username', function ($model)
             {
                 return $model->user->username;
@@ -64,15 +63,7 @@ class NasabahDataTable extends DataTable
                     ->setTableId('nasabahs-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    /* ->dom('Bfrtip') */
                     ->orderBy(1);
-                    /* ->buttons( */
-                        /* Button::make('create'), */
-                        /* Button::make('export'), */
-                        /* Button::make('print'), */
-                        /* Button::make('reset'), */
-                        /* Button::make('reload') */
-                    /* ); */
     }
 
     /**
@@ -83,7 +74,7 @@ class NasabahDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('username')->title(trans('app.nasabah.column.username'))->searchable(),
+            Column::make('username')->title(trans('app.nasabah.column.username')),
             Column::make('nama_lengkap')->title(trans('app.nasabah.column.full_name')),
             Column::make('nomor_ktp')->title(trans('app.nasabah.column.id_number')),
             Column::make('saldo_akhir')->title(trans('app.nasabah.column.saldo_akhir')),

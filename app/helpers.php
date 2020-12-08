@@ -22,9 +22,10 @@ if (! function_exists('dash_to_space')) {
     }
 }
 if (! function_exists('price_format')) {
-    function price_format($price)
+    function price_format($price, $label = true)
     {
-        return 'Rp. '.number_format($price, 0, ',', '.');
+        $label = $label ? 'Rp. ' : '';
+        return $label.number_format($price, 0, ',', '.');
     }
 }
 if (! function_exists('get_lang')) {

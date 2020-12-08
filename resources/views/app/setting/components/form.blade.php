@@ -16,5 +16,14 @@
            name="profit_bank_sampah"
            value="{{ setting('profit_bank_sampah') }}">
   </div>
+  <div class="form-group">
+    <label for="profit_bank_sampah">@lang('app.setting.profit_total_petugas')</label>
+    <input type="number"
+           class="form-control"
+           id="profit_total_petugas"
+           placeholder="@lang('app.setting.placeholder.profit_total_petugas')"
+           name="profit_total_petugas"
+           value="{{ setting('profit_total_petugas') }}">
+  </div>
   <button type="submit" class="btn btn-primary">@lang('app.global.save')</button>
 </form>

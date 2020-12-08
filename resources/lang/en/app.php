@@ -178,6 +178,21 @@ return [
         'username_or_pin' => 'Username, Account Number Or Pin',
         'password' => 'Password'
     ],
+    'setting' => [
+        'bahasa' => 'Language',
+        'profit_bank_sampah' => 'Profit Bank Sampah (%)',
+        'profit_total_petugas' => 'Profit Total Petugas (%)',
+        'placeholder' => [
+            'profit_bank_sampah' => 'Specify Profit for Bank Sampah',
+            'profit_total_petugas' => 'Specify Total Profit for PIC (Person in Charge)'
+        ]
+    ],
+    'dashboard' => [
+        'total_admin' => 'Total Admin',
+        'total_nasabah' => 'Total Nasabah',
+        'total_jenis_sampah' => 'Total Item Type',
+        'profit_bank_sampah' => 'Profit Bank Sampah'
+    ],
     'global' => [
         'add' => 'Add',
         'save' => 'Save',

@@ -90,6 +90,16 @@ class User extends Authenticatable
     }
 
     /**
+     * get user Admin
+     *
+     * @return void
+     */
+    public function scopeIsAdmin(Builder $query): Builder
+    {
+        return $query->where('is_nasabah', false);
+    }
+
+    /**
      * mengambil saving
      *
      * @return HasOne

@@ -26,7 +26,9 @@ class TransactionController extends Controller
             }
         });
         $nasabah = $nasabah->filter(function($data) {
-            if (isset($data['id_user']) && session()->get('today-pic')->id != $data['id_user']) {
+            if (isset($data['id_user']) && session()->get('today-pic') && session()->get('today-pic')->id != $data['id_user']) {
+                return $data;
+            } else if(isset($data['id_user'])) {
                 return $data;
             }
         });
@@ -81,7 +83,6 @@ class TransactionController extends Controller
                 $saving = $todayPic->tabungan;
                 $nilai_setiap_tugas = TodayPic::where('user_id', $todayPic->id)->where('tanggal_tugas', date('Y-m-d'))->first()->pic->nilai_setiap_tugas;
                 $upahPetugas = $money * $nilai_setiap_tugas / 100;
-                $money = $money - $upahPetugas;
                 $savingHistory = new SavingHistory();
                 $savingHistory->fill([
                     'type' => 'upah-petugas',
@@ -94,6 +95,7 @@ class TransactionController extends Controller
                 ]);
                 $savingHistory->tabungan()->associate($saving);
                 $savingHistory->save();
+                $money = $money - ($money * setting('profit_total_petugas') ?? 5 / 100);
             }
             $saving = Saving::where('user_id', $nasabah->user->id)->first();
             if (!$saving) {
