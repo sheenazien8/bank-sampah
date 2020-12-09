@@ -29,7 +29,7 @@ class SavingDataTable extends DataTable
             })
             ->addColumn('nasabah', function ($model)
             {
-                return $model->nasabahUser->nasabahProfile->nama_lengkap;
+                return optional($model->nasabahUser->nasabahProfile)->nama_lengkap;
             })
             ->addColumn('nomor_rekening', function ($model)
             {
@@ -37,7 +37,7 @@ class SavingDataTable extends DataTable
             })
             ->addColumn('transaksi_terakhir', function ($model)
             {
-                return $model->nasabahUser->nasabahProfile->transaksi->last()->tanggal_transaksi;
+                return optional($model->nasabahUser->nasabahProfile->transaksi->last())->tanggal_transaksi;
             })
             ->addColumn('saldo_akhir', function ($model)
             {

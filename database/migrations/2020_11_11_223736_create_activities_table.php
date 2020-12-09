@@ -17,7 +17,7 @@ class CreateActivitiesTable extends Migration
             $table->id();
             $table->date('tanggal');
             $table->string('title');
-            $table->text('agenda');
+            $table->longText('agenda');
             $table->timestamps();
         });
     }

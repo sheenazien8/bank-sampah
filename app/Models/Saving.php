@@ -35,5 +35,11 @@ class Saving extends Model
         return $this->hasMany(SavingHistory::class, 'saving_id');
     }
 
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'transaction_id');
+    }
+
+
 
 }

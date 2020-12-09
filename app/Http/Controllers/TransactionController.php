@@ -135,23 +135,21 @@ class TransactionController extends Controller
         return view($this->viewpath . '.show', compact('transaction'));
     }
 
-    public function edit(Transaction $transaction)
-    {
-        return view($this->viewpath . '.edit', compact('transaction'));
-    }
-
-    public function update(Request $request, Transaction $transaction)
-    {
-        $transaction->fill($request->all());
-        $transaction->save();
-
-        return redirect()->route('transaction.index')->with('success',trans('message.update', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));
-    }
-
     public function destroy(Transaction $transaction)
     {
-        $transaction->delete();
+        try {
+            DB::beginTransaction();
+            $tabungan = $transaction->savingHistory->tabungan;
+            $tabungan->update(['saldo_akhir' => $tabungan->saldo_akhir - $transaction->savingHistory->jumlah_uang]);
+            $transaction->savingHistory()->delete();
+            $transaction->delete();
+            DB::commit();
 
-        return back()->with('success',trans('message.delete', ['data' => 'Transaction']));
+            return back()->with('success',trans('message.delete', ['data' => 'Transaction']));
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return $e->getMessage();
+        }
     }
 }

@@ -47,5 +47,9 @@ class Transaction extends Model
         return $this->hasMany(TransactionDetail::class);
     }
 
+    public function savingHistory()
+    {
+        return $this->hasOne(SavingHistory::class, 'transaction_id');
+    }
 
 }
