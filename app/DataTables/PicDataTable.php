@@ -42,7 +42,7 @@ class PicDataTable extends DataTable
      */
     public function query(Pic $model)
     {
-        return $model->newQuery();
+        return $model->orderBy('created_at', 'DESC')->newQuery();
     }
 
     /**

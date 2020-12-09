@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Nasabah;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +14,8 @@ class UsersSeeder extends Seeder
     public function run()
     {
         factory(User::class, 1)->create([
+            'username' => 'admin',
             'is_nasabah' => false
         ]);
-        factory(User::class, 9)->create()->each(function($user) {
-            $nasabash = factory(App\Models\Nasabah::class)->make();
-            $user->nasabahProfile()->save($nasabash);
-        });
     }
 }

@@ -8,7 +8,7 @@ class ReportController extends Controller
 {
     public function index()
     {
-        return;
+        return view('app.report.index');
     }
 
 }

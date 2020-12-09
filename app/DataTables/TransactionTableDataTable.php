@@ -34,7 +34,11 @@ class TransactionTableDataTable extends DataTable
             ->addColumn('action', function ($model)
             {
                 $resources = 'transaction';
-                return view('partials.table.action', compact('resources', 'model'));
+                return view('partials.table.action', [
+                    'resources' => $resources,
+                    'model' => $model,
+                    'tanpaedit' => true
+                ]);
             });
     }
 
@@ -49,7 +53,7 @@ class TransactionTableDataTable extends DataTable
         return $model->when(auth()->user()->whoami == 'pic', function ($query)
         {
             return $query->where('user_id', auth()->id());
-        })->newQuery();
+        })->orderBy('created_at', 'DESC')->newQuery();
     }
 
     /**

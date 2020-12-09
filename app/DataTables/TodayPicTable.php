@@ -50,7 +50,7 @@ class TodayPicTable extends DataTable
      */
     public function query(TodayPic $model)
     {
-        return $model->newQuery();
+        return $model->orderBy('created_at', 'DESC')->newQuery();
     }
 
     /**

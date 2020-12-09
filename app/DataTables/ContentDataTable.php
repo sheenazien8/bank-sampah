@@ -46,7 +46,7 @@ class ContentDataTable extends DataTable
      */
     public function query(Content $model)
     {
-        return $model->newQuery();
+        return $model->orderBy('created_at', 'DESC')->newQuery();
     }
 
     /**

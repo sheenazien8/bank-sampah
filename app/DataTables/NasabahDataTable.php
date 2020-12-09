@@ -49,7 +49,7 @@ class NasabahDataTable extends DataTable
      */
     public function query(Nasabah $model)
     {
-        return $model->newQuery();
+        return $model->orderBy('created_at', 'DESC')->newQuery();
     }
 
     /**

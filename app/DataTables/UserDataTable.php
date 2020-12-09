@@ -42,7 +42,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->where('is_nasabah', 0)->newQuery();
+        return $model->where('is_nasabah', 0)->orderBy('created_at', 'DESC')->newQuery();
     }
 
     /**

@@ -42,7 +42,7 @@ class ItemDataTable extends DataTable
      */
     public function query(Item $model)
     {
-        return $model->newQuery();
+        return $model->orderBy('created_at', 'DESC')->newQuery();
     }
 
     /**

@@ -42,7 +42,7 @@ class ActivityDataTable extends DataTable
      */
     public function query(Activity $model)
     {
-        return $model->newQuery();
+        return $model->orderBy('created_at', 'DESC')->newQuery();
     }
 
     /**
