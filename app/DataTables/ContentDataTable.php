@@ -34,7 +34,18 @@ class ContentDataTable extends DataTable
             ->addColumn('action', function ($model)
             {
                 $resources = 'content';
-                return view('partials.table.action', compact('resources', 'model'));
+                $action = [
+                    'resources' => $resources,
+                    'model' => $model
+                ];
+                if (auth()->user()->whoami == 'nasabah') {
+                    $action = array_merge($action, [
+                        'tanpaedit' => true,
+                        'tanpadelete' => true
+                    ]);
+                }
+
+                return view('partials.table.action', $action);
             });
     }
 

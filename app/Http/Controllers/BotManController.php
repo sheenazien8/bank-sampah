@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Conversations\RegistrationConversation;
+use App\Conversations\ShowMenu;
 use BotMan\BotMan\Messages\Incoming\Answer;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Api;
@@ -21,7 +22,7 @@ class BotManController extends Controller
             $config = [
                 // Your driver-specific configuration
                 "telegram" => [
-                    "token" => config('telegram.bot_token')
+                    "token" => config('telegram.token')
                 ]
             ];
 
@@ -30,8 +31,13 @@ class BotManController extends Controller
             // Create an instance
             $botman = BotManFactory::create($config);
 
-            $botman->hears('start', function(BotMan $botMan) {
+            $botman->hears('/start', function(BotMan $botMan) {
                 $botMan->startConversation(new RegistrationConversation);
+            });
+
+            $botman->hears('/menu', function (BotMan $botMan)
+            {
+                $botMan->startConversation(new ShowMenu);
             });
 
             $botman->listen();

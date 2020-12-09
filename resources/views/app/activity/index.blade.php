@@ -15,20 +15,20 @@
         <div class="card-header d-flex justify-content-end">
           <h3 class="mr-auto">{{ trans('app.activity.title.index') }}</h3>
           <div class="card-title">
-            <a href="{{route('activity.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> <span>{{ trans('app.global.add', ['name' => 'Item']) }}</span></a>
+            @if (auth()->user()->whoami == 'admin')
+              <a href="{{route('activity.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> <span>{{ trans('app.global.add', ['name' => 'Item']) }}</span></a>
+            @endif
           </div>
         </div>
         <div class="card-body">
-         <div class="table-responsive">
-  {{ $dataTable->table() }}
-</div>
-
-@push('javascript')
-  {{ $dataTable->scripts() }}
-@endpush
-
+          <div class="table-responsive">
+            {{ $dataTable->table() }}
+          </div>
         </div>
       </div>
     </div>
   </section>
 @endsection
+@push('javascript')
+  {{ $dataTable->scripts() }}
+@endpush

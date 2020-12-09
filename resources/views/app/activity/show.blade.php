@@ -15,8 +15,9 @@
         <div class="card-header d-flex justify-activity-end">
           <h3 class="mr-auto">{{ $activity->nama }}</h3>
           <div class="card-title">
-            <a href="{{route('activity.edit', $activity->id)}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-            {{-- <a href="{{route('activity.destroy', $activity->id)}}" class="btn btn-danger"><i class="fas fa-trash"></i></a> --}}
+            @if (auth()->user()->whoami == 'admin')
+              <a href="{{route('activity.edit', $activity->id)}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+            @endif
           </div>
         </div>
         <div class="card-body">

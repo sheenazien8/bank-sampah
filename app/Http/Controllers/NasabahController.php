@@ -6,6 +6,7 @@ use App\DataTables\NasabahDataTable;
 use App\Models\Nasabah;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NasabahController extends Controller
 {
@@ -33,20 +34,26 @@ class NasabahController extends Controller
             'telegram_account' => ['unique:users', 'required'],
             'password' => ['required']
         ]);
-        $user = new User();
-        $request->merge([
-            'is_nasabah' => 1,
-            'saldo_akhir' => 0,
-            'password' => bcrypt($request->password)
-        ]);
-        $user->fill($request->all());
-        $user->save();
-        $nasabah = new Nasabah();
-        $nasabah->fill($request->all());
-        $nasabah->user()->associate($user);
-        $nasabah->save();
+        try {
+            $user = new User();
+            $request->merge([
+                'is_nasabah' => 1,
+                'saldo_akhir' => 0,
+                'password' => bcrypt($request->password)
+            ]);
+            $user->fill($request->all());
+            $user->save();
+            $nasabah = new Nasabah();
+            $nasabah->fill($request->all());
+            $nasabah->user()->associate($user);
+            $nasabah->save();
 
-        return redirect()->route('nasabah.index')->with('success',trans('message.create', ['data' => $nasabah->nama_lengkap]));
+            return redirect()->route('nasabah.index')->with('success',trans('message.create', ['data' => $nasabah->nama_lengkap]));
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return $e->getMessage();
+        }
     }
 
     public function show(Nasabah $nasabah)
@@ -70,29 +77,46 @@ class NasabahController extends Controller
             'phone' => ['unique:users,phone,'.$nasabah->user->id, 'required'],
             'telegram_account' => ['unique:users,telegram_account,'.$nasabah->user->id, 'required'],
         ]);
-        $password = $nasabah->user->password;
-        if ($request->password) {
-           $passwod = bcrypt($request->password);
-        }
-        $request->merge([
-            'is_nasabah' => 1,
-            'saldo_akhir' => $nasabah->saldo_akhir,
-            'password' => $password
-        ]);
-        $nasabah->fill($request->all());
-        $user = $nasabah->user;
-        $user->fill($request->all());
-        $user->save();
-        $nasabah->save();
+        try {
+            DB::beginTransaction();
+            $password = $nasabah->user->password;
+            if ($request->password) {
+                $passwod = bcrypt($request->password);
+            }
+            $request->merge([
+                'is_nasabah' => 1,
+                'saldo_akhir' => $nasabah->saldo_akhir,
+                'password' => $password
+            ]);
+            $nasabah->fill($request->all());
+            $user = $nasabah->user;
+            $user->fill($request->all());
+            $user->save();
+            $nasabah->save();
+            DB::commit();
 
-        return redirect()->route('nasabah.index')->with('success',trans('message.update', ['data' => $nasabah->nama_lengkap]));
+            return redirect()->route('nasabah.index')->with('success',trans('message.update', ['data' => $nasabah->nama_lengkap]));
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return $e->getMessage();
+        }
     }
 
     public function destroy(Nasabah $nasabah)
     {
-        $message = $nasabah->nama_lengkap;
-        $nasabah->delete();
+        try {
+            DB::beginTransaction();
+            $message = $nasabah->nama_lengkap;
+            $nasabah->delete();
+            $nasabah->user()->delete();
+            DB::commit();
 
-        return back()->with('success',trans('message.delete', ['data' => $message]));
+            return back()->with('success',trans('message.delete', ['data' => $message]));
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return $e->getMessage();
+        }
     }
 }

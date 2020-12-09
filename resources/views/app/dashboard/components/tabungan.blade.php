@@ -9,7 +9,7 @@
           <h4>@lang('app.dashboard.tabungan')</h4>
         </div>
         <div class="card-body">
-          {{ price_format(auth()->guard()->user()->tabungan->saldo_akhir) }}
+          {{ price_format(optional(auth()->guard()->user()->tabungan)->saldo_akhir) }}
         </div>
       </div>
     </div>

@@ -140,7 +140,9 @@ class TransactionController extends Controller
         try {
             DB::beginTransaction();
             $tabungan = $transaction->savingHistory->tabungan;
-            $tabungan->update(['saldo_akhir' => $tabungan->saldo_akhir - $transaction->savingHistory->jumlah_uang]);
+            $saldo_akhir = $tabungan->saldo_akhir - $transaction->savingHistory->jumlah_uang;
+            $tabungan->update(['saldo_akhir' => $saldo_akhir]);
+            $transaction->nasabah->update(['saldo_akhir' => $saldo_akhir]);
             $transaction->savingHistory()->delete();
             $transaction->delete();
             DB::commit();
