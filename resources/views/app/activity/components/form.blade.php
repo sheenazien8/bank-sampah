@@ -11,7 +11,7 @@
            class="form-control {{ $errors->first('title') ? 'is-invalid' : '' }}"
            id="title"
            name="title"
-           value="{{ optional($activity ?? '')->title }}">
+           value="{{ old('title', optional($activity ?? '')->title ) }}">
   </div>
 </div>
 <div class="form-group row">
@@ -22,7 +22,7 @@
            class="form-control {{ $errors->first('tanggal') ? 'is-invalid' : '' }}"
            id="tanggal"
            name="tanggal"
-           value="{{ optional($activity ?? '')->tanggal }}">
+           value="{{ old('tanggal', optional($activity ?? '')->tanggal ) }}">
   </div>
 </div>
 <div class="form-group row">
@@ -34,7 +34,7 @@
       id="agenda"
       name="agenda"
       row="30"
-      >{!! optional($activity ??  '')->agenda !!}</textarea>
+      >{!! old('agenda',optional($activity ??  '')->agenda) !!}</textarea>
   </div>
 </div>
 <div class="form-group">

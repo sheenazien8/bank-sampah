@@ -11,7 +11,7 @@
              class="form-control {{ $errors->first('username') ? 'is-invalid' : '' }}"
              id="username"
              name="username"
-             value="{{ optional($user ?? '')->username }}">
+             value="{{ old('username', optional($user ?? '')->username ) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -22,7 +22,7 @@
              class="form-control {{ $errors->first('phone') ? 'is-invalid' : '' }}"
              id="phone"
              name="phone"
-             value="{{ optional($user ?? '')->phone }}">
+             value="{{ old('phone', optional($user ?? '')->phone ) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -33,7 +33,7 @@
              class="form-control {{ $errors->first('telegram_account') ? 'is-invalid' : '' }}"
              id="telegram_account"
              name="telegram_account"
-             value="{{ optional($user ?? '')->telegram_account }}">
+             value="{{ old('telegram_account', optional($user ?? '')->telegram_account ) }}">
     </div>
   </div>
   <div class="form-group row">

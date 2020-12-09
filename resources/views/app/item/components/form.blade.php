@@ -11,7 +11,7 @@
              class="form-control {{ $errors->first('nama') ? 'is-invalid' : '' }}"
              id="nama"
              name="nama"
-             value="{{ optional($item ?? '')->nama }}">
+             value="{{ old('nama',  optional($item ?? '')->nama ) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -22,7 +22,7 @@
              class="form-control {{ $errors->first('unit') ? 'is-invalid' : '' }}"
              id="unit"
              name="unit"
-             value="{{ optional($item ?? '')->unit }}">
+             value="{{ old('unit',  optional($item ?? '')->unit ) }}">
     </div>
   </div>
   <div class="form-group">

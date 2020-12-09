@@ -56,7 +56,9 @@
         width: 'resolve',
         theme: "bootstrap"
       })
-
+      @if ($errors->first('nasabah'))
+       $('select[name=nasabah]').addClass('is-invalid')
+      @endif
 
       $('.add-item').on('click', function($event) {
         let rowTable = $('.row-table-transaction')

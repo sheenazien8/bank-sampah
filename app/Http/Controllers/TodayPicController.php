@@ -26,6 +26,8 @@ class TodayPicController extends Controller
     {
         $this->validate($request, [
             'tanggal_tugas' => ['required', 'after:now'],
+            'user_id' => ['required'],
+            'pic_id' => ['required']
         ]);
         $request->merge(['pin' => random_int(1111, 9999)]);
         $user = User::find($request->user_id);
@@ -53,6 +55,8 @@ class TodayPicController extends Controller
     {
         $this->validate($request, [
             'tanggal_tugas' => ['required', 'after:now'],
+            'user_id' => ['required'],
+            'pic_id' => ['required']
         ]);
         $today_pic->fill($request->all());
         $today_pic->save();

@@ -11,7 +11,7 @@
              class="form-control {{ $errors->first('nama_jabatan') ? 'is-invalid' : '' }}"
              id="nama_jabatan"
              name="nama_jabatan"
-             value="{{ optional($pic ?? '')->nama_jabatan }}">
+             value="{{ old('nama_jabatan',  optional($pic ?? '')->nama_jabatan ) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -22,7 +22,7 @@
              class="form-control {{ $errors->first('keterangan') ? 'is-invalid' : '' }}"
              id="keterangan"
              name="keterangan"
-             value="{{ optional($pic ?? '')->keterangan }}">
+             value="{{ old('keterangan', optional($pic ?? '')->keterangan ) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -33,7 +33,7 @@
              class="form-control {{ $errors->first('nilai_setiap_tugas') ? 'is-invalid' : '' }}"
              id="nilai_setiap_tugas"
              name="nilai_setiap_tugas"
-             value="{{ optional($pic ?? '')->nilai_setiap_tugas }}">
+             value="{{ old('nilai_setiap_tugas', optional($pic ?? '')->nilai_setiap_tugas ) }}">
     </div>
   </div>
   <div class="form-group">

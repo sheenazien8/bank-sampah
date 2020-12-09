@@ -6,8 +6,8 @@
   <div class="form-group row">
     <label for="nasabah" class="col-sm-2 col-form-label">{{ trans('app.transaction.column.nasabah') }}</label>
     <div class="col-sm-10">
-      <select name="nasabah" id="nasabah" class="form-control" style="width: 100%">
-        <option value="" disabled>{{ trans('app.transaction.placeholder.nasabah') }}</option>
+      <select name="nasabah" id="nasabah" class="form-control {{ $errors->first('nasabah') ? 'is-invalid' : '' }}" style="width: 100%">
+        <option value="" disabled selected>{{ trans('app.transaction.placeholder.nasabah') }}</option>
         @foreach ($nasabah as $nasabah)
           <option value="{{ $nasabah['value'] }}">{{ $nasabah['text'] }}</option>
         @endforeach

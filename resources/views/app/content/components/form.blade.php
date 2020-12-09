@@ -11,7 +11,7 @@
              class="form-control {{ $errors->first('title') ? 'is-invalid' : '' }}"
              id="title"
              name="title"
-             value="{{ optional($content ?? '')->title }}">
+             value="{{ old('title', optional($content ?? '')->title ) }}">
     </div>
   </div>
   <div class="form-group row">
@@ -21,7 +21,7 @@
                 id="body"
                 class="form-control summernote {{ $errors->first('body') ? 'is-invalid' : '' }}"
                 name="body"
-                >{{ optional($content ?? '')->body }}</textarea>
+                >{{ old('body', optional($content ?? '')->body ) }}</textarea>
     </div>
   </div>
   <div class="form-group">
