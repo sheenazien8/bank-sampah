@@ -13,7 +13,7 @@ return [
         'menu-header' => 'Menu',
         'route' => 'nasabah.index',
         'active' => ['nasabah.index', 'nasabah.create', 'nasabah.edit', 'nasabah.show'],
-        'menu_title' => 'Nasabah',
+        'menu_title' => 'app.nasabah.title.index',
         'display_for' => ['admin'],
         'icon' => 'fas fa-user-friends'
     ],
@@ -21,20 +21,20 @@ return [
         'route' => 'transaction.index',
         'active' => ['transaction.index', 'transaction.edit', 'transaction.show'],
         'display_for' => ['admin', 'pic'],
-        'menu_title' => 'Transaction',
+        'menu_title' => 'app.transaction.title.menu',
         'icon' => 'fas fa-money-check-alt'
     ],
     [
         'route' => 'item.index',
         'active' => ['item.index', 'item.create', 'item.edit', 'item.show'],
         'display_for' => ['admin'],
-        'menu_title' => 'Item',
+        'menu_title' => 'app.item.title.index',
         'icon' => 'fas fa-pastafarianism'
     ],
     [
         'route' => 'pic.index',
         'active' => ['pic.index', 'pic.edit', 'pic.create', 'pic.show'],
-        'menu_title' => 'Pic',
+        'menu_title' => 'app.pic.title.menu',
         'display_for' => ['admin'],
         'icon' => 'fas fa-user'
     ],
@@ -42,13 +42,13 @@ return [
         'route' => 'today-pic.index',
         'active' => ['today-pic.index', 'today-pic.edit', 'today-pic.create', 'today-pic.show'],
         'display_for' => ['admin'],
-        'menu_title' => 'Today Pic',
+        'menu_title' => 'app.today_pic.title.index',
         'icon' => 'fas fa-user-cog'
     ],
     [
         'route' => 'user.index',
         'active' => ['user.index', 'user.create', 'user.edit', 'user.show'],
-        'menu_title' => 'User',
+        'menu_title' => 'app.user.title.index',
         'display_for' => ['admin'],
         'icon' => 'fas fa-users'
     ],
@@ -56,35 +56,35 @@ return [
         'route' => 'saving.index',
         'active' => ['saving.index', 'saving.show'],
         'display_for' => ['admin', 'nasabah'],
-        'menu_title' => 'Saving',
+        'menu_title' => 'app.saving.title.index',
         'icon' => 'fas fa-piggy-bank'
     ],
     [
         'route' => 'activity.index',
         'display_for' => ['nasabah', 'admin'],
         'active' => ['activity.index', 'activity.show', 'activity.create', 'activity.edit'],
-        'menu_title' => 'Activity',
+        'menu_title' => 'app.activity.title.index',
         'icon' => 'fas fa-th-list'
     ],
     [
         'route' => 'content.index',
         'display_for' => ['nasabah', 'admin'],
         'active' => ['content.index', 'content.show', 'content.create', 'content.edit'],
-        'menu_title' => 'Content',
+        'menu_title' => 'app.content.title.index',
         'icon' => 'fas fa-cubes'
     ],
-    [
-        'route' => 'report.index',
-        'active' => ['report.index', 'report.edit', 'report.show'],
-        'display_for' => ['admin'],
-        'menu_title' => 'Report',
-        'icon' => 'fas fa-list-alt'
-    ],
+    /* [ */
+    /*     'route' => 'report.index', */
+    /*     'active' => ['report.index', 'report.edit', 'report.show'], */
+    /*     'display_for' => ['admin'], */
+    /*     'menu_title' => 'app.report.title.index', */
+    /*     'icon' => 'fas fa-list-alt' */
+    /* ], */
     [
         'route' => 'setting.index',
         'display_for' => ['admin'],
         'active' => ['setting.index'],
-        'menu_title' => 'Setting',
+        'menu_title' => 'app.setting.title.index',
         'icon' => 'fas fa-cogs'
     ],
 ];

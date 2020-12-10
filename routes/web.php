@@ -16,6 +16,7 @@ use App\Http\Controllers\TodayPicController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Telegram\Bot\Api;
 
@@ -30,57 +31,35 @@ use Telegram\Bot\Api;
 |
 */
 
-Route::get('/table', function () {
-    return view('app.table');
+Route::group(['prefix' => '/'], function ()
+{
+    App::setLocale(setting('bahasa') ?? 'id');
+    Route::get('/table', function () {
+        return view('app.table');
+    });
+
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [LoginController::class, 'login'])->name('login');
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+    Route::middleware('auth')->group(function() {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+        Route::resource('/nasabah', NasabahController::class);
+        Route::resource('/user', UserController::class);
+        Route::resource('/item', ItemController::class);
+        Route::resource('/pic', PicController::class);
+        Route::resource('/saving', SavingController::class);
+        Route::post('/tarik_tunai/saving/', [SavingController::class, 'tarikTunai'])->name('saving.tarik_tunai');
+        Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+        Route::resource('/today-pic', TodayPicController::class);
+        Route::resource('/transaction', TransactionController::class);
+        Route::resource('/unit', UnitController::class);
+        Route::resource('/setting', SettingController::class)->only(['index', 'store']);
+        Route::resource('/activity', ActivityController::class);
+        Route::resource('/content', ContentController::class);
+    });
+
+
+    Route::match(['get', 'post'], '/botman', [BotTelegramController::class, 'handle']);
 });
-
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login'])->name('login');
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-
-Route::middleware('auth')->group(function() {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::resource('/nasabah', NasabahController::class);
-    Route::resource('/user', UserController::class);
-    Route::resource('/item', ItemController::class);
-    Route::resource('/pic', PicController::class);
-    Route::resource('/saving', SavingController::class);
-    Route::post('/tarik_tunai/saving/', [SavingController::class, 'tarikTunai'])->name('saving.tarik_tunai');
-    Route::get('/report', [ReportController::class, 'index'])->name('report.index');
-    Route::resource('/today-pic', TodayPicController::class);
-    Route::resource('/transaction', TransactionController::class);
-    Route::resource('/unit', UnitController::class);
-    Route::resource('/setting', SettingController::class)->only(['index', 'store']);
-    Route::resource('/activity', ActivityController::class);
-    Route::resource('/content', ContentController::class);
-});
-
-Route::get('/bot/telegram', function() {
-    $response = new Api(config('telegram.bot_token'));
-    $response = $response->getMe();
-    $botId = $response->getId();
-    $firstName = $response->getFirstName();
-    $username = $response->getUsername();
-
-    return response()->json([
-        'bot_id' => $botId,
-        'firstName' => $firstName,
-        'username' => $username
-    ]);
-});
-
-Route::get('/bot/sendmessage', function() {
-    $telegram = new Api(config('telegram.bot_token'));
-    $response = $telegram->sendMessage([
-        'chat_id' => 491937914,
-        'text' => 'Hello World'
-    ]);
-
-    $messageId = $response->getMessageId();
-
-    return response()->json($response->toArray());
-});
-
-Route::match(['get', 'post'], '/botman', [BotTelegramController::class, 'handle']);
-
 

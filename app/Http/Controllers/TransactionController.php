@@ -10,6 +10,7 @@ use App\Models\TodayPic;
 use App\Models\TransactionDetail;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Notifications\SendTodayPicNotification;
 use Illuminate\Http\Request;
 Use App\DataTables\TransactionTableDataTable as TransactionTable;
 use Illuminate\Support\Facades\DB;
@@ -120,6 +121,11 @@ class TransactionController extends Controller
             $nasabah->save();
             $savingHistory->tabungan()->associate($saving);
             $savingHistory->save();
+            $money = price_format($money);
+            $datetime = date('Y-m-d H:i');
+            $nasabah->user->notify(new SendTodayPicNotification([
+                'text' => "Saudara {$nasabah->nama_lengkap} : Menabung Sebesar {$money} {$datetime}"
+            ]));
             DB::commit();
 
             return redirect()->route('transaction.index')->with('success',trans('message.create', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));

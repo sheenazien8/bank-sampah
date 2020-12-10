@@ -13,6 +13,10 @@ return [
             'address' => 'Address',
             'username' => 'Username',
             'account_number' => 'Account Number',
+            'nomor_rekening' => 'Account Number',
+            'nama_lengkap' => 'Full Name',
+            'nomor_ktp' => 'KTP Id Number',
+            'alamat' => 'Address',
             'saldo_akhir' => 'Current Saldo',
             'phone' => 'Phone',
             'telegram_account' => 'Telegram Account',
@@ -173,25 +177,36 @@ return [
             'transaksi_terakhir' => 'Last Transaction',
             'saldo_akhir' => 'Current Saldo',
         ],
+        'detail' => 'Detail',
+        'tarik_tunai' => 'Tarik Tunai',
+        'tanggal_transaksi' => 'Transaction Date',
+        'type' => 'Type',
+        'jumlah_uang' => 'Money'
     ],
     'auth' => [
         'username_or_pin' => 'Username, Account Number Or Pin',
         'password' => 'Password'
     ],
     'setting' => [
+        'title' => [
+            'index' => 'Setting'
+        ],
+        'succes' => 'Success',
         'bahasa' => 'Language',
         'profit_bank_sampah' => 'Profit Bank Sampah (%)',
         'profit_total_petugas' => 'Profit Total Petugas (%)',
+        'pin_register_telegram' => 'Pin For Telgram Register',
         'placeholder' => [
             'profit_bank_sampah' => 'Specify Profit for Bank Sampah',
-            'profit_total_petugas' => 'Specify Total Profit for PIC (Person in Charge)'
+            'profit_total_petugas' => 'Specify Total Profit for PIC (Person in Charge)',
+            'pin_register_telegram' => 'Set Pins Periodically',
         ]
     ],
     'dashboard' => [
         'total_admin' => 'Total Admin',
         'total_nasabah' => 'Total Nasabah',
         'total_jenis_sampah' => 'Total Item Type',
-        'profit_bank_sampah' => 'Profit Bank Sampah',
+        'profit_bank_sampah' => 'Profit BS',
         'tabungan' => 'Current Saldo'
     ],
     'global' => [

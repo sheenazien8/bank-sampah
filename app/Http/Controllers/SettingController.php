@@ -15,7 +15,10 @@ class SettingController extends Controller
 
     public function store(Request $request)
     {
-        foreach ($request->only('bahasa', 'profit_bank_sampah', 'profit_total_petugas') as $key => $value) {
+        $this->validate($request, [
+            'pin_register_telegram' => 'size:6'
+        ]);
+        foreach ($request->only('bahasa', 'profit_bank_sampah', 'profit_total_petugas', 'pin_register_telegram') as $key => $value) {
             $setting = Setting::where('key', $key)->first();
             if (!$setting) {
                 $setting = new Setting();

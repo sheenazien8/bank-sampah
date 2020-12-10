@@ -3,8 +3,8 @@
   <div class="form-group">
     <label for="bahasa">@lang('app.setting.bahasa')</label>
     <select id="bahasa" class="form-control" name="bahasa">
-      <option selected="{{ setting('bahasa') == 'id' ? true : '' }}" value="id">Bahasa Indonesia</option>
-      <option selected="{{ setting('bahasa') == 'en' ? true : '' }}" value="en">English</option>
+      <option {{ setting('bahasa') == 'id' ? 'selected' : '' }} value="id">Bahasa Indonesia</option>
+      <option {{ setting('bahasa') == 'en' ? 'selected' : '' }} value="en">English</option>
     </select>
   </div>
   <div class="form-group">
@@ -24,6 +24,16 @@
            placeholder="@lang('app.setting.placeholder.profit_total_petugas')"
            name="profit_total_petugas"
            value="{{ setting('profit_total_petugas') }}">
+  </div>
+  <hr>
+  <div class="form-group">
+    <label for="pin_register_telegram">@lang('app.setting.pin_register_telegram')</label>
+    <input type="number"
+           class="form-control {{ $errors->first('pin_register_telegram') ? 'is-invalid' : '' }}"
+           id="pin_register_telegram"
+           placeholder="@lang('app.setting.placeholder.pin_register_telegram')"
+           name="pin_register_telegram"
+           value="{{ setting('pin_register_telegram') }}">
   </div>
   <button type="submit" class="btn btn-primary">@lang('app.global.save')</button>
 </form>

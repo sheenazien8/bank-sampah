@@ -17,7 +17,7 @@
         @endif
         @if (in_array(auth()->user()->whoami, $menu['display_for']))
           <li class="{{ getActiveClass($menu['active']) }}">
-            <a href="{{ route($menu['route']) }}"><i class="fas {{$menu['icon']}}"></i> <span>{{ $menu['menu_title'] }}</span></a>
+            <a href="{{ route($menu['route']) }}"><i class="fas {{$menu['icon']}}"></i> <span>@lang($menu['menu_title'])</span></a>
           </li>
         @endif
       @endif

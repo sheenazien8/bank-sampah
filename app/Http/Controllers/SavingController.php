@@ -6,6 +6,7 @@ use App\DataTables\SavingDataTable;
 use App\Models\User;
 use App\Models\Saving;
 use App\Models\SavingHistory;
+use App\Notifications\SendTodayPicNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -56,6 +57,11 @@ class SavingController extends Controller
             $nasabah->user->getSaving->save();
             $nasabah->fill(['saldo_akhir' => $saldo_akhir]);
             $nasabah->save();
+            $money = price_format($saldo_akhir);
+            $datetime = date('Y-m-d H:i');
+            $nasabah->user->notify(new SendTodayPicNotification([
+                'text' => "Saudara {$nasabah->nama_lengkap}: Tarik Tunai sebesar {$money} {$datetime}"
+            ]));
             DB::commit();
 
             return back()->with('success',trans('app.saving.message.tarik_tunai', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));

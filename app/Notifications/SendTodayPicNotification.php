@@ -45,17 +45,4 @@ class SendTodayPicNotification extends Notification
         return (new TelegramMessage())
             ->text($this->data['text']);
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

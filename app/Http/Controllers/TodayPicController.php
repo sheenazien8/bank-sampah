@@ -29,10 +29,11 @@ class TodayPicController extends Controller
             'user_id' => ['required'],
             'pic_id' => ['required']
         ]);
-        $request->merge(['pin' => random_int(1111, 9999)]);
+        $pin = random_int(1111, 9999);
+        $request->merge(['pin' => $pin]);
         $user = User::find($request->user_id);
         $user->notify(new SendTodayPicNotification([
-            'text' => 'test'
+            'text' => "Selamat kamu di tugaskan sebagai Petugas di tanggal {$request->tanggal_tugas}. Silahkan Masuk dengan pin {$pin} dan password kamu, Semoga Sukses."
         ]));
         $today_pic = new TodayPic();
         $today_pic->fill($request->all());
