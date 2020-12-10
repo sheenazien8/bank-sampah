@@ -176,6 +176,10 @@ return [
             'nomor_rekening' => 'Account Number',
             'transaksi_terakhir' => 'Last Transaction',
             'saldo_akhir' => 'Current Saldo',
+            'jumlah_uang' => 'Jumlah Uang',
+        ],
+        'placeholder' => [
+            'jumlah_uang' => 'Masukkan Jumlah Uang',
         ],
         'detail' => 'Detail',
         'tarik_tunai' => 'Tarik Tunai',

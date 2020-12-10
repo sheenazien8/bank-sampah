@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="unit" class="col-form-label">{{ trans('app.saving.column.unit') }}</label>
+    <label for="jumlah_uang" class="col-form-label">{{ trans('app.saving.column.jumlah_uang') }}</label>
     <div class="">
       <input type="number"
              placeholder="{{ trans('app.saving.placeholder.jumlah_uang') }}"
