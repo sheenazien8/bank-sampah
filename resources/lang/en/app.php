@@ -57,7 +57,8 @@ return [
         'title' => [
             'index' => 'Transaction Histories',
             'create' => 'Create Transaction',
-            'edit' => 'Edit Transaction'
+            'edit' => 'Edit Transaction',
+            'menu' => 'Transaction'
         ],
         'add_item' => 'Add Item',
         'column' => [
@@ -99,7 +100,8 @@ return [
         'title' => [
             'index' => 'List Pic (Person In Charge)',
             'create' => 'Create Pic',
-            'edit' => 'Edit Pic'
+            'edit' => 'Edit Pic',
+            'menu' => 'PIC'
         ],
         'column' => [
             'name' => 'Job Name',
@@ -221,6 +223,7 @@ return [
         'delete' => 'Delete',
         'ohno422' => 'You Must Complete the field',
         'wellcome' => 'Wellcome, :user',
-        'profile' => 'Profile'
+        'profile' => 'Profile',
+        'generate' => 'Generate'
     ]
 ];

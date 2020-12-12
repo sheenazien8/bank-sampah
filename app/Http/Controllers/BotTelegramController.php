@@ -155,38 +155,42 @@ Pin:pin
     private function sendArusTabungan($user, $chat_id)
     {
         $price = price_format(0);
-        $nama_lengkap = $user->nasabahProfile->nama_lengkap;
-        $response = "Saudara {$nama_lengkap}: maaf dikarenakan tabungan anda masih sebesar {$price} and tidak bisa melihat aksi ini";
-        if ($user->tabungan) {
-            $price = price_format($user->tabungan->saldo_akhir);
-            $riwayatTabungan = $user->tabungan->savingHistories;
-            $response = "Saudara {$nama_lengkap}.\n\n";
-            $response .= "------------------------------------------------\n";
-            $response .= "Tanggal Transaksi|Type|Jumlah Uang\n";
-            foreach ($riwayatTabungan as $riwayat) {
-                $priceRow = price_format($riwayat->jumlah_uang);
+        if ($user) {
+            $nama_lengkap = $user->nasabahProfile->nama_lengkap;
+            $response = "Saudara {$nama_lengkap}: maaf dikarenakan tabungan anda masih sebesar {$price} and tidak bisa melihat aksi ini";
+            if ($user->tabungan) {
+                $price = price_format($user->tabungan->saldo_akhir);
+                $riwayatTabungan = $user->tabungan->savingHistories;
+                $response = "Saudara {$nama_lengkap}.\n\n";
                 $response .= "------------------------------------------------\n";
-                $response .= "{$riwayat->tanggal}|{$riwayat->type}|$priceRow\n";
+                $response .= "Tanggal Transaksi|Type|Jumlah Uang\n";
+                foreach ($riwayatTabungan as $riwayat) {
+                    $priceRow = price_format($riwayat->jumlah_uang);
+                    $response .= "------------------------------------------------\n";
+                    $response .= "{$riwayat->tanggal}|{$riwayat->type}|$priceRow\n";
+                }
             }
+            $this->send('sendMessage', [
+                'chat_id' => $chat_id,
+                'text' => $response
+            ]);
         }
-        $this->send('sendMessage', [
-            'chat_id' => $chat_id,
-            'text' => $response
-        ]);
     }
 
     private function sendSaldoInformation($user, $chat_id)
     {
         $price = price_format(0);
-        $nama_lengkap = $user->nasabahProfile->nama_lengkap;
-        $response = "Saudara {$nama_lengkap}: Total Saldo anda sekarang Sebesar {$price}";
-        if ($user->tabungan) {
-            $price = price_format($user->tabungan->saldo_akhir);
+        if ($user) {
+            $nama_lengkap = $user->nasabahProfile->nama_lengkap;
             $response = "Saudara {$nama_lengkap}: Total Saldo anda sekarang Sebesar {$price}";
+            if ($user->tabungan) {
+                $price = price_format($user->tabungan->saldo_akhir);
+                $response = "Saudara {$nama_lengkap}: Total Saldo anda sekarang Sebesar {$price}";
+            }
+            $this->send('sendMessage', [
+                'chat_id' => $chat_id,
+                'text' => $response
+            ]);
         }
-        $this->send('sendMessage', [
-            'chat_id' => $chat_id,
-            'text' => $response
-        ]);
     }
 }

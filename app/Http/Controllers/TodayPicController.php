@@ -32,9 +32,11 @@ class TodayPicController extends Controller
         $pin = random_int(1111, 9999);
         $request->merge(['pin' => $pin]);
         $user = User::find($request->user_id);
-        $user->notify(new SendTodayPicNotification([
-            'text' => "Selamat kamu di tugaskan sebagai Petugas di tanggal {$request->tanggal_tugas}. Silahkan Masuk dengan pin {$pin} dan password kamu, Semoga Sukses."
-        ]));
+        if ($user->telegram_account) {
+            $user->notify(new SendTodayPicNotification([
+                'text' => "Selamat kamu di tugaskan sebagai Petugas di tanggal {$request->tanggal_tugas}. Silahkan Masuk dengan pin {$pin} dan password kamu, Semoga Sukses."
+            ]));
+        }
         $today_pic = new TodayPic();
         $today_pic->fill($request->all());
         $today_pic->save();

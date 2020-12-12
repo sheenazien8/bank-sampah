@@ -90,6 +90,10 @@
              id="password"
              name="password"
              value="">
+     <div class="custom-control custom-checkbox">
+       <input class="custom-control-input" tabindex="3" type="checkbox" id="show-password"onclick="myFunction()">
+       <label class="custom-control-label" for="show-password">Show Password</label>
+     </div>
     </div>
   </div>
   <div class="form-group">

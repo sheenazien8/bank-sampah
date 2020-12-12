@@ -2,6 +2,7 @@
 
 use App\Models\Setting;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -103,6 +104,13 @@ if (! function_exists('get_month')) {
         }
 
         return $month;
+    }
+}
+
+if (! function_exists('get_month_by_key')) {
+    function get_month_by_key($key)
+    {
+        return Carbon::parse($key);
     }
 }
 

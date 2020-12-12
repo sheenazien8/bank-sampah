@@ -5,6 +5,12 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>Login &mdash; {{ env('APP_NAME') }}</title>
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+  <style type="text/css" media="screen">
+    .container-eye-icon i {
+      margin-left: -30px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
@@ -38,5 +44,15 @@
   <script src="{{ mix('js/manifest.js') }}"></script>
   <script src="{{ mix('js/vendor.js') }}"></script>
   <script src="{{ mix('js/app.js') }}"></script>
+  <script>
+    function myFunction() {
+      var x = $('input[name=password]')[0];
+      if ($(x).attr('type') === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+  </script>
 </body>
 </html>

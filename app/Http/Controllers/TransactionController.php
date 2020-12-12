@@ -123,9 +123,11 @@ class TransactionController extends Controller
             $savingHistory->save();
             $money = price_format($money);
             $datetime = date('Y-m-d H:i');
-            $nasabah->user->notify(new SendTodayPicNotification([
-                'text' => "Saudara {$nasabah->nama_lengkap} : Menabung Sebesar {$money} {$datetime}"
-            ]));
+            if ($nasabah->user->telegram_account && config('telegram.token')) {
+                $nasabah->user->notify(new SendTodayPicNotification([
+                    'text' => "Saudara {$nasabah->nama_lengkap} : Menabung Sebesar {$money} {$datetime}"
+                ]));
+            }
             DB::commit();
 
             return redirect()->route('transaction.index')->with('success',trans('message.create', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));

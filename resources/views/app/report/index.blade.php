@@ -11,13 +11,16 @@
     @endif
 
     <div class="section-body">
-      <div class="card">
+      <div class="card col-md-6">
         <div class="card-header d-flex justify-content-end">
           <h3 class="mr-auto">{{ trans('app.report.title.index') }}</h3>
           <div class="card-title">
           </div>
         </div>
         <div class="card-body">
+          <div class="">
+            @include('app.report.components.filter')
+          </div>
         </div>
       </div>
     </div>

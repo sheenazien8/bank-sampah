@@ -51,6 +51,7 @@ Route::group(['prefix' => '/'], function ()
         Route::resource('/saving', SavingController::class);
         Route::post('/tarik_tunai/saving/', [SavingController::class, 'tarikTunai'])->name('saving.tarik_tunai');
         Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+        Route::post('/report', [ReportController::class, 'generate'])->name('report.generate');
         Route::resource('/today-pic', TodayPicController::class);
         Route::resource('/transaction', TransactionController::class);
         Route::resource('/unit', UnitController::class);

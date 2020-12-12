@@ -16,11 +16,16 @@
           @enderror
         </div>
 
-        <div class="form-group">
+        <div class="form-group container-eye-icon">
           <div class="d-block">
             <label for="password" class="control-label"> {{ trans('app.auth.password') }} </label>
           </div>
           <input id="password" type="password" class="form-control {{ $errors->first('password') ? 'is-invalid': '' }}" name="password" tabindex="2" >
+          <!-- An element to toggle between password visibility -->
+          <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" tabindex="3" type="checkbox" id="show-password"onclick="myFunction()">
+            <label class="custom-control-label" for="show-password">Show Password</label>
+          </div>
           @error('password')
             <div class="invalid-feedback">
               {{ $message }}

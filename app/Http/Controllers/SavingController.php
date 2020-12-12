@@ -59,9 +59,11 @@ class SavingController extends Controller
             $nasabah->save();
             $money = price_format($saldo_akhir);
             $datetime = date('Y-m-d H:i');
-            $nasabah->user->notify(new SendTodayPicNotification([
-                'text' => "Saudara {$nasabah->nama_lengkap}: Tarik Tunai sebesar {$money} {$datetime}"
-            ]));
+            if ($nasabah->user->telegram_account) {
+                $nasabah->user->notify(new SendTodayPicNotification([
+                    'text' => "Saudara {$nasabah->nama_lengkap}: Tarik Tunai sebesar {$money} {$datetime}"
+                ]));
+            }
             DB::commit();
 
             return back()->with('success',trans('app.saving.message.tarik_tunai', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));

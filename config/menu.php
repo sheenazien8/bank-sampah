@@ -73,13 +73,13 @@ return [
         'menu_title' => 'app.content.title.index',
         'icon' => 'fas fa-cubes'
     ],
-    /* [ */
-    /*     'route' => 'report.index', */
-    /*     'active' => ['report.index', 'report.edit', 'report.show'], */
-    /*     'display_for' => ['admin'], */
-    /*     'menu_title' => 'app.report.title.index', */
-    /*     'icon' => 'fas fa-list-alt' */
-    /* ], */
+    [
+        'route' => 'report.index',
+        'active' => ['report.index', 'report.edit', 'report.show'],
+        'display_for' => ['admin'],
+        'menu_title' => 'app.report.title.index',
+        'icon' => 'fas fa-list-alt'
+    ],
     [
         'route' => 'setting.index',
         'display_for' => ['admin'],

@@ -217,6 +217,7 @@ return [
         'delete' => 'Hapus?',
         'ohno422' => 'Kamu Harus melengkapi form',
         'wellcome' => 'Selamat Datan, :user',
-        'profile' => 'Profil'
+        'profile' => 'Profil',
+        'generate' => 'Generate'
     ]
 ];

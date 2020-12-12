@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5",
         "babenkoivan/telegram-notifications": "^1.0",
+        "barryvdh/laravel-dompdf": "^0.8.7",
         "botman/botman": "^2.6",
         "botman/driver-telegram": "^1.6",
         "botman/driver-web": "^1.5",
