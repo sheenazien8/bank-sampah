@@ -26,7 +26,7 @@ class NasabahController extends Controller
     {
         $this->validate($request, [
             'nama_lengkap' => ['required'],
-            'nomor_ktp' => ['required', 'unique:nasabahs'],
+            'nomor_ktp' => ['required', 'unique:nasabahs', 'size:16'],
             'alamat' => ['required'],
             'nomor_rekening' => ['required', 'unique:users', 'string', 'size:6'],
             'username' => ['unique:users', 'alpha_dash', 'required'],
@@ -69,7 +69,7 @@ class NasabahController extends Controller
     {
         $this->validate($request, [
             'nama_lengkap' => ['required'],
-            'nomor_ktp' => ['required', 'unique:nasabahs,nomor_ktp,'.$nasabah->id],
+            'nomor_ktp' => ['required', 'unique:nasabahs,nomor_ktp,'.$nasabah->id, 'size:16'],
             'alamat' => ['required'],
             'nomor_rekening' => ['required', 'unique:users,nomor_rekening,'.$nasabah->user->id, 'string', 'size:6'],
             'username' => ['unique:users,username,'.$nasabah->user->id, 'alpha_dash', 'required'],
