@@ -40,6 +40,4 @@ class Saving extends Model
         return $this->belongsTo(Transaction::class, 'transaction_id');
     }
 
-
-
 }

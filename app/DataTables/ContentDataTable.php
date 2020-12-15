@@ -22,11 +22,6 @@ class ContentDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('created_at', function ($model) {
-                $date = (new Carbon($model->created_at))->diffForHumans();
-
-                return $date;
-            })
             ->addColumn('user', function ($model)
             {
                 return $model->user->username;
@@ -84,7 +79,6 @@ class ContentDataTable extends DataTable
         return [
             Column::make('user')->title(trans('app.content.column.writer')),
             Column::make('title')->title(trans('app.content.column.title')),
-            Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

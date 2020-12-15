@@ -22,11 +22,6 @@ class TodayPicTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('created_at', function ($model) {
-                $date = (new Carbon($model->created_at))->diffForHumans();
-
-                return $date;
-            })
             ->addColumn('user', function ($model)
             {
                 return $model->user->username;
@@ -79,7 +74,6 @@ class TodayPicTable extends DataTable
             Column::make('user')->title(trans('app.today_pic.column.user')),
             Column::make('tugas')->title(trans('app.today_pic.column.pics')),
             Column::make('pin')->title(trans('app.today_pic.column.pin')),
-            Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

@@ -22,10 +22,9 @@ class ItemDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('created_at', function ($model) {
-                $date = (new Carbon($model->created_at))->diffForHumans();
-
-                return $date;
+            ->addColumn('price', function ($model)
+            {
+                return price_format($model->price);
             })
             ->addColumn('action', function ($model)
             {
@@ -69,7 +68,7 @@ class ItemDataTable extends DataTable
         return [
             Column::make('nama')->title(trans('app.item.column.name')),
             Column::make('unit')->title(trans('app.item.column.unit')),
-            Column::make('created_at'),
+            Column::make('price')->title(trans('app.item.column.price')),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

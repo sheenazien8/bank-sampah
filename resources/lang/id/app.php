@@ -2,9 +2,10 @@
 return [
     'nasabah' => [
         'title' => [
-            'index' => 'Daftar Nasabah',
+            'index' => 'Nasabah',
             'create' => 'Buat Nasabah',
             'edit' => 'Ubah Nasabah',
+            'show' => 'Detail Nasabah'
         ],
         'column' => [
             'name' => 'Nama',
@@ -18,7 +19,7 @@ return [
             'nomor_ktp' => 'Nomor KTP',
             'alamat' => 'Alamat',
             'saldo_akhir' => 'Saldo Akhir',
-            'phone' => 'Phone',
+            'phone' => 'Nomor Telepon',
             'telegram_account' => 'Akun Telegram',
             'password' => 'Password'
         ],
@@ -29,16 +30,17 @@ return [
             'address' => 'Masukkan Alamat',
             'username' => 'Masukkan Username',
             'account_number' => 'Masukkan Nomor Rekening',
-            'phone' => 'Phone',
+            'phone' => 'Nomor Telepon',
             'telegram_account' => 'Masukkan Akun Telegram',
             'password' => 'Masukkan Password'
         ]
     ],
     'user' => [
         'title' => [
-            'index' => 'Daftar Pengguna',
-            'create' => 'Buat Pengguna',
-            'edit' => 'Ubah Pengguna'
+            'index' => 'User',
+            'create' => 'Buat User',
+            'edit' => 'Ubah User',
+            'show' => 'Detail User'
         ],
         'column' => [
             'username' => 'Username',
@@ -58,7 +60,8 @@ return [
             'index' => 'Riwayat Transaksi',
             'create' => 'Buat Transaksi',
             'edit' => 'Ubah Transaksi',
-            'menu' => 'Transaksi'
+            'menu' => 'Transaksi',
+            'show' => 'Detail Transaksi'
         ],
         'add_item' => 'Tambah Sampah',
         'column' => [
@@ -80,26 +83,30 @@ return [
     ],
     'item' => [
         'title' => [
-            'index' => 'Daftar Sampah',
+            'index' => 'Data Sampah',
             'create' => 'Buat Sampah',
-            'edit' => 'Edit Sampah'
+            'edit' => 'Edit Sampah',
+            'show' => 'Detail Jenis Sampah'
         ],
         'column' => [
             'name' => 'Jenis Sampah',
             'nama' => 'Jenis Sampah',
-            'unit' => 'Satuan'
+            'unit' => 'Satuan',
+            'price' => 'Harga',
         ],
         'placeholder' => [
             'name' => 'Masukkan Nama Jenis Sampah',
-            'unit' => 'Masukkan Nama Satuan'
+            'unit' => 'Masukkan Nama Satuan',
+            'price' => 'Masukkan Harga',
         ]
     ],
     'pic' => [
         'title' => [
-            'index' => 'Daftar Petugas (Person In Charge)',
+            'index' => 'Petugas (Person In Charge)',
             'create' => 'Buat Petugas',
             'edit' => 'Ubah Petugas',
-            'menu' => 'Daftar Petugas'
+            'menu' => 'Petugas',
+            'show' => 'Detail Petugas'
         ],
         'column' => [
             'name' => 'Nama Pekerjaan',
@@ -117,14 +124,17 @@ return [
     ],
     'today_pic' => [
         'title' => [
-            'index' => 'Daftar Petugas Hari Ini',
-            'create' => 'Buat Petugas Hari Ini',
-            'edit' => 'Ubah Petugas Hari Ini'
+            'index' => 'Jadwal Petugas',
+            'create' => 'Buat Petugas',
+            'edit' => 'Ubah Petugas',
+            'show' => 'Detail Petugas'
         ],
         'column' => [
             'date' => 'Tanggal Tugas',
             'user' => 'Nasabah',
-            'pics' => 'Pekerjaan'
+            'pics' => 'Pekerjaan',
+            'name' => 'Nasabah',
+            'pin' => 'PIN'
         ],
         'placeholder' => [
             'date' => 'Masukkan Tanggal Tugas',
@@ -134,9 +144,10 @@ return [
     ],
     'content' => [
         'title' => [
-            'index' => 'Daftar Konten',
+            'index' => 'Konten',
             'create' => 'Buat Konten',
-            'edit' => 'Ubah Konten'
+            'edit' => 'Ubah Konten',
+            'show' => 'Detail Konten'
         ],
         'column' => [
             'title' => 'Judul',
@@ -151,9 +162,10 @@ return [
     ],
     'activity' => [
         'title' => [
-            'index' => 'Daftar Kegiatan',
+            'index' => 'Kegiatan',
             'create' => 'Buat Kegiatan',
-            'edit' => 'Ubah Kegiatan'
+            'edit' => 'Ubah Kegiatan',
+            'show' => 'Detail Kegiatan'
         ],
         'column' => [
             'title' => 'Judul',
@@ -177,6 +189,9 @@ return [
             'transaksi_terakhir' => 'Transaksi Terakhir',
             'saldo_akhir' => 'Saldo Akhir',
         ],
+        'message' => [
+            'tarik_tunai' => 'Sukses Tarik Tunai.'
+        ],
         'detail' => 'Detail',
         'tarik_tunai' => 'Tarik Tunai',
         'tanggal_transaksi' => 'Tanggal Transaksi',
@@ -184,7 +199,7 @@ return [
         'jumlah_uang' => 'Jumlah Uang'
     ],
     'auth' => [
-        'username_or_pin' => 'Usernam, Nomor Rekening atau PIN',
+        'username_or_pin' => 'Username, Nomor Rekening atau PIN',
         'password' => 'Password'
     ],
     'setting' => [
@@ -209,6 +224,11 @@ return [
         'profit_bank_sampah' => 'Profit BS',
         'tabungan' => 'Saldo Akhir'
     ],
+    'report' => [
+        'title' => [
+            'index' => 'Laporan'
+        ]
+    ],
     'global' => [
         'add' => 'Tambah',
         'save' => 'Simpan',
@@ -216,8 +236,10 @@ return [
         'edit' => 'Ubah',
         'delete' => 'Hapus?',
         'ohno422' => 'Kamu Harus melengkapi form',
-        'wellcome' => 'Selamat Datan, :user',
+        'wellcome' => 'Selamat Datang, :user',
         'profile' => 'Profil',
-        'generate' => 'Generate'
+        'generate' => 'Generate',
+        'totalPrice' => 'Sub Total',
+        'grandTotal' => 'Total Harga'
     ]
 ];

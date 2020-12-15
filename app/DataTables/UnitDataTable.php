@@ -22,11 +22,6 @@ class UnitDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('created_at', function ($model) {
-                $date = (new Carbon($model->created_at))->diffForHumans();
-
-                return $date;
-            })
             ->addColumn('action', function ($model)
             {
                 $resources = 'unit';
@@ -68,7 +63,6 @@ class UnitDataTable extends DataTable
     {
         return [
             Column::make('nama')->title(trans('app.nasabah.column.nama')),
-            Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

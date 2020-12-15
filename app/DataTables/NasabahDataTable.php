@@ -25,11 +25,6 @@ class NasabahDataTable extends DataTable
             {
                 return $model->user->username;
             })
-            ->addColumn('created_at', function ($model) {
-                $date = (new Carbon($model->created_at))->diffForHumans();
-
-                return $date;
-            })
             ->addColumn('saldo_akhir', function ($model)
             {
                 return price_format($model->saldo_akhir);
@@ -79,7 +74,6 @@ class NasabahDataTable extends DataTable
             Column::make('nomor_ktp')->title(trans('app.nasabah.column.id_number')),
             Column::make('saldo_akhir')->title(trans('app.nasabah.column.saldo_akhir')),
             Column::make('alamat')->title(trans('app.nasabah.column.address')),
-            Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

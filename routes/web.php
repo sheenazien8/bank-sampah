@@ -17,6 +17,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Telegram\Bot\Api;
 
@@ -64,3 +65,18 @@ Route::group(['prefix' => '/'], function ()
     Route::match(['get', 'post'], '/botman', [BotTelegramController::class, 'handle']);
 });
 
+Route::group([ 'prefix' => 'artisan' ], function ()
+{
+    Route::get('migrate/{command}', function ($command)
+    {
+        Artisan::call("migrate:$command");
+    });
+    Route::get('make/{command}', function ($command)
+    {
+        Artisan::call("make:$command");
+    });
+    Route::get('{command}', function ($command)
+    {
+        Artisan::call("$command");
+    });
+});

@@ -88,11 +88,13 @@ return [
         'column' => [
             'name' => 'Item Name',
             'nama' => 'Item Name',
-            'unit' => 'Unit'
+            'unit' => 'Unit',
+            'price' => 'Price'
         ],
         'placeholder' => [
             'name' => 'Input Item Name',
-            'unit' => 'Input Unit'
+            'unit' => 'Input Unit',
+            'price' => 'Price'
         ]
 
     ],
@@ -212,8 +214,12 @@ return [
         'total_admin' => 'Total Admin',
         'total_nasabah' => 'Total Nasabah',
         'total_jenis_sampah' => 'Total Item Type',
-        'profit_bank_sampah' => 'Profit BS',
         'tabungan' => 'Current Saldo'
+    ],
+    'report' => [
+        'title' => [
+            'index' => 'Report'
+        ]
     ],
     'global' => [
         'add' => 'Add',
@@ -224,6 +230,10 @@ return [
         'ohno422' => 'You Must Complete the field',
         'wellcome' => 'Wellcome, :user',
         'profile' => 'Profile',
-        'generate' => 'Generate'
+        'generate' => 'Generate',
+        'totalPrice' => 'Sub Total',
+        'grandTotal' => 'Grand Total'
     ]
 ];
+
+

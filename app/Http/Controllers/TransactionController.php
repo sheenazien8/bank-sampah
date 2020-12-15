@@ -66,8 +66,15 @@ class TransactionController extends Controller
             foreach ($request->item as $k => $item) {
                 $itemData = Item::where('nama', $item)->firstOrCreate([
                     'nama' => $item,
-                    'unit' => $request->satuan[$k]
+                    'unit' => $request->satuan[$k],
+                    'price' => $request->price[$k],
                 ]);
+                $itemData->fill([
+                    'nama' => $item,
+                    'unit' => $request->satuan[$k],
+                    'price' => $request->price[$k],
+                ]);
+                $itemData->save();
                 $profit = setting('profit_bank_sampah') ?? 5;
                 $data = [
                     'jumlah' => $request->quantity[$k],
@@ -121,6 +128,7 @@ class TransactionController extends Controller
             $nasabah->save();
             $savingHistory->tabungan()->associate($saving);
             $savingHistory->save();
+            $transaction->savingHistory()->save($savingHistory);
             $money = price_format($money);
             $datetime = date('Y-m-d H:i');
             if ($nasabah->user->telegram_account && config('telegram.token')) {

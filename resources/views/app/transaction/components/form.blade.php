@@ -21,6 +21,7 @@
         <th>{{ trans('app.transaction.column.quantity') }}</th>
         <th>{{ trans('app.transaction.column.price') }}</th>
         <th>{{ trans('app.transaction.column.satuan') }}</th>
+        <th>{{ trans('Total') }}</th>
       </tr>
     </thead>
     <tbody class="tbody-transaction">
@@ -36,9 +37,9 @@
         </td>
         <td>
           <input
-            type="text"
+            type="number"
             placeholder="{{ trans('app.transaction.placeholder.quantity') }}"
-            class="form-control row row-satuan"
+            class="form-control row row-jumlah"
             name="quantity[]"
             value=""
           >
@@ -61,11 +62,28 @@
                  name="satuan[]"
                  value=""
                  >
-                 <button class="btn btn-danger col close-row">X</button>
+          </div>
+        </td>
+        <td>
+          <div class="row">
+            <input
+                 type="text"
+                 placeholder="{{ trans('app.global.totalPrice') }}"
+                 class="form-control row-totalPrice col-md-8"
+                 value=""
+                 >
+          <button class="btn btn-danger close-row">X</button>
           </div>
         </td>
       </tr>
     </tbody>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td class="grandTotal"></td>
+    </tr>
   </table>
   <div class="form-group">
     <button class="btn btn-primary">{{ trans('app.global.save') }}</button>

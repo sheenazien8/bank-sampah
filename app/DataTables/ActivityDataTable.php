@@ -22,11 +22,6 @@ class ActivityDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('created_at', function ($model) {
-                $date = (new Carbon($model->created_at))->diffForHumans();
-
-                return $date;
-            })
             ->addColumn('action', function ($model)
             {
                 $resources = 'activity';
@@ -80,7 +75,6 @@ class ActivityDataTable extends DataTable
         return [
             Column::make('tanggal')->title(trans('app.activity.column.tanggal')),
             Column::make('title')->title(trans('app.activity.column.title')),
-            Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

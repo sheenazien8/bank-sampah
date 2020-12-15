@@ -27,7 +27,14 @@ class ItemController extends Controller
     {
         if (request()->type == 'select2') {
             return $this->response->success(Item::where('nama', 'LIKE', "%{$request->term}%")->get()->map(function($data) {
-                return ['value' => $data->nama, 'label' => $data->nama, 'id' => $data->id, 'unit' => $data->unit];
+                return [
+                    'value' => $data->nama,
+                    'label' => $data->nama,
+                    'id' => $data->id,
+                    'unit' => $data->unit,
+                    'priceFormat' => price_format($data->price),
+                    'price' => $data->price
+                ];
             })->toArray());
         }
 

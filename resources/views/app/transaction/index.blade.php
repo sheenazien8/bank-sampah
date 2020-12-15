@@ -47,10 +47,37 @@
         select: function (event, ui) {
           // Set selection
           $(event.target.closest('.row-table-transaction').children[3]).find('input.row-satuan')[0].value = ui.item.unit
+          $(event.target.closest('.row-table-transaction').children[2]).find('input.row-price')[0].value = ui.item.price
+          let jumlah = $(event.target.closest('.row-table-transaction').children[1]).find('input.row-jumlah')[0].value
+          let subTotal = jumlah * ui.item.price
+          $(event.target.closest('.row-table-transaction').children[4]).find('input.row-totalPrice')[0].value = subTotal
           return false;
         }
       })
     })
+    $(document).on('keyup', '.row-price', function(e) {
+      let jumlah = $(e.target.closest('.row-table-transaction').children[1]).find('input.row-jumlah')[0].value
+      let value = e.target.value
+      let subTotal = jumlah * value
+      $(event.target.closest('.row-table-transaction').children[4]).find('input.row-totalPrice')[0].value = subTotal
+      insertGrantTotal()
+    })
+    $(document).on('keyup', '.row-jumlah', function(e) {
+      let price = $(e.target.closest('.row-table-transaction').children[2]).find('input.row-price')[0].value
+      let value = e.target.value
+      let subTotal = price * value
+      $(event.target.closest('.row-table-transaction').children[4]).find('input.row-totalPrice')[0].value = subTotal
+      insertGrantTotal()
+    })
+    function insertGrantTotal() {
+      let subTotal = $('input.row-totalPrice')
+      let grandTotal = 0;
+      for(let index = 0; index < subTotal.length; index++) {
+        grandTotal += parseInt(subTotal[index].value)
+      }
+      grandTotal = 'Total:' + grandTotal
+      $('.grandTotal').html(grandTotal)
+    }
     $(document).ready(() => {
       $('select[name=nasabah]').select2({
         width: 'resolve',
@@ -71,6 +98,7 @@
       if($('.row-table-transaction').length > 1) {
         $(e.target).parents()[2].remove()
       }
+      insertGrantTotal()
     });
 
   </script>

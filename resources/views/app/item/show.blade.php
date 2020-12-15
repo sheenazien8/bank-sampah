@@ -26,7 +26,11 @@
                   <p>{{ trans("app.item.column.{$key}") }}</p>
                 </div>
                 <div class="col-md-8">
-                  <p><b>{{ $value }}</b></p>
+                  @if ($key == 'price')
+                    <p><b>{{ price_format($value) }}</b></p>
+                  @else
+                    <p><b>{{ $value }}</b></p>
+                  @endif
                 </div>
               </div>
             @endif

@@ -43,7 +43,7 @@
                 @foreach ($saving->savingHistories as $savingHistory)
                   <tr>
                     <td>{{ $savingHistory->tanggal }}</td>
-                    <td>{{ $savingHistory->type }}</td>
+                    <td>{{ $savingHistory->type_string }}</td>
                     <td>{{ price_format( $savingHistory->jumlah_uang ) }}</td>
                   </tr>
                 @endforeach

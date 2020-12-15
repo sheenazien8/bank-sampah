@@ -22,11 +22,6 @@ class UserDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('created_at', function ($model) {
-                $date = (new Carbon($model->created_at))->diffForHumans();
-
-                return $date;
-            })
             ->addColumn('action', function ($model)
             {
                 $resources = 'user';
@@ -68,7 +63,6 @@ class UserDataTable extends DataTable
     {
         return [
             Column::make('username')->title(trans('app.user.column.username')),
-            Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

@@ -22,11 +22,6 @@ class SavingDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('created_at', function ($model) {
-                $date = (new Carbon($model->created_at))->diffForHumans();
-
-                return $date;
-            })
             ->addColumn('nasabah', function ($model)
             {
                 return optional($model->nasabahUser->nasabahProfile)->nama_lengkap;
@@ -94,7 +89,6 @@ class SavingDataTable extends DataTable
             Column::make('nomor_rekening')->title(trans('app.saving.column.nomor_rekening')),
             Column::make('transaksi_terakhir')->title(trans('app.saving.column.transaksi_terakhir')),
             Column::make('saldo_akhir')->title(trans('app.saving.column.saldo_akhir')),
-            Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

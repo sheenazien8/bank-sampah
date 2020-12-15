@@ -31,7 +31,6 @@ class NasabahController extends Controller
             'nomor_rekening' => ['required', 'unique:users', 'string', 'size:6'],
             'username' => ['unique:users', 'alpha_dash', 'required'],
             'phone' => ['unique:users', 'required'],
-            'telegram_account' => ['unique:users', 'required'],
             'password' => ['required']
         ]);
         try {
@@ -75,7 +74,6 @@ class NasabahController extends Controller
             'nomor_rekening' => ['required', 'unique:users,nomor_rekening,'.$nasabah->user->id, 'string', 'size:6'],
             'username' => ['unique:users,username,'.$nasabah->user->id, 'alpha_dash', 'required'],
             'phone' => ['unique:users,phone,'.$nasabah->user->id, 'required'],
-            'telegram_account' => ['unique:users,telegram_account,'.$nasabah->user->id, 'required'],
         ]);
         try {
             DB::beginTransaction();

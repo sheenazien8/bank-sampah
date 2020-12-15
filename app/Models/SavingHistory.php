@@ -24,4 +24,26 @@ class SavingHistory extends Model
     {
         return $this->belongsTo(Saving::class, 'saving_id');
     }
+
+    public function getTypeStringAttribute()
+    {
+        $string = null;
+        switch ($this->type) {
+            case 'in':
+                $string = 'In (Debit)';
+                break;
+            case 'out':
+                $string = 'Out (Kredit)';
+                break;
+            case 'upah-petugas':
+                $string = 'Upah Petugas (Kredit)';
+                break;
+            default:
+                $string = 'default';
+                break;
+        }
+        return $string;
+    }
+
+
 }

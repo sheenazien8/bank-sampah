@@ -59,7 +59,7 @@ Pin:pin
                     $user->update([
                         'telegram_account' => $chat_id
                     ]);
-                    $response = "Selamat datang {$user->nasabahProfile->nama_lengkap}, anda sekarang sudah terdaftaran di Telegram Banking Banksampah Mawar";
+                    $response = "Selamat datang {$user->nasabahProfile->nama_lengkap}, anda sekarang sudah terdaftarkan di Telegram Banking Banksampah Mawar";
                 }
                 $this->send('sendMessage', [
                     'chat_id' => $chat_id,
@@ -193,4 +193,6 @@ Pin:pin
             ]);
         }
     }
+
 }
+

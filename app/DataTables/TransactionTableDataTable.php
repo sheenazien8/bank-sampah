@@ -22,11 +22,6 @@ class TransactionTableDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('created_at', function ($model) {
-                $date = (new Carbon($model->created_at))->diffForHumans();
-
-                return $date;
-            })
             ->addColumn('nasabah', function ($model)
             {
                 return optional($model->nasabah)->nama_lengkap;
@@ -78,7 +73,6 @@ class TransactionTableDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('created_at'),
             Column::make('tanggal_transaksi')->title(trans('app.transaction.column.tanggal_transaksi')),
             Column::make('nasabah')->title(trans('app.transaction.column.nasabah')),
             Column::computed('action')

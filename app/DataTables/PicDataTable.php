@@ -22,11 +22,6 @@ class PicDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('created_at', function ($model) {
-                $date = (new Carbon($model->created_at))->diffForHumans();
-
-                return $date;
-            })
             ->addColumn('action', function ($model)
             {
                 $resources = 'pic';
@@ -70,7 +65,6 @@ class PicDataTable extends DataTable
             Column::make('nama_jabatan')->title(trans('app.pic.column.name')),
             Column::make('nilai_setiap_tugas')->title(trans('app.pic.column.value')),
             Column::make('keterangan')->title(trans('app.pic.column.description')),
-            Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
