@@ -44,13 +44,13 @@ return [
         ],
         'column' => [
             'username' => 'Username',
-            'phone' => 'Phone',
+            'phone' => 'Nomor Telepon',
             'telegram_account' => 'Akun Telegram',
             'password' => 'Password'
         ],
         'placeholder' => [
             'username' => 'Masukkan Username',
-            'phone' => 'Masukkan Phone',
+            'phone' => 'Masukkan Nomor Telepon',
             'telegram_account' => 'Masukkan Akun Telegram',
             'password' => 'Masukkan Password'
         ]

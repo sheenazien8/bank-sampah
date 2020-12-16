@@ -26,17 +26,6 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="telegram_account" class="col-sm-2 col-form-label">{{ trans('app.user.column.telegram_account') }}</label>
-    <div class="col-sm-10">
-      <input type="text"
-             placeholder="{{ trans('app.user.placeholder.telegram_account') }}"
-             class="form-control {{ $errors->first('telegram_account') ? 'is-invalid' : '' }}"
-             id="telegram_account"
-             name="telegram_account"
-             value="{{ old('telegram_account', optional($user ?? '')->telegram_account ) }}">
-    </div>
-  </div>
-  <div class="form-group row">
     <label for="password" class="col-sm-2 col-form-label">{{ trans('app.user.column.password') }}</label>
     <div class="col-sm-10">
       <input type="password"
