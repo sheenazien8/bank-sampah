@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Telegram\Bot\Api;
 
 class BotTelegramController extends Controller
 {
@@ -167,7 +166,7 @@ Pin:pin
                 foreach ($riwayatTabungan as $riwayat) {
                     $priceRow = price_format($riwayat->jumlah_uang);
                     $response .= "------------------------------------------------\n";
-                    $response .= "{$riwayat->tanggal}|{$riwayat->type}|$priceRow\n";
+                    $response .= "{$riwayat->tanggal}|{$riwayat->typeString}|$priceRow\n";
                 }
             }
             $this->send('sendMessage', [
@@ -193,6 +192,4 @@ Pin:pin
             ]);
         }
     }
-
 }
-

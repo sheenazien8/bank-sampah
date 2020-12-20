@@ -23,7 +23,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function sendFailedLoginResponse(Request $request)
+    protected function sendFailedLoginResponse()
     {
         throw ValidationException::withMessages([
             'identity' => [trans('auth.failed')],
@@ -56,8 +56,7 @@ class LoginController extends Controller
         ];
 
         $request->validate([
-            'identity' => ['required', 'string', function ($attr, $value, $fail) use ($request)
-            {
+            'identity' => ['required', 'string', function ($attr, $value, $fail) use ($request) {
                 if ($this->username() == 'pin') {
                     $todayPic = TodayPic::where('pin', $value)->where('tanggal_tugas', date('Y-m-d'))->first();
                     if (!$todayPic) {
@@ -82,7 +81,8 @@ class LoginController extends Controller
             return $this->guard()->loginUsingId($this->userPic->id);
         }
         return $this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
+            $this->credentials($request),
+            $request->filled('remember')
         );
     }
 }

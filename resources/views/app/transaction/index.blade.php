@@ -5,15 +5,20 @@
 @section('content')
   <section class="section">
     @if (app()->environment() == 'production')
-    <div class="section-header">
-      <h1>{{ trans('app.transaction.title.index') }}</h1>
-    </div>
+      <div class="section-header">
+        <h1>{{ trans('app.transaction.title.index') }}</h1>
+      </div>
     @endif
 
     <div class="section-body">
       <div class="card">
         <div class="card-header">
           <h3 class="mr-auto">{{ trans('app.transaction.title.create') }}</h3>
+          <h4>
+            Setiap transaksi akan dikurangi
+            {{ setting('profit_bank_sampah') }}%
+            dari total transaksi.
+          </h4>
         </div>
         <div class="card-body">
           @include('app.transaction.components.form')

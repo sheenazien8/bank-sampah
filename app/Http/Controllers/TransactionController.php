@@ -12,7 +12,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\Notifications\SendTodayPicNotification;
 use Illuminate\Http\Request;
-Use App\DataTables\TransactionTableDataTable as TransactionTable;
+use App\DataTables\TransactionTableDataTable as TransactionTable;
 use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
@@ -21,15 +21,15 @@ class TransactionController extends Controller
 
     public function index(TransactionTable $dataTable)
     {
-        $nasabah = User::isNasabah()->get()->map(function($data) {
+        $nasabah = User::isNasabah()->get()->map(function ($data) {
             if ($data->nasabahProfile) {
                 return ['value' => $data->nasabahProfile->id, 'text' => $data->nomor_rekening . ' --- ' . $data->nasabahProfile->nama_lengkap, 'id_user' => $data->id];
             }
         });
-        $nasabah = $nasabah->filter(function($data) {
+        $nasabah = $nasabah->filter(function ($data) {
             if (isset($data['id_user']) && session()->get('today-pic') && session()->get('today-pic')->id != $data['id_user']) {
                 return $data;
-            } else if(isset($data['id_user'])) {
+            } else if (isset($data['id_user'])) {
                 return $data;
             }
         });
@@ -63,6 +63,18 @@ class TransactionController extends Controller
             $transaction->nasabah()->associate($nasabah);
             $transaction->save();
             $money = 0;
+            // di ket.
+            // t = total
+            // p = profit
+            // hs = hasil tabungan
+            // ditanya?
+            // hs = t - (t * p)
+            // dijawab
+            // t = 10000
+            // p = 10%
+            // hs = 10000 - (10000 * 10%)
+            // hs = 10000 - (1000)
+            // hs = 9000
             foreach ($request->item as $k => $item) {
                 $itemData = Item::where('nama', $item)->firstOrCreate([
                     'nama' => $item,
@@ -138,7 +150,7 @@ class TransactionController extends Controller
             }
             DB::commit();
 
-            return redirect()->route('transaction.index')->with('success',trans('message.create', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));
+            return redirect()->route('transaction.index')->with('success', trans('message.create', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -163,7 +175,7 @@ class TransactionController extends Controller
             $transaction->delete();
             DB::commit();
 
-            return back()->with('success',trans('message.delete', ['data' => 'Transaction']));
+            return back()->with('success', trans('message.delete', ['data' => 'Transaction']));
         } catch (\Exception $e) {
             DB::rollBack();
 

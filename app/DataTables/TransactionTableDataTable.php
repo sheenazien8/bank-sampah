@@ -3,11 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Transaction;
-use Carbon\Carbon;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class TransactionTableDataTable extends DataTable
@@ -22,12 +18,13 @@ class TransactionTableDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('nasabah', function ($model)
-            {
+            ->addColumn('nasabah', function ($model) {
                 return optional($model->nasabah)->nama_lengkap;
             })
-            ->addColumn('action', function ($model)
-            {
+            ->addColumn('kasir', function ($model) {
+                return optional($model->kasir)->username;
+            })
+            ->addColumn('action', function ($model) {
                 $resources = 'transaction';
                 return view('partials.table.action', [
                     'resources' => $resources,
@@ -45,8 +42,7 @@ class TransactionTableDataTable extends DataTable
      */
     public function query(Transaction $model)
     {
-        return $model->when(auth()->user()->whoami == 'pic', function ($query)
-        {
+        return $model->when(auth()->user()->whoami == 'pic', function ($query) {
             return $query->where('user_id', auth()->id());
         })->orderBy('created_at', 'DESC')->newQuery();
     }
@@ -59,10 +55,10 @@ class TransactionTableDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('transactiontable-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->orderBy(1);
+            ->setTableId('transactiontable-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->orderBy(1);
     }
 
     /**
@@ -75,6 +71,7 @@ class TransactionTableDataTable extends DataTable
         return [
             Column::make('tanggal_transaksi')->title(trans('app.transaction.column.tanggal_transaksi')),
             Column::make('nasabah')->title(trans('app.transaction.column.nasabah')),
+            Column::make('kasir')->title(trans('app.transaction.column.cashier')),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

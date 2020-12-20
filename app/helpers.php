@@ -7,13 +7,13 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-if (! function_exists('action')) {
+if (!function_exists('action')) {
     function action(array $action)
     {
     }
 }
 
-if (! function_exists('dash_to_space')) {
+if (!function_exists('dash_to_space')) {
     function dash_to_space(string $string, bool $capital = false)
     {
         $name = str_replace('-', ' ', $string);
@@ -22,33 +22,33 @@ if (! function_exists('dash_to_space')) {
         return $capital ? Str::upper($name) : $name;
     }
 }
-if (! function_exists('price_format')) {
+if (!function_exists('price_format')) {
     function price_format($price, $label = true)
     {
         $label = $label ? 'Rp. ' : '';
-        return $label.number_format($price, 0, ',', '.');
+        return $label . number_format($price, 0, ',', '.');
     }
 }
-if (! function_exists('get_lang')) {
+if (!function_exists('get_lang')) {
     function get_lang()
     {
         app()->setLocale(session()->get('lang'));
     }
 }
-if (! function_exists('media')) {
+if (!function_exists('media')) {
     function media(Media $media = null)
     {
         return url($media->getFullName ?? '');
     }
 }
-if (! function_exists('medias')) {
+if (!function_exists('medias')) {
     function medias(Collection $media)
     {
         dd($media);
     }
 }
 
-if (! function_exists('checkValueArray')) {
+if (!function_exists('checkValueArray')) {
     function array_must_same(array $array, array $key, $expectedValue): bool
     {
         for ($i = 0; $i < count($key); $i++) {
@@ -57,7 +57,6 @@ if (! function_exists('checkValueArray')) {
                 if ($val != $expectedValue) {
                     return false;
                 }
-
             } else {
                 return false;
             }
@@ -67,19 +66,19 @@ if (! function_exists('checkValueArray')) {
     }
 }
 
-if (! function_exists('percentage')) {
+if (!function_exists('percentage')) {
     function percentage(int $percentage): string
     {
         return $percentage . '%';
     }
 }
 
-if (! function_exists('get_month')) {
+if (!function_exists('get_month')) {
     function get_month($length = null, $withKey = false): array
     {
         $month = [];
         $i = 1;
-        for($m=1; $m<=12; ++$m){
+        for ($m = 1; $m <= 12; ++$m) {
             $i;
             if ($length) {
                 if ($withKey) {
@@ -107,18 +106,18 @@ if (! function_exists('get_month')) {
     }
 }
 
-if (! function_exists('get_month_by_key')) {
+if (!function_exists('get_month_by_key')) {
     function get_month_by_key($key)
     {
         return Carbon::parse($key);
     }
 }
 
-if (! function_exists('get_wrapper_month')) {
+if (!function_exists('get_wrapper_month')) {
     function get_wrapper_month(): array
     {
         $wrapp = [];
-        for ($i = 0; $i <12; $i++) {
+        for ($i = 0; $i < 12; $i++) {
             $wrapp[$i] = null;
         }
 
@@ -126,7 +125,7 @@ if (! function_exists('get_wrapper_month')) {
     }
 }
 
-if (! function_exists('setting')) {
+if (!function_exists('setting')) {
     function setting(string $key)
     {
         return optional(Setting::where('key', $key)->first())->value;
@@ -134,47 +133,50 @@ if (! function_exists('setting')) {
 }
 
 
-if (! function_exists('penyebut')) {
-    function penyebut($nilai) {
+if (!function_exists('penyebut')) {
+    function penyebut($nilai)
+    {
         $nilai = abs($nilai);
         $huruf = array("", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");
         $temp = "";
         if ($nilai < 12) {
-            $temp = " ". $huruf[$nilai];
-        } else if ($nilai <20) {
-            $temp = penyebut($nilai - 10). " belas";
+            $temp = " " . $huruf[$nilai];
+        } else if ($nilai < 20) {
+            $temp = penyebut($nilai - 10) . " belas";
         } else if ($nilai < 100) {
-            $temp = penyebut($nilai/10)." puluh". penyebut($nilai % 10);
+            $temp = penyebut($nilai / 10) . " puluh" . penyebut($nilai % 10);
         } else if ($nilai < 200) {
             $temp = " seratus" . penyebut($nilai - 100);
         } else if ($nilai < 1000) {
-            $temp = penyebut($nilai/100) . " ratus" . penyebut($nilai % 100);
+            $temp = penyebut($nilai / 100) . " ratus" . penyebut($nilai % 100);
         } else if ($nilai < 2000) {
             $temp = " seribu" . penyebut($nilai - 1000);
         } else if ($nilai < 1000000) {
-            $temp = penyebut($nilai/1000) . " ribu" . penyebut($nilai % 1000);
+            $temp = penyebut($nilai / 1000) . " ribu" . penyebut($nilai % 1000);
         } else if ($nilai < 1000000000) {
-            $temp = penyebut($nilai/1000000) . " juta" . penyebut($nilai % 1000000);
+            $temp = penyebut($nilai / 1000000) . " juta" . penyebut($nilai % 1000000);
         } else if ($nilai < 1000000000000) {
-            $temp = penyebut($nilai/1000000000) . " milyar" . penyebut(fmod($nilai,1000000000));
+            $temp = penyebut($nilai / 1000000000) . " milyar" . penyebut(fmod($nilai, 1000000000));
         } else if ($nilai < 1000000000000000) {
-            $temp = penyebut($nilai/1000000000000) . " trilyun" . penyebut(fmod($nilai,1000000000000));
+            $temp = penyebut($nilai / 1000000000000) . " trilyun" . penyebut(fmod($nilai, 1000000000000));
         }
         return $temp;
     }
 }
-if (! function_exists('terbilang')) {
-    function terbilang($nilai) {
-        if($nilai<0) {
-            $hasil = "minus ". trim(penyebut($nilai));
+if (!function_exists('terbilang')) {
+    function terbilang($nilai)
+    {
+        if ($nilai < 0) {
+            $hasil = "minus " . trim(penyebut($nilai));
         } else {
             $hasil = trim(penyebut($nilai));
         }
         return $hasil;
     }
 }
-if (! function_exists('getActiveClass')) {
-    function getActiveClass($activefor) {
+if (!function_exists('getActiveClass')) {
+    function getActiveClass($activefor)
+    {
         foreach ($activefor as $value) {
             if ($value == Route::current()->action['as']) {
                 return 'active';
@@ -184,7 +186,7 @@ if (! function_exists('getActiveClass')) {
     }
 }
 
-if (! function_exists('getConditionDetail')) {
+if (!function_exists('getConditionDetail')) {
     function getConditionDetail($key, ...$bypass)
     {
         foreach ($bypass as $v) {
@@ -192,6 +194,18 @@ if (! function_exists('getConditionDetail')) {
                 return false;
             }
         }
-        return $key != 'id' && $key !='updated_at' && $key != 'created_at';
+        return $key != 'id' && $key != 'updated_at' && $key != 'created_at';
+    }
+}
+if (!function_exists('get_years')) {
+    function get_years()
+    {
+        $k = 2020;
+        $tahun = [];
+        for ($i = 0; $i < 10; $i++) {
+            $y = $k + $i;
+            $tahun[] = $y;
+        }
+        return $tahun;
     }
 }

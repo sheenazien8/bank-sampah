@@ -29,14 +29,12 @@ class SavingController extends Controller
         $user = User::whereNomorRekening($request->nasabah)->firstOrFail();
         $nasabah = $user->nasabahProfile;
         $this->validate($request, [
-            'nasabah' => ['required', function ($attr, $value, $fail) use ($user)
-            {
+            'nasabah' => ['required', function ($attr, $value, $fail) use ($user) {
                 if (!$user->getSaving) {
                     $fail(trans('app.saving.saving_not_founf'));
                 }
             }],
-            'jumlah_uang' => ['required', function ($attr, $value, $fail) use ($user)
-            {
+            'jumlah_uang' => ['required', function ($attr, $value, $fail) use ($user) {
                 if ($value > $user->getSaving->saldo_akhir) {
                     $fail(trans('app.saving.uang_melebihi_saldo', ['jumlah_saldo' => $user->getSaving->saldo_akhir]));
                 }
@@ -49,7 +47,7 @@ class SavingController extends Controller
             ]);
             $saldo_akhir = $nasabah->saldo_akhir - $request->jumlah_uang;
             $savingHistory = new SavingHistory();
-            $request->merge([ 'type' => 'out' ]);
+            $request->merge(['type' => 'out']);
             $savingHistory->fill($request->all());
             $savingHistory->tabungan()->associate($nasabah->user->getSaving);
             $savingHistory->save();
@@ -57,7 +55,7 @@ class SavingController extends Controller
             $nasabah->user->getSaving->save();
             $nasabah->fill(['saldo_akhir' => $saldo_akhir]);
             $nasabah->save();
-            $money = price_format($saldo_akhir);
+            $money = price_format($request->jumlah_uang);
             $datetime = date('Y-m-d H:i');
             if ($nasabah->user->telegram_account) {
                 $nasabah->user->notify(new SendTodayPicNotification([
@@ -66,12 +64,11 @@ class SavingController extends Controller
             }
             DB::commit();
 
-            return back()->with('success',trans('app.saving.message.tarik_tunai', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));
+            return back()->with('success', trans('app.saving.message.tarik_tunai', ['data' => "Transaction for {$nasabah->nama_lengkap}"]));
         } catch (\Exception $e) {
             DB::rollBack();
 
             return $e->getMessage();
         }
     }
-
 }

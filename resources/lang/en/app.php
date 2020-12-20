@@ -68,6 +68,7 @@ return [
             'satuan' => 'Unit',
             'quantity' => 'Quantity',
             'tanggal_transaksi' => 'Transaction Date',
+            'cashier' => 'Cashier',
         ],
         'placeholder' => [
             'nasabah' => 'Search Nasabah',
@@ -235,5 +236,3 @@ return [
         'grandTotal' => 'Grand Total'
     ]
 ];
-
-

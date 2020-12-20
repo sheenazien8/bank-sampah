@@ -70,6 +70,7 @@ return [
             'price' => 'Harga',
             'satuan' => 'Satuan',
             'quantity' => 'Jumlah',
+            'cashier' => 'Kasir',
             'tanggal_transaksi' => 'Tanggal Transaksi',
         ],
         'placeholder' => [
