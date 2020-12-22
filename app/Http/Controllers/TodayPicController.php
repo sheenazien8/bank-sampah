@@ -41,7 +41,7 @@ class TodayPicController extends Controller
         $today_pic->fill($request->all());
         $today_pic->save();
 
-        return redirect()->route('today-pic.index')->with('success',trans('message.create', ['data' => "for {$user->nasabahProfile->nama_lengkap}"]));
+        return redirect()->route('today-pic.index')->with('success', trans('message.create', ['data' => "for {$user->nasabahProfile->nama_lengkap}"]));
     }
 
     public function show(TodayPic $today_pic)
@@ -62,9 +62,10 @@ class TodayPicController extends Controller
             'pic_id' => ['required']
         ]);
         $today_pic->fill($request->all());
+        $user = User::find($request->user_id);
         $today_pic->save();
 
-        return redirect()->route('today-pic.index')->with('success',trans('message.update', ['data' => "for {$user->nasabahProfile->nama_lengkap}"]));
+        return redirect()->route('today-pic.index')->with('success', trans('message.update', ['data' => "for {$user->nasabahProfile->nama_lengkap}"]));
     }
 
     public function destroy(TodayPic $today_pic)
@@ -72,6 +73,6 @@ class TodayPicController extends Controller
         $message = $today_pic->user->nasabahProfile->nama_lengkap;
         $today_pic->delete();
 
-        return back()->with('success',trans('message.delete', ['data' => "for {$message}"]));
+        return back()->with('success', trans('message.delete', ['data' => "for {$message}"]));
     }
 }
