@@ -76,17 +76,23 @@ class TransactionController extends Controller
             // hs = 10000 - (1000)
             // hs = 9000
             foreach ($request->item as $k => $item) {
-                $itemData = Item::where('nama', $item)->firstOrCreate([
-                    'nama' => $item,
-                    'unit' => $request->satuan[$k],
-                    'price' => $request->price[$k],
-                ]);
-                $itemData->fill([
-                    'nama' => $item,
-                    'unit' => $request->satuan[$k],
-                    'price' => $request->price[$k],
-                ]);
-                $itemData->save();
+                $itemData = Item::where('nama', $item)->first();
+                if (!$itemData) {
+                    $itemData = new Item();
+                    $itemData->fill([
+                        'nama' => $item,
+                        'unit' => $request->satuan[$k],
+                        'price' => $request->price[$k],
+                    ]);
+                    $itemData->save();
+                } else {
+                    $itemData->fill([
+                        'nama' => $item,
+                        'unit' => $request->satuan[$k],
+                        'price' => $request->price[$k],
+                    ]);
+                    $itemData->save();
+                }
                 $profit = setting('profit_bank_sampah') ?? 5;
                 $data = [
                     'jumlah' => $request->quantity[$k],
