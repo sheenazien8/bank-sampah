@@ -39,7 +39,6 @@
                 <th>@lang('app.transaction.column.quantity')</th>
                 <th>@lang('app.transaction.column.price')</th>
                 <th>@lang('app.transaction.column.satuan')</th>
-                <th>@lang('profit')</th>
               </tr>
             </thead>
             @php
@@ -53,18 +52,17 @@
                 <td>{{ $detailTransaksi->jumlah }}</td>
                 <td>{{ price_format($detailTransaksi->harga_sekarang) }}</td>
                 <td>{{ $detailTransaksi->item->unit }}</td>
-                <td>{{ $detailTransaksi->profit_bank_sampah }}%</td>
               </tr>
               @php
                 $total += $detailTransaksi->harga_sekarang;
-                $qtyTotal += $detailTransaksi->jumlah;
+                $qtyTotal += $detailTransaksi->harga_sekarang * $detailTransaksi->jumlah;
               @endphp
             @endforeach
             <tr>
               <td><b>Total:</b></td>
               <td><b>{{ $qtyTotal }}</b></td>
               <td><b>{{ price_format($total) }}</b></td>
-              <td><b>{{ price_format($total * $qtyTotal) }}</b></td>
+              <td><b>{{ price_format($qtyTotal) }}</b></td>
             </tr>
           </table>
         </div>

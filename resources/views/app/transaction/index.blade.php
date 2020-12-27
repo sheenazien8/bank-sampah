@@ -38,25 +38,17 @@
 
 @push('javascript')
   <script>
-    $(document).on('keyup', '.row-item', function(e) {
-      $('.tbody-transaction .row-table-transaction .row-item').autocomplete({
-        source: function(req, res) {
-          axios.get(`/item?type=select2&term=${req.term}`)
-            .then((data) => {
-              res(data.data.payload)
-            })
-            .catch((err) => {
-
-            })
-        },
-        select: function (event, ui) {
-          // Set selection
-          $(event.target.closest('.row-table-transaction').children[3]).find('input.row-satuan')[0].value = ui.item.unit
-          $(event.target.closest('.row-table-transaction').children[2]).find('input.row-price')[0].value = ui.item.price
+    $(document).on('change', '.select-item', function(e) {
+      console.log(e)
+      $.ajax({
+        url: `/item/${e.target.value}`,
+        success: function(data) {
+          let event = e;
+          $(event.target.closest('.row-table-transaction').children[3]).find('input.row-satuan')[0].value = data.unit
+          $(event.target.closest('.row-table-transaction').children[2]).find('input.row-price')[0].value = data.price
           let jumlah = $(event.target.closest('.row-table-transaction').children[1]).find('input.row-jumlah')[0].value
-          let subTotal = jumlah * ui.item.price
+          let subTotal = jumlah * data.price
           $(event.target.closest('.row-table-transaction').children[4]).find('input.row-totalPrice')[0].value = subTotal
-          return false;
         }
       })
     })
@@ -88,6 +80,12 @@
         width: 'resolve',
         theme: "bootstrap"
       })
+
+      $('.select2item').select2({
+        width: 'resolve',
+        theme: 'bootstrap'
+      });
+
       @if ($errors->first('nasabah'))
        $('select[name=nasabah]').addClass('is-invalid')
       @endif

@@ -76,7 +76,7 @@ class TransactionController extends Controller
             // hs = 10000 - (1000)
             // hs = 9000
             foreach ($request->item as $k => $item) {
-                $itemData = Item::where('nama', $item)->first();
+                $itemData = Item::where('id', $item)->first();
                 if (!$itemData) {
                     $itemData = new Item();
                     $itemData->fill([
@@ -110,8 +110,8 @@ class TransactionController extends Controller
                 $saving = $todayPic->tabungan;
                 // mengambil nilai_setiap_tugas
                 $nilai_setiap_tugas = TodayPic::where('user_id', $todayPic->id)->where('tanggal_tugas', date('Y-m-d'))->first()->pic->nilai_setiap_tugas;
-                $upahPetugas = $money * $nilai_setiap_tugas / 100;
-                $money = $money - $money * (setting('profit_total_petugas') ?? 5) / 100;
+                $upahPetugas = $price * $nilai_setiap_tugas / 100;
+                $money = $money - $price * (setting('profit_total_petugas') ?? 5) / 100;
                 $savingHistory = new SavingHistory();
                 $savingHistory->fill([
                     'type' => 'upah-petugas',

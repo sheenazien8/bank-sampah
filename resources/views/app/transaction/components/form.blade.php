@@ -27,13 +27,11 @@
     <tbody class="tbody-transaction">
       <tr class="row-table-transaction">
         <td>
-          <input
-            type="text"
-            placeholder="{{ trans('app.transaction.placeholder.item') }}"
-            class="form-control row row-item"
-            name="item[]"
-            value=""
-          >
+          <select name="item[]" class="form-control select-item" style="width:15em">
+            @foreach ($items as $item)
+              <option value="{{ $item->id }}">{{ $item->nama }}</option>
+            @endforeach
+          </select>
         </td>
         <td>
           <input

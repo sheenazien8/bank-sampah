@@ -26,7 +26,7 @@ class ItemController extends Controller
     public function index(ItemDataTable $dataTable, Request $request)
     {
         if (request()->type == 'select2') {
-            return $this->response->success(Item::where('nama', 'LIKE', "%{$request->term}%")->get()->map(function($data) {
+            return $this->response->success(Item::where('nama', 'LIKE', "%{$request->term}%")->get()->map(function ($data) {
                 return [
                     'value' => $data->nama,
                     'label' => $data->nama,
@@ -56,11 +56,14 @@ class ItemController extends Controller
         $item->fill($request->all());
         $item->save();
 
-        return redirect()->route('item.index')->with('success',trans('message.create', ['data' => $item->nama]));
+        return redirect()->route('item.index')->with('success', trans('message.create', ['data' => $item->nama]));
     }
 
     public function show(Item $item)
     {
+        if (request()->ajax()) {
+            return response()->json($item);
+        }
         return view($this->viewpath . '.show', compact('item'));
     }
 
@@ -72,13 +75,13 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         $this->validate($request, [
-            'nama' => ['required', 'unique:items,nama,'.$item->id],
+            'nama' => ['required', 'unique:items,nama,' . $item->id],
             'unit' => ['required']
         ]);
         $item->fill($request->all());
         $item->save();
 
-        return redirect()->route('item.index')->with('success',trans('message.update', ['data' => $item->nama]));
+        return redirect()->route('item.index')->with('success', trans('message.update', ['data' => $item->nama]));
     }
 
     public function destroy(Item $item)
@@ -86,7 +89,7 @@ class ItemController extends Controller
         $message = $item->nama;
         $item->delete();
 
-        return back()->with('success',trans('message.delete', ['data' => $item->nama]));
+        return back()->with('success', trans('message.delete', ['data' => $item->nama]));
     }
 
     public function getItemByName(Request $request)
