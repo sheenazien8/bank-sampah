@@ -15,6 +15,9 @@
             </a>
           @endif
           <div class="dropdown-divider"></div>
+          <a href="{{ route('so.index') }}" class="dropdown-item has-icon">
+            <i class="fas fa-cogs"></i> SO
+          </a>
           <a href="#" class="dropdown-item has-icon text-danger logout">
             <i class="fas fa-sign-out-alt"></i> Logout
           </a>

@@ -32,8 +32,7 @@ use Telegram\Bot\Api;
 |
 */
 
-Route::group(['prefix' => '/'], function ()
-{
+Route::group(['prefix' => '/'], function () {
     App::setLocale(setting('bahasa') ?? 'id');
     Route::get('/table', function () {
         return view('app.table');
@@ -43,7 +42,7 @@ Route::group(['prefix' => '/'], function ()
     Route::post('login', [LoginController::class, 'login'])->name('login');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::middleware('auth')->group(function() {
+    Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
         Route::resource('/nasabah', NasabahController::class);
         Route::resource('/user', UserController::class);
@@ -65,18 +64,18 @@ Route::group(['prefix' => '/'], function ()
     Route::match(['get', 'post'], '/botman', [BotTelegramController::class, 'handle']);
 });
 
-Route::group([ 'prefix' => 'artisan' ], function ()
-{
-    Route::get('migrate/{command}', function ($command)
-    {
+Route::get('/so/index', function () {
+    return view('so.index');
+})->name('so.index');
+
+Route::group(['prefix' => 'artisan'], function () {
+    Route::get('migrate/{command}', function ($command) {
         Artisan::call("migrate:$command");
     });
-    Route::get('make/{command}', function ($command)
-    {
+    Route::get('make/{command}', function ($command) {
         Artisan::call("make:$command");
     });
-    Route::get('{command}', function ($command)
-    {
+    Route::get('{command}', function ($command) {
         Artisan::call("$command");
     });
 });
