@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\BotManController;
 use App\Http\Controllers\BotTelegramController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
@@ -19,7 +18,6 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use Telegram\Bot\Api;
 
 /*
 |--------------------------------------------------------------------------

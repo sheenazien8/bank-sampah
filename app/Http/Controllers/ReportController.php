@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
-use App\Models\TransactionDetail;
 use App\Queries\TransactionQuery;
 use PDF;
 use Illuminate\Http\Request;
@@ -23,7 +21,6 @@ class ReportController extends Controller
         $pdf = PDF::loadView('app.report.components.rekap-penjualan-sampah', [
             'data' => $transactions
         ]);
-        $bulan = strtolower($request->bulan);
 
         return $pdf->stream();
     }

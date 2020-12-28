@@ -35,11 +35,13 @@ class TransactionQuery
     {
         $keyMonth = $this->month;
         $array = [];
-        $result = TransactionDetail::whereHas('transaction', function ($transaction) use ($keyMonth)
-        {
+        $result = TransactionDetail::whereHas('transaction', function ($transaction) use ($keyMonth) {
             return $transaction->whereMonth('tanggal_transaksi', $keyMonth);
         })->get()->groupBy('item_id');
-        foreach ($result as $key => $res) {
+        $totalUangNasabah = 0;
+        $totalProfitTP = 0;
+        $totalProfitBS = 0;
+        foreach ($result as  $res) {
             $jumlah = array_sum(Arr::pluck($res, "jumlah"));
             $uangMasuk = array_sum(Arr::pluck($res, "harga_sekarang")) * $jumlah;
             $profitPetugas = $uangMasuk * $res[0]->profit_total_petugas / 100;
@@ -55,9 +57,21 @@ class TransactionQuery
                 'profit_total_petugas' => price_format($profitPetugas),
                 'uang_nasabah' => price_format($uangNasabah),
             ];
+            $totalUangNasabah += $uangNasabah;
+            $totalProfitTP += $profitPetugas;
+            $totalProfitBS += $profitBS;
         }
+        $array[] = [
+            'jenis_sampah' => 'Total:',
+            'volume' => '',
+            'satuan' => '',
+            'jumlah' => '',
+            'harga_satuan' => '',
+            'profit_bank_sampah' => price_format($totalProfitBS),
+            'profit_total_petugas' => price_format($totalProfitTP),
+            'uang_nasabah' => price_format($totalUangNasabah),
+        ];
 
         return $array;
     }
-
 }
