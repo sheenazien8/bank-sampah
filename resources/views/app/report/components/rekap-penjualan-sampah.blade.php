@@ -27,16 +27,20 @@
           background-color: #4CAF50;
           color: white;
         }
-        section.header {
+        section.header h3,h4 {
           text-align: center;
+        }
+        section.footer {
+          text-align: right;
         }
     </style>
   </head>
   <body>
+    <img src="{{ asset('images/logo_bank_sampah.png') }}" style="float: left" width="100" height="100"/>
     <section class="header">
       <h3>Rekapitulasi Penjualan Sampah</h3>
       <h4>Bank Sampah Mawar</h4>
-      <h4>Perum Wiki 1 Demak</h4>
+      <h4 style="margin-left:6em">Perum Wiki 1 Demak</h4>
     </section>
     <section class="body">
       <table id="customers">
@@ -72,7 +76,13 @@
       </table>
     </section>
     <section class="footer">
-
+      <p>Demak, {{ now()->format('D F Y') }}:</p>
+      <p>BANK SAMPAH "MAWAR"</p>
+      <p>PERUMAHAN WIJAYA KUSUMA 1 DEMAK</p>
+      <br></br>
+      <br></br>
+      INDRA MARSUDARYANTO
+      Ketua
     </section>
   </body>
 </html>
